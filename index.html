@@ -1,62 +1,545 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080914">
 <title>SANO LIVE</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#080914;color:white;font-family:Arial}
-header{padding:18px;display:flex;justify-content:space-between;align-items:center}
+body{margin:0;background:#080914;color:white;font-family:Arial,sans-serif}
+button,input{font:inherit}
+button{cursor:pointer}
+header{height:65px;background:#0d0d1b;display:flex;align-items:center;justify-content:space-between;padding:0 17px;position:sticky;top:0;z-index:5;border-bottom:1px solid #282039}
 .logo{font-size:23px;font-weight:900;color:#ff38a5}
 .logo span{color:#a66cff}
-.tabs{display:flex;gap:15px;padding:10px;overflow:auto}
-.tabs button{border:0;background:none;color:#aaa;font-size:14px}
-.tabs .active{color:#ff38a5;font-weight:bold}
-.banner{margin:10px;height:140px;border-radius:20px;background:linear-gradient(120deg,#30105b,#b520a5,#ff299d);display:flex;align-items:center;justify-content:center;text-align:center}
-.banner h1{font-size:27px;margin:0}
-.banner p{font-size:12px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px;padding-bottom:100px}
-.card{height:260px;border-radius:20px;background-size:cover;background-position:center;position:relative;overflow:hidden}
-.card:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent,black)}
-.tag,.name,.caption,.view{position:absolute;z-index:2}
-.tag{top:10px;left:10px;background:#222;padding:7px;border-radius:20px;font-size:12px}
-.live{background:#00c9e9}
-.view{right:10px;top:10px;background:#222;padding:7px;border-radius:20px}
-.name{bottom:38px;left:10px;font-weight:bold}
-.caption{bottom:10px;left:10px;font-size:11px;background:#555;padding:5px;border-radius:15px}
-.go{position:fixed;bottom:85px;right:15px;background:linear-gradient(90deg,#ff299d,#8844ff);color:white;border:0;border-radius:30px;padding:15px;font-weight:bold}
-nav{position:fixed;bottom:0;background:#090a15;width:100%;height:72px;display:flex;justify-content:space-around;align-items:center;border-top:1px solid #25243a}
-nav button{background:none;border:0;color:#aaa;font-size:11px}
-nav b{display:block;font-size:22px}
+.page{display:none;min-height:calc(100vh - 135px);padding-bottom:95px}
+.page.active{display:block}
+.heading{padding:18px 15px;font-size:20px;font-weight:bold}
+.sub,.muted{color:#aaa;font-size:12px}
+.banner{margin:12px;height:145px;border-radius:20px;background:linear-gradient(130deg,#27104e,#9220a8,#ff299d);display:grid;place-items:center;text-align:center}
+.banner h1{font-size:25px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}
+.card{height:190px;border-radius:17px;background:linear-gradient(145deg,#32134f,#a72c94);display:flex;align-items:end;padding:12px;font-weight:bold}
+.primary{border:0;background:linear-gradient(90deg,#ff299d,#813cff);color:white;border-radius:22px;padding:12px 20px;font-weight:bold}
+.secondary{border:1px solid #8b3bd1;background:#17152a;color:white;border-radius:20px;padding:11px 18px}
+.panel{margin:12px;padding:17px;background:#17172a;border:1px solid #35254e;border-radius:17px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.input{width:100%;padding:14px;border-radius:10px;background:#090914;border:1px solid #49345e;color:white;margin:9px 0}
+.room{margin:12px;padding:15px;background:linear-gradient(110deg,#271044,#51186a);border:1px solid #693c9c;border-radius:18px}
+.seats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:20px}
+.seat{min-height:88px;border-radius:13px;background:#111326;border:1px solid #633c88;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;gap:6px;overflow:hidden}
+.seat.occupied{background:#34204a;border-color:#ed36b0}
+.seat span{font-size:24px}
+.seat small{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.action{margin:5px 3px 0;padding:11px 14px;border-radius:20px;background:#29213b;border:1px solid #7941a0;color:white}
+.menu{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px}
+.menu button{background:#17172a;color:white;border:1px solid #3b2b51;border-radius:14px;padding:17px}
+.menu span{display:block;font-size:25px;margin-bottom:8px}
+nav{position:fixed;bottom:0;left:0;right:0;height:70px;background:#0c0c19;border-top:1px solid #332440;display:flex;justify-content:space-around;align-items:center;z-index:9;overflow-x:auto}
+nav button{background:none;border:0;color:#aaa;font-size:9px;min-width:55px}
+nav b{display:block;font-size:20px;margin-bottom:3px}
+nav button.selected{color:#ff39a5}
+.notice{margin:12px;padding:12px;border-radius:12px;background:#24203a;color:#d9c7ee;font-size:12px;line-height:1.6}
+.money{background:linear-gradient(135deg,#30104c,#17172c);border:1px solid #7433a8;border-radius:17px;text-align:center;padding:20px 5px}
+.money strong{display:block;font-size:21px;margin:9px}
+.wallet-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px}
+.history{padding:12px;border-bottom:1px solid #332b41;font-size:13px}
+.member-card{padding:13px;border-bottom:1px solid #332b41}
+.member-avatar{width:42px;height:42px;border-radius:50%;background:#482064;display:grid;place-items:center;font-size:22px}
+#connectionStatus{padding:10px;text-align:center;color:#ffd15c;font-size:12px}
+#remoteAudios{display:none}
+button:disabled{opacity:.4;cursor:not-allowed}
 </style>
 </head>
 <body>
-<header><div class="logo">SANO <span>LIVE 🔴</span></div><div>🔍</div></header>
-<div class="tabs">
-<button>Follow</button><button class="active">Popular</button><button>All</button><button>🌍 Global</button><button>🏆</button>
-</div>
-<div class="banner">
-<div><h1>WELCOME TO SANO LIVE ✨</h1><p>CONNECT • SHARE • GO LIVE</p></div>
-</div>
-<div class="grid">
-<div class="card" style="background-image:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500')">
-<div class="tag">🎙 PARTY</div><div class="view">🔥 128</div><div class="name">Angel ✨</div><div class="caption">Welcome 💖</div>
-</div>
-<div class="card" style="background-image:url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1?w=500')">
-<div class="tag live">● LIVE</div><div class="view">🔥 56</div><div class="name">SANO KING</div><div class="caption">Hello friends 👋</div>
-</div>
-<div class="card" style="background-image:url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500')">
-<div class="tag">🎙 PARTY</div><div class="view">🔥 43</div><div class="name">Rose 🌹</div><div class="caption">Music & Chill</div>
-</div>
-<div class="card" style="background-image:url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500')">
-<div class="tag live">● LIVE</div><div class="view">🔥 89</div><div class="name">Rocky</div><div class="caption">Join my live</div>
-</div>
-</div>
-<button class="go" onclick="alert('Live feature coming soon!')">📹 GO LIVE</button>
-<nav>
-<button><b>⌂</b>HOME</button><button><b>◎</b>EXPLORE</button><button><b>🎙</b>PARTY</button><button><b>▢</b>MESSAGES</button><button><b>♙</b>PROFILE</button>
-</nav>
-</body>
-</html>
 
+<header>
+ <div class="logo">SANO <span>LIVE 🔴</span></div>
+ <div onclick="openPage('wallet')">🪙 <span id="topCoins">0</span></div>
+</header>
+
+<section id="home" class="page active">
+ <div class="banner">
+  <div><h1>WELCOME TO SANO LIVE ✨</h1><p>CONNECT • SHARE • GO LIVE</p></div>
+ </div>
+ <div class="heading">🔥 Popular Live</div>
+ <div class="grid">
+  <div class="card">🔴 Angel ✨</div>
+  <div class="card">🔴 SANO KING</div>
+  <div class="card">🔴 Rose 🌹</div>
+  <div class="card">🔴 Rocky</div>
+ </div>
+ <div style="text-align:center">
+  <button class="primary" onclick="openPage('party')">🎙 ENTER PARTY</button>
+ </div>
+</section>
+
+<section id="explore" class="page">
+ <div class="heading">🌍 Explore Members</div>
+ <div class="panel">
+  <input class="input" id="search" placeholder="Search users..." oninput="searchMembers()">
+  <div id="searchResult"></div>
+ </div>
+</section>
+
+<section id="members" class="page">
+ <div class="heading">👥 SANO LIVE Members</div>
+ <div class="wallet-grid">
+  <div class="money"><strong id="totalMembers">0</strong><small>Total Members</small></div>
+  <div class="money"><strong id="onlineMembers">0</strong><small>Party Online</small></div>
+ </div>
+ <div class="panel">
+  <input class="input" id="memberSearch" placeholder="Search members..." oninput="renderMembers()">
+  <div class="row">
+   <b>Member Directory</b>
+   <button class="secondary" onclick="loadMembers()">Refresh</button>
+  </div>
+  <div id="memberList" class="muted">Loading members...</div>
+ </div>
+ <div class="notice">Online status currently shows members inside the Party Room. General app-wide online status requires a separate presence connection.</div>
+</section>
+
+<section id="party" class="page">
+ <div class="heading">🎙 Party Live Rooms</div>
+ <div class="room">
+  <div class="row">
+   <div><b>🌟 SANO VIP PARTY</b><div class="sub">Real-time voice room</div></div>
+   <span>🎤</span>
+  </div>
+  <div class="row" style="margin-top:15px">
+   <span>👥 <b id="peopleCount">0</b> / 8 People</span>
+   <span class="muted">Room #1001</span>
+  </div>
+  <div id="connectionStatus">⚪ Not connected</div>
+  <div class="seats" id="seats"></div>
+  <div style="text-align:center;margin-top:17px">
+   <button class="primary" id="joinBtn" onclick="joinParty()">＋ JOIN PARTY</button>
+   <button class="action" id="micBtn" onclick="toggleMic()" disabled>🎤 MIC OFF</button>
+   <button class="action" id="speakerBtn" onclick="toggleSpeaker()">🔊 SPEAKER ON</button>
+   <button class="action" onclick="leaveParty()">LEAVE</button>
+  </div>
+ </div>
+ <div class="panel">
+  <b>🎧 Voice Chat Instructions</b>
+  <p class="muted">1. Join Party.</p>
+  <p class="muted">2. Allow microphone permission.</p>
+  <p class="muted">3. Invite friends to Room #1001.</p>
+  <p class="muted">4. Turn on your microphone when you want to speak.</p>
+ </div>
+ <div class="notice">This is a WebRTC voice demo. A TURN server may be required for reliable connections. Be careful when sharing your voice or personal information with strangers.</div>
+ <div id="remoteAudios"></div>
+</section>
+
+<section id="messages" class="page">
+ <div class="heading">💬 Messages</div>
+ <div class="panel">Messaging will be connected to the database in a future update.</div>
+</section>
+
+<section id="profile" class="page">
+ <div class="banner"><h1>👑 SANO LIVE</h1></div>
+ <div class="panel" style="text-align:center">
+  <div style="font-size:55px">👑</div>
+  <h2 id="profileName">SANO KING</h2>
+  <div class="muted">ID: <span id="profileId"></span></div>
+  <p style="color:#23e99a">● ONLINE ON THIS DEVICE</p>
+  <button class="primary" onclick="editProfile()">✏️ EDIT PROFILE</button>
+ </div>
+ <div class="menu">
+  <button onclick="openPage('members')"><span>👥</span>Members</button>
+  <button onclick="openPage('wallet')"><span>👛</span>My Wallet</button>
+  <button onclick="openPage('exchange')"><span>💱</span>Coin Exchange</button>
+  <button onclick="openPage('withdraw')"><span>💵</span>Withdrawal</button>
+  <button onclick="openPage('history')"><span>📜</span>History</button>
+ </div>
+</section>
+
+<section id="wallet" class="page">
+ <div class="heading">👛 My Wallet</div>
+ <div class="wallet-grid">
+  <div class="money">🪙<strong id="walletCoins">0</strong><small>My Coins</small></div>
+  <div class="money">💎<strong id="walletDiamonds">0</strong><small>My Diamonds</small></div>
+ </div>
+ <div class="panel">
+  <button class="primary" onclick="openPage('exchange')">💱 EXCHANGE COINS</button>
+  <button class="secondary" onclick="openPage('withdraw')">💵 WITHDRAWAL</button>
+  <p class="muted">Demo wallet only. No real money is stored.</p>
+ </div>
+</section>
+
+<section id="exchange" class="page">
+ <div class="heading">💱 Coin Exchange</div>
+ <div class="panel">
+  <p>My Coins: <b id="exchangeCoins">0</b></p>
+  <p>My Diamonds: <b id="exchangeDiamonds">0</b></p>
+  <input class="input" type="number" id="exchangeAmount" min="100" placeholder="Enter coins" oninput="previewExchange()">
+  <p class="muted">Demo rate: 100 Coins = 1 Diamond</p>
+  <p id="exchangePreview">0 Diamonds</p>
+  <button class="primary" onclick="exchangeCoins()">CONFIRM EXCHANGE</button>
+ </div>
+</section>
+
+<section id="withdraw" class="page">
+ <div class="heading">💵 Withdrawal</div>
+ <div class="panel">
+  <div class="money"><strong>500,000 Coins</strong><small>Demo minimum</small></div>
+  <h2 style="text-align:center;color:#ffd15c">$7.14</h2>
+  <p>Your coins: <b id="withdrawCoins">0</b></p>
+  <button class="primary" onclick="requestWithdrawal()">SUBMIT DEMO REQUEST</button>
+  <p id="withdrawStatus" class="muted"></p>
+  <div class="notice">Demo conversion only. No real money will be sent.</div>
+ </div>
+</section>
+
+<section id="history" class="page">
+ <div class="heading">📜 History</div>
+ <div class="panel" id="historyList">No transactions yet.</div>
+</section>
+
+<nav>
+ <button class="selected" onclick="openPage('home',this)"><b>⌂</b>HOME</button>
+ <button onclick="openPage('explore',this)"><b>◎</b>EXPLORE</button>
+ <button onclick="openPage('members',this)"><b>👥</b>MEMBERS</button>
+ <button onclick="openPage('party',this)"><b>🎙</b>PARTY</button>
+ <button onclick="openPage('messages',this)"><b>▢</b>CHAT</button>
+ <button onclick="openPage('profile',this)"><b>♙</b>PROFILE</button>
+</nav>
+
+<script>
+/* SUPABASE CONFIGURATION */
+const SUPABASE_URL = "https://gogfsjxfrmyoqiqmapxt.supabase.co/rest/v1/";
+const SUPABASE_KEY = "sb_publishable_JC4i_NmT1RRVr3Zshtq72A_EZ2_4kTS";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+/* USER PROFILE */
+let userId = localStorage.getItem("sanoUserId");
+if (!userId) {
+  userId = crypto.randomUUID();
+  localStorage.setItem("sanoUserId", userId);
+}
+
+let userName = localStorage.getItem("sanoUserName") || "SANO KING";
+let allMembers = [];
+
+/* PARTY SETTINGS */
+const ROOM_ID = "1001";
+const MAX_USERS = 8;
+let roomChannel = null;
+let localStream = null;
+let joined = false;
+let micOn = false;
+let speakerOn = true;
+let members = {};
+let peers = {};
+let candidateQueues = {};
+
+/* DEMO WALLET */
+let coins = Number(localStorage.getItem("sanoCoins") || 0);
+let diamonds = Number(localStorage.getItem("sanoDiamonds") || 0);
+let history = JSON.parse(localStorage.getItem("sanoHistory") || "[]");
+
+function saveWallet() {
+  localStorage.setItem("sanoCoins", coins);
+  localStorage.setItem("sanoDiamonds", diamonds);
+  localStorage.setItem("sanoHistory", JSON.stringify(history));
+  updateWallet();
+}
+
+function updateWallet() {
+  document.getElementById("topCoins").textContent = coins.toLocaleString();
+  document.getElementById("walletCoins").textContent = coins.toLocaleString();
+  document.getElementById("walletDiamonds").textContent = diamonds.toLocaleString();
+  document.getElementById("exchangeCoins").textContent = coins.toLocaleString();
+  document.getElementById("exchangeDiamonds").textContent = diamonds.toLocaleString();
+  document.getElementById("withdrawCoins").textContent = coins.toLocaleString();
+
+  const historyBox = document.getElementById("historyList");
+  historyBox.innerHTML = history.length
+    ? history.slice().reverse().map(item =>
+        `<div class="history">${escapeHTML(item.text)}<div class="muted">${escapeHTML(item.date)}</div></div>`
+      ).join("")
+    : "No transactions yet.";
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;",
+    '"':"&quot;", "'":"&#39;"
+  })[char]);
+}
+
+function addHistory(text) {
+  history.push({text, date:new Date().toLocaleString()});
+  saveWallet();
+}
+
+function openPage(id, btn) {
+  document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll("nav button").forEach(button => button.classList.remove("selected"));
+  if (btn) btn.classList.add("selected");
+  else {
+    const navButton = [...document.querySelectorAll("nav button")]
+      .find(button => button.getAttribute("onclick")?.includes("'" + id + "'"));
+    if (navButton) navButton.classList.add("selected");
+  }
+
+  window.scrollTo(0,0);
+  updateWallet();
+
+  if (id === "members") loadMembers();
+  if (id === "explore") searchMembers();
+}
+
+function editProfile() {
+  const newName = prompt("Enter your display name:", userName);
+  if (!newName || !newName.trim()) return;
+
+  userName = newName.trim().slice(0,24);
+  localStorage.setItem("sanoUserName", userName);
+  document.getElementById("profileName").textContent = userName;
+  saveProfile();
+}
+
+async function saveProfile() {
+  const {error} = await supabaseClient
+    .from("profiles")
+    .upsert({
+      id:userId,
+      username:userName
+    }, {onConflict:"id"});
+
+  if (error) console.error("Profile save error:", error.message);
+}
+
+/* MEMBER SYSTEM */
+async function loadMembers() {
+  const box = document.getElementById("memberList");
+  box.textContent = "Loading members...";
+
+  try {
+    const {data,error} = await supabaseClient
+      .from("profiles")
+      .select("id,username,created_at")
+      .order("created_at", {ascending:false});
+
+    if (error) throw error;
+
+    allMembers = data || [];
+    renderMembers();
+  } catch (error) {
+    console.error(error);
+    box.textContent = "Unable to load members. Check your Supabase table and policies.";
+  }
+}
+
+function renderMembers() {
+  const box = document.getElementById("memberList");
+  const input = document.getElementById("memberSearch");
+  const term = (input?.value || "").toLowerCase();
+  const onlineIds = new Set(Object.keys(members));
+
+  document.getElementById("totalMembers").textContent = allMembers.length;
+  document.getElementById("onlineMembers").textContent = onlineIds.size;
+
+  const filtered = allMembers.filter(member =>
+    (member.username || "").toLowerCase().includes(term) ||
+    (member.id || "").toLowerCase().includes(term)
+  );
+
+  if (!filtered.length) {
+    box.innerHTML = '<p class="muted">No members found.</p>';
+    return;
+  }
+
+  box.innerHTML = "";
+  filtered.forEach(member => {
+    const isOnline = onlineIds.has(member.id);
+    const card = document.createElement("div");
+    card.className = "member-card";
+
+    const row = document.createElement("div");
+    row.className = "row";
+
+    const left = document.createElement("div");
+    left.className = "row";
+
+    const avatar = document.createElement("div");
+    avatar.className = "member-avatar";
+    avatar.textContent = "👤";
+
+    const details = document.createElement("div");
+    const name = document.createElement("b");
+    name.textContent = member.username || "SANO MEMBER";
+
+    const id = document.createElement("div");
+    id.className = "muted";
+    id.textContent = "ID: " + member.id;
+
+    details.append(name,id);
+    left.append(avatar,details);
+
+    const status = document.createElement("small");
+    status.style.color = isOnline ? "#23e99a" : "#999";
+    status.textContent = isOnline ? "● ONLINE" : "● OFFLINE";
+
+    row.append(left,status);
+    card.appendChild(row);
+    box.appendChild(card);
+  });
+}
+
+async function searchMembers() {
+  const box = document.getElementById("searchResult");
+  const term = (document.getElementById("search").value || "").toLowerCase();
+
+  if (!allMembers.length) {
+    const {data,error} = await supabaseClient
+      .from("profiles")
+      .select("id,username,created_at")
+      .order("created_at", {ascending:false});
+
+    if (error) {
+      box.textContent = "Unable to search members.";
+      return;
+    }
+    allMembers = data || [];
+  }
+
+  const filtered = allMembers.filter(member =>
+    (member.username || "").toLowerCase().includes(term) ||
+    member.id.toLowerCase().includes(term)
+  );
+
+  box.innerHTML = "";
+  filtered.forEach(member => {
+    const item = document.createElement("div");
+    item.className = "member-card";
+    item.textContent = "👤 " + (member.username || "SANO MEMBER") + " · " + member.id;
+    box.appendChild(item);
+  });
+
+  if (!filtered.length) box.textContent = "No members found.";
+}
+
+/* WEBRTC VOICE PARTY */
+const rtcConfig = {
+  iceServers: [{urls:"stun:stun.l.google.com:19302"}]
+};
+
+function setStatus(message) {
+  document.getElementById("connectionStatus").textContent = message;
+}
+
+function getMembers() {
+  if (!roomChannel) return [];
+  const state = roomChannel.presenceState();
+  const result = [];
+
+  Object.values(state).forEach(entries => {
+    entries.forEach(entry => {
+      if (entry && entry.user_id) result.push(entry);
+    });
+  });
+
+  return result;
+}
+
+function sendSignal(to,type,data) {
+  if (!roomChannel) return;
+  roomChannel.send({
+    type:"broadcast",
+    event:"signal",
+    payload:{from:userId,to,type,data}
+  }).catch(error => console.error("Signal error:",error));
+}
+
+async function createPeer(peerId,initiate=false) {
+  if (peers[peerId]) return peers[peerId];
+
+  const pc = new RTCPeerConnection(rtcConfig);
+  peers[peerId] = pc;
+  candidateQueues[peerId] = [];
+
+  if (localStream) {
+    localStream.getTracks().forEach(track => pc.addTrack(track,localStream));
+  }
+
+  pc.onicecandidate = event => {
+    if (event.candidate) sendSignal(peerId,"candidate",event.candidate);
+  };
+
+  pc.ontrack = event => {
+    let audio = document.getElementById("audio_" + peerId);
+    if (!audio) {
+      audio = document.createElement("audio");
+      audio.id = "audio_" + peerId;
+      audio.autoplay = true;
+      audio.playsInline = true;
+      document.getElementById("remoteAudios").appendChild(audio);
+    }
+    audio.srcObject = event.streams[0];
+    audio.muted = !speakerOn;
+    audio.play().catch(() => setStatus("Tap the screen to enable audio."));
+  };
+
+  if (initiate) {
+    try {
+      const offer = await pc.createOffer();
+      await pc.setLocalDescription(offer);
+      sendSignal(peerId,"offer",pc.localDescription);
+    } catch(error) {
+      console.error("Offer error:",error);
+    }
+  }
+  return pc;
+}
+
+async function processCandidates(peerId) {
+  const pc = peers[peerId];
+  if (!pc || !pc.remoteDescription) return;
+
+  const queue = candidateQueues[peerId] || [];
+  candidateQueues[peerId] = [];
+
+  for (const candidate of queue) {
+    try {
+      await pc.addIceCandidate(new RTCIceCandidate(candidate));
+    } catch(error) {
+      console.error(error);
+    }
+  }
+}
+
+async function handleSignal(payload) {
+  if (!payload || payload.to !== userId || payload.from === userId) return;
+
+  const peerId = payload.from;
+  const type = payload.type;
+  const data = payload.data;
+
+  try {
+    if (type === "offer") {
+      const pc = await createPeer(peerId,false);
+      await pc.setRemoteDescription(new RTCSessionDescription(data));
+      await processCandidates(peerId);
+      const answer = await pc.createAnswer();
+      await pc.setLocalDescription(answer);
+      sendSignal(peerId,"answer",pc.localDescription);
+    } else if (type === "answer") {
+      const pc = peers[peerId];
+      if (!pc) return;
+      await pc.setRemoteDescription(new RTCSessionDescription(data));
+      await processCandidates(peerId);
+    } else if (type === "candidate") {
+      const pc = peers[peerId];
+      if (!pc || !pc.remoteDescription) {
+        if (!candidateQueues[
