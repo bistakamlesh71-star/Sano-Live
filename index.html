@@ -3,6 +3,709 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>NEPAL X ESPORTS — Dark Neon Social & Party App</title>
+  <style>
+    :root {
+      --bg-outer: #04050a;
+      --bg-main: #090b14;
+      --bg-card: #121626;
+      --bg-card-2: #181e34;
+      --border-neon: rgba(34, 211, 238, 0.28);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --cyan: #22d3ee;
+      --cyan-glow: rgba(34, 211, 238, 0.35);
+      --pink: #f43f5e;
+      --purple: #a855f7;
+      --gold: #fbbf24;
+      --gold-glow: rgba(251, 191, 36, 0.3);
+      --green: #10b981;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: var(--bg-outer);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 430px;
+      background: radial-gradient(circle at top right, rgba(168, 85, 247, 0.12), transparent 45%),
+                  radial-gradient(circle at top left, rgba(34, 211, 238, 0.12), transparent 45%),
+                  var(--bg-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding-bottom: 84px;
+      border-left: 1px solid var(--border-subtle);
+      border-right: 1px solid var(--border-subtle);
+    }
+
+    /* Top Header */
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 16px 10px;
+      position: sticky;
+      top: 0;
+      background: rgba(9, 11, 20, 0.88);
+      backdrop-filter: blur(12px);
+      z-index: 30;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .brand-title {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-wallet-chips {
+      display: flex;
+      gap: 8px;
+    }
+
+    .mini-chip {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .mini-chip.coins { border-color: rgba(251, 191, 36, 0.4); color: var(--gold); }
+    .mini-chip.diamonds { border-color: rgba(34, 211, 238, 0.4); color: var(--cyan); }
+
+    /* Views */
+    .view {
+      display: none;
+      padding: 14px 16px 24px;
+      animation: fadeSlide 0.2s ease;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Common Section Headings */
+    .sec-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sec-title span.accent {
+      border-left: 3px solid var(--cyan);
+      padding-left: 8px;
+    }
+
+    /* Cards */
+    .neon-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 14px;
+      margin-bottom: 14px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    .neon-card.highlight {
+      border-color: var(--border-neon);
+      box-shadow: 0 0 18px rgba(34, 211, 238, 0.12);
+    }
+
+    .tag-live {
+      display: inline-block;
+      background: rgba(244, 63, 94, 0.2);
+      color: #fb7185;
+      border: 1px solid rgba(244, 63, 94, 0.45);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-bottom: 6px;
+    }
+
+    /* Buttons */
+    .btn {
+      border: none;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.12s ease, opacity 0.12s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn:active { transform: scale(0.96); }
+
+    .btn-cyan {
+      background: linear-gradient(135deg, #22d3ee, #06b6d4);
+      color: #041e24;
+      box-shadow: 0 0 14px var(--cyan-glow);
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: #1f1300;
+      box-shadow: 0 0 14px var(--gold-glow);
+    }
+
+    .btn-purple {
+      background: linear-gradient(135deg, #a855f7, #7e22ce);
+      color: #fff;
+    }
+
+    .btn-danger {
+      background: rgba(244, 63, 94, 0.18);
+      color: #fb7185;
+      border: 1px solid rgba(244, 63, 94, 0.45);
+    }
+
+    .btn-ghost {
+      background: var(--bg-card-2);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-full { width: 100%; }
+
+    /* PARTY ROOM (8 SEATS) */
+    .party-banner {
+      background: linear-gradient(135deg, rgba(34, 211, 238, 0.14), rgba(168, 85, 247, 0.16));
+      border: 1px solid var(--border-neon);
+      border-radius: 20px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+
+    .party-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .participant-pill {
+      background: rgba(16, 185, 129, 0.16);
+      border: 1px solid rgba(16, 185, 129, 0.45);
+      color: #34d399;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .seats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .seat-slot {
+      background: rgba(18, 22, 38, 0.9);
+      border: 1px dashed rgba(148, 163, 184, 0.3);
+      border-radius: 16px;
+      padding: 10px 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.18s ease;
+    }
+
+    .seat-slot.occupied {
+      border-style: solid;
+      border-color: var(--cyan);
+      box-shadow: 0 0 12px rgba(34, 211, 238, 0.2);
+    }
+
+    .seat-slot.speaking {
+      border-color: var(--green);
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.45);
+    }
+
+    .seat-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg-card-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      border: 2px solid transparent;
+    }
+
+    .seat-slot.occupied .seat-avatar {
+      background: linear-gradient(135deg, #22d3ee, #a855f7);
+      color: #050811;
+    }
+
+    .seat-num {
+      position: absolute;
+      top: 5px;
+      left: 7px;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .seat-mic-badge {
+      position: absolute;
+      bottom: 24px;
+      right: 10px;
+      background: #0f172a;
+      border: 1px solid var(--border-subtle);
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .seat-name {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-main);
+      max-width: 68px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .party-controls {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    /* Explore Room List */
+    .explore-room-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Profile View */
+    .profile-hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .profile-avatar {
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, var(--cyan), var(--gold));
+      margin-bottom: 10px;
+    }
+
+    .profile-avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: var(--bg-card-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .profile-meta-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .badge-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      padding: 4px 10px;
+      border-radius: 16px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 12px 6px;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .stats-row div:not(:last-child) {
+      border-right: 1px solid var(--border-subtle);
+    }
+
+    /* Dual Wallet Cards */
+    .wallet-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .w-card {
+      background: var(--bg-card);
+      border-radius: 18px;
+      padding: 14px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .w-card.coins {
+      border-color: rgba(251, 191, 36, 0.38);
+      background: linear-gradient(180deg, rgba(251, 191, 36, 0.08), var(--bg-card));
+    }
+
+    .w-card.diamonds {
+      border-color: rgba(34, 211, 238, 0.38);
+      background: linear-gradient(180deg, rgba(34, 211, 238, 0.08), var(--bg-card));
+    }
+
+    .w-val {
+      font-size: 21px;
+      font-weight: 800;
+      margin: 8px 0 10px;
+    }
+
+    /* Sub-tabs inside Wallet/Profile */
+    .sub-nav {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      background: var(--bg-card);
+      padding: 5px;
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 14px;
+    }
+
+    .sub-tab {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 8px 4px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .sub-tab.active {
+      background: var(--bg-card-2);
+      color: var(--cyan);
+      border: 1px solid var(--border-neon);
+    }
+
+    .sub-panel { display: none; }
+    .sub-panel.active { display: block; }
+
+    /* Form Controls */
+    .field-label {
+      display: block;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .neon-input {
+      width: 100%;
+      background: var(--bg-card-2);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      padding: 11px 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      margin-bottom: 10px;
+      outline: none;
+    }
+
+    .neon-input:focus {
+      border-color: var(--cyan);
+    }
+
+    .calc-box {
+      background: rgba(34, 211, 238, 0.08);
+      border: 1px solid var(--border-neon);
+      border-radius: 14px;
+      padding: 12px;
+      margin-bottom: 12px;
+      font-size: 12px;
+    }
+
+    .calc-highlight {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--green);
+      margin-top: 4px;
+    }
+
+    /* Transaction List */
+    .tx-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 12px;
+    }
+
+    .tx-item:last-child { border-bottom: none; }
+
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      max-width: 430px;
+      height: 68px;
+      background: rgba(13, 17, 31, 0.96);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border-subtle);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      align-items: center;
+      z-index: 40;
+    }
+
+    .nav-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .nav-btn.active {
+      color: var(--cyan);
+      text-shadow: 0 0 10px var(--cyan-glow);
+    }
+
+    .nav-btn .ico { font-size: 20px; }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      top: 66px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #13192e;
+      border: 1px solid var(--cyan);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      z-index: 100;
+      display: none;
+      box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div id="toast" class="toast"></div>
+
+    <!-- Top Sticky Header -->
+    <header class="header-bar">
+      <div class="brand-title">NEPAL X ESPORTS</div>
+      <div class="header-wallet-chips">
+        <div class="mini-chip coins" onclick="goToWalletSection('exchange')">🪙 <span id="hdrCoins">520,000</span></div>
+        <div class="mini-chip diamonds" onclick="goToWalletSection('withdraw')">💎 <span id="hdrDiamonds">724,600</span></div>
+      </div>
+    </header>
+
+    <!-- ================= 1. HOME SCREEN (PARTY ROOM + FEED) ================= -->
+    <section id="view-home" class="view active">
+      <div class="sec-title">
+        <span class="accent">Live Party Room</span>
+        <span class="participant-pill" id="participantCountBadge">👥 4 / 8 Seated</span>
+      </div>
+
+      <div class="party-banner">
+        <div class="party-top-row">
+          <div>
+            <span class="tag-live">● LIVE VOICE LOBBY</span>
+            <h3 id="activeRoomName" style="font-size:16px; margin-top:2px;">Kathmandu Night Chill &amp; Gaming</h3>
+            <p style="font-size:11px; color:var(--text-muted); margin-top:2px;">Room ID: #8841 • Tap any empty seat or Join Party</p>
+          </div>
+        </div>
+
+        <!-- 8 Seats Grid -->
+        <div class="seats-grid" id="seatsGrid"></div>
+
+        <!-- Join / Leave & Mic Toggle Controls -->
+        <div class="party-controls">
+          <button id="joinLeaveBtn" class="btn btn-cyan" style="flex:1.4;" onclick="toggleJoinParty()">🎙️ Join Party</button>
+          <button id="micToggleBtn" class="btn btn-ghost" style="flex:1;" onclick="toggleMic()" disabled>🔇 Mic Off</button>
+        </div>
+      </div>
+
+      <div class="sec-title"><span class="accent">Quick Reward Milestone</span></div>
+      <div class="neon-card highlight">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="font-size:13px; font-weight:700;">500K Coins = $7.14 Demo Payout</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:3px;">Current Coins: <strong style="color:var(--gold);" id="homeCoinProgress">520,000</strong> (Eligible!)</div>
+          </div>
+          <button class="btn btn-gold" onclick="goToWalletSection('withdraw')">Cash Out</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 2. EXPLORE SCREEN ================= -->
+    <section id="view-explore" class="view">
+      <div class="sec-title"><span class="accent">Explore Active Party Rooms</span></div>
+
+      <div class="neon-card explore-room-card">
+        <div>
+          <span class="tag-live">🔥 HOT • 6/8</span>
+          <h4 style="font-size:14px;">NEPAL X ESPORTS Squad Lobby</h4>
+          <p style="font-size:11px; color:var(--text-muted); margin-top:3px;">Free Fire &amp; Blood Strike Custom Talk</p>
+        </div>
+        <button class="btn btn-cyan" onclick="switchRoom('NEPAL X ESPORTS Squad Lobby', 6)">Enter</button>
+      </div>
+
+      <div class="neon-card explore-room-card">
+        <div>
+          <span class="tag-live" style="color:#38bdf8; border-color:rgba(56,189,248,0.4); background:rgba(56,189,248,0.12);">🎵 MUSIC • 4/8</span>
+          <h4 style="font-size:14px;">Kathmandu Night Chill &amp; Gaming</h4>
+          <p style="font-size:11px; color:var(--text-muted); margin-top:3px;">Acoustic vibe &amp; coin gifting</p>
+        </div>
+        <button class="btn btn-ghost" onclick="switchRoom('Kathmandu Night Chill & Gaming', 4)">Enter</button>
+      </div>
+
+      <div class="neon-card explore-room-card">
+        <div>
+          <span class="tag-live" style="color:#c084fc; border-color:rgba(192,132,252,0.4); background:rgba(192,132,252,0.12);">💎 VIP • 3/8</span>
+          <h4 style="font-size:14px;">Pokhara late night Guff</h4>
+          <p style="font-size:11px; color:var(--text-muted); margin-top:3px;">Open mic • Earn bonus Coins</p>
+        </div>
+        <button class="btn btn-purple" onclick="switchRoom('Pokhara late night Guff', 3)">Enter</button>
+      </div>
+    </section>
+
+    <!-- ================= 3. PROFILE & WALLET SCREEN ================= -->
+    <section id="view-profile" class="view">
+      <!-- Profile Header -->
+      <div class="profile-hero">
+        <div class="profile-avatar">
+          <div class="profile-avatar-inner" id="profAvatar">KB</div>
+        </div>
+        <h2 id="profName" style="font-size:20px; font-weight:800;">Kamlesh Bista</h2>
+        <p id="profBio" style="font-size:12px; color:var(--text-muted); margin-top:3px;">NEPAL X ESPORTS • Host &amp; Gamer</p>
+        <div class="profile-meta-row">
+          <span class="badge-pill">🇳🇵 <span id="profCity">Nepal</span></span>
+          <span class="badge-pill" style="color:var(--gold); border-color:rgba(251,191,36,0.35);">ID: 5449288</span>
+          <span class="badge-pill" style="color:var(--cyan); border-color:var(--border-neon);">Lv.14</span>
+        </div>
+      </div>
+
+      <!-- Social Stats -->
+      <div class="stats-row">
+        <div>
+          <div style="font-size:16px; font-weight:800;">24</div>
+          <div style="font-size:10px; color:var(--text-muted);">FOLLOWING</div>
+        </div>
+        <div>
+          <div style="font-size:16px; font-weight:800;">15</div>
+          <div style="font-size:10px; color:var(--text-muted);">FOLLOWERS</div>
+        </div>
+        <div>
+          <div style="font-size:16px; font-weight:800;">11</div>
+          <div style="font-size:10px; color:var(--text-muted);">FRIENDS</div>
+        </div>
+      </div>
+
+      <!-- Dual Wallet: Coins & Diamonds -->
+      <div class="wallet-cards">
+        <div class="w-card coins">
+          <div style="font-size:11px; font-weight:700; color:var(--gold);">🪙 COINS WALLET</div>
+          <div class="w-val" id="walletCoinsText">520,000</div>
+          <button class="btn btn-gold btn-full" onclick="openSubPanel('exchange')">Exchange</button>
+        </div>
+
+        <div class="w-card diamonds">
+          <div style="font-size:11px; font-weight:700; color:var(--cyan);">💎 DIAMONDS</div>
+          <div class="w-val" id="walletDiamondsText">724,600</div>
+          <button class="btn btn-cyan btn-full" onclick="openSubPanel('withdraw')">Withdraw</button>
+        </div>
+      </div>
+
+      <!-- Sub-Navigation Tabs -->
+      <div class="sub-nav">
+        <button id="subbtn-exchange" class="sub-tab active" onclick="openSubPanel('exchange')">🔄 Coin Exchange</button>
+        <button id="subbtn-withdraw" class="sub-tab" onclick="openSubPanel('withdraw')">💸 Withdraw ($)</button>
+        <button id="subbtn-history" class="sub-tab" onclick="openSubPanel('history')">📜 History &amp; Edit</button>
+      </div>
+
+      <!-- PANEL A: COIN EXCHANGE SCREEN -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>NEPAL X ESPORTS - App UI</title>
   <style>
     :root {
