@@ -1,156 +1,61 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SANO LIVE</title>
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;background:#080914;color:white;
- font-family:Arial,sans-serif;
-}
-header{
- padding:18px 16px 12px;
- display:flex;align-items:center;justify-content:space-between;
- position:sticky;top:0;background:#080914;z-index:10;
-}
+body{margin:0;background:#080914;color:white;font-family:Arial}
+header{padding:18px;display:flex;justify-content:space-between;align-items:center}
 .logo{font-size:23px;font-weight:900;color:#ff38a5}
 .logo span{color:#a66cff}
-.search{
- background:#191b2c;border:0;border-radius:50%;
- width:43px;height:43px;color:white;font-size:22px;
-}
-.tabs{display:flex;align-items:center;gap:17px;padding:0 16px 14px;overflow:auto}
-.tabs button{
- background:transparent;border:0;color:#9295aa;
- font-weight:bold;font-size:15px;white-space:nowrap;
-}
-.tabs .active{color:#ff3d9e;border-bottom:3px solid #ff3d9e;padding-bottom:8px}
-.pill{
- background:#ff329d!important;color:white!important;
- padding:8px 15px;border-radius:20px;
-}
-.banner{
- margin:0 15px 16px;height:140px;border-radius:18px;
- background:linear-gradient(120deg,#24104b,#9e1c91,#ff299c);
- display:flex;align-items:center;justify-content:center;
- text-align:center;overflow:hidden;
-}
-.banner h1{font-size:32px;margin:0;font-weight:900}
-.banner p{margin:8px 0 0;font-size:12px}
-.grid{
- padding:0 14px 100px;
- display:grid;grid-template-columns:1fr 1fr;gap:14px;
-}
-.card{
- height:270px;border-radius:22px;overflow:hidden;
- position:relative;background:#202238;
- background-size:cover;background-position:center;
- border:1px solid #27283c;
-}
-.card:after{
- content:"";position:absolute;inset:0;
- background:linear-gradient(transparent 45%,rgba(0,0,0,.85));
-}
-.tag{
- position:absolute;top:12px;left:10px;z-index:2;
- border-radius:20px;padding:6px 10px;
- background:#171722cc;font-size:12px;font-weight:bold;
-}
+.tabs{display:flex;gap:15px;padding:10px;overflow:auto}
+.tabs button{border:0;background:none;color:#aaa;font-size:14px}
+.tabs .active{color:#ff38a5;font-weight:bold}
+.banner{margin:10px;height:140px;border-radius:20px;background:linear-gradient(120deg,#30105b,#b520a5,#ff299d);display:flex;align-items:center;justify-content:center;text-align:center}
+.banner h1{font-size:27px;margin:0}
+.banner p{font-size:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px;padding-bottom:100px}
+.card{height:260px;border-radius:20px;background-size:cover;background-position:center;position:relative;overflow:hidden}
+.card:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent,black)}
+.tag,.name,.caption,.view{position:absolute;z-index:2}
+.tag{top:10px;left:10px;background:#222;padding:7px;border-radius:20px;font-size:12px}
 .live{background:#00c9e9}
-.viewers{position:absolute;top:12px;right:10px;z-index:2;
- background:#171722cc;border-radius:20px;padding:6px 9px;font-size:12px}
-.name{position:absolute;bottom:40px;left:12px;z-index:2;font-weight:bold;font-size:14px}
-.caption{position:absolute;bottom:12px;left:12px;z-index:2;background:#7775;border-radius:15px;padding:5px 9px;font-size:11px}
-.go{
- position:fixed;right:18px;bottom:88px;z-index:8;
- border:0;border-radius:30px;padding:15px 21px;
- color:white;font-weight:bold;font-size:16px;
- background:linear-gradient(90deg,#ff299d,#8c46ff);
- box-shadow:0 4px 25px #c02aff55;
-}
-nav{
- position:fixed;bottom:0;left:0;right:0;
- height:75px;background:#090a15;border-top:1px solid #24243a;
- display:flex;justify-content:space-around;align-items:center;z-index:9;
-}
-nav button{background:none;border:0;color:#818397;font-size:11px}
-nav button b{display:block;font-size:22px;margin-bottom:4px}
-nav button.selected{color:#ff38a5}
+.view{right:10px;top:10px;background:#222;padding:7px;border-radius:20px}
+.name{bottom:38px;left:10px;font-weight:bold}
+.caption{bottom:10px;left:10px;font-size:11px;background:#555;padding:5px;border-radius:15px}
+.go{position:fixed;bottom:85px;right:15px;background:linear-gradient(90deg,#ff299d,#8844ff);color:white;border:0;border-radius:30px;padding:15px;font-weight:bold}
+nav{position:fixed;bottom:0;background:#090a15;width:100%;height:72px;display:flex;justify-content:space-around;align-items:center;border-top:1px solid #25243a}
+nav button{background:none;border:0;color:#aaa;font-size:11px}
+nav b{display:block;font-size:22px}
 </style>
 </head>
 <body>
-
-<header>
- <div class="logo">SANO <span>LIVE</span> 🔴</div>
- <button class="search" onclick="alert('Search coming soon 🔍')">⌕</button>
-</header>
-
+<header><div class="logo">SANO <span>LIVE 🔴</span></div><div>🔍</div></header>
 <div class="tabs">
- <button>Follow</button>
- <button class="active">Popular</button>
- <button class="pill">All</button>
- <button>🌍 Global ▾</button>
- <button>🏆</button>
+<button>Follow</button><button class="active">Popular</button><button>All</button><button>🌍 Global</button><button>🏆</button>
 </div>
-
 <div class="banner">
- <div>
-  <h1>WELCOME TO SANO LIVE ✨</h1>
-  <p>CONNECT • SHARE • GO LIVE</p>
- </div>
+<div><h1>WELCOME TO SANO LIVE ✨</h1><p>CONNECT • SHARE • GO LIVE</p></div>
 </div>
-
 <div class="grid">
-
-<div class="card" style="background-image:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80')">
- <div class="tag">🎙 Party</div>
- <div class="viewers">🔥 128</div>
- <div class="name">✨ Angel</div>
- <div class="caption">Welcome everyone 💖</div>
+<div class="card" style="background-image:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500')">
+<div class="tag">🎙 PARTY</div><div class="view">🔥 128</div><div class="name">Angel ✨</div><div class="caption">Welcome 💖</div>
 </div>
-
-<div class="card" style="background-image:url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1?auto=format&fit=crop&w=500&q=80')">
- <div class="tag live">● LIVE</div>
- <div class="viewers">🔥 56</div>
- <div class="name">SANO KING</div>
- <div class="caption">Hello friends 👋</div>
+<div class="card" style="background-image:url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1?w=500')">
+<div class="tag live">● LIVE</div><div class="view">🔥 56</div><div class="name">SANO KING</div><div class="caption">Hello friends 👋</div>
 </div>
-
-<div class="card" style="background-image:url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=500&q=80')">
- <div class="tag">🎙 Party</div>
- <div class="viewers">🔥 43</div>
- <div class="name">Rose 🌹</div>
- <div class="caption">Music & chill</div>
+<div class="card" style="background-image:url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500')">
+<div class="tag">🎙 PARTY</div><div class="view">🔥 43</div><div class="name">Rose 🌹</div><div class="caption">Music & Chill</div>
 </div>
-
-<div class="card" style="background-image:url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80')">
- <div class="tag live">● LIVE</div>
- <div class="viewers">🔥 89</div>
- <div class="name">Rocky</div>
- <div class="caption">Join my live</div>
+<div class="card" style="background-image:url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500')">
+<div class="tag live">● LIVE</div><div class="view">🔥 89</div><div class="name">Rocky</div><div class="caption">Join my live</div>
 </div>
-
 </div>
-
-<button class="go" onclick="alert('Live streaming feature will be added next! 🎥')">📹 GO LIVE</button>
-
+<button class="go" onclick="alert('Live feature coming soon!')">📹 GO LIVE</button>
 <nav>
- <button class="selected" onclick="nav(this)"><b>⌂</b>HOME</button>
- <button onclick="nav(this)"><b>◎</b>EXPLORE</button>
- <button onclick="nav(this)"><b>🎙</b>PARTY</button>
- <button onclick="nav(this)"><b>▢</b>MESSAGES</button>
- <button onclick="nav(this)"><b>♙</b>PROFILE</button>
+<button><b>⌂</b>HOME</button><button><b>◎</b>EXPLORE</button><button><b>🎙</b>PARTY</button><button><b>▢</b>MESSAGES</button><button><b>♙</b>PROFILE</button>
 </nav>
-
-<script>
-function nav(btn){
- document.querySelectorAll('nav button').forEach(b=>b.classList.remove('selected'));
- btn.classList.add('selected');
- alert(btn.innerText.trim()+' page will be added next!');
-}
-</script>
 </body>
 </html>
