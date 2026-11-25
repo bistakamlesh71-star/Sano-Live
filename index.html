@@ -7,7 +7,7 @@
 <title>SANO LIVE</title>
 <style>
 :root{
---bg:#080D1D;
+--bg:#090B14;
 --card:#121C30;
 --border:#26344B;
 --cyan:#00D9FF;
@@ -20,18 +20,18 @@
 body{
 background:var(--bg);color:white;
 font-family:Arial,sans-serif;
-padding-bottom:85px;
+padding-bottom:88px;
 overflow-x:hidden;
 }
 header{
-height:62px;background:#0B1221;
+height:60px;background:#090B14;
 display:flex;justify-content:space-between;
-align-items:center;padding:0 18px;
-position:sticky;top:0;z-index:5;
-border-bottom:1px solid var(--border);
+align-items:center;padding:0 16px;
+position:sticky;top:0;z-index:10;
+border-bottom:1px solid rgba(255,255,255,0.06);
 }
-.logo{font-size:22px;font-weight:900;color:var(--cyan)}
-.page{display:none;padding:18px 15px 30px}
+.logo{font-size:21px;font-weight:900;color:var(--cyan)}
+.page{display:none;padding:12px 12px 30px}
 .page.active{display:block}
 h1{font-size:25px;margin-bottom:10px}
 h2{font-size:20px}
@@ -51,21 +51,6 @@ font-size:20px;margin:25px 0 15px;
 border-left:5px solid var(--cyan);
 padding-left:11px;
 }
-.hero{
-background:linear-gradient(120deg,#153B67,#44317D);
-border-radius:22px;padding:24px;margin-bottom:23px;
-}
-.hero p{margin-top:8px;color:#D6E5FF;font-size:13px}
-.quick-grid{
-display:grid;grid-template-columns:1fr 1fr;gap:12px;
-}
-.quick{
-background:var(--card);border:1px solid var(--border);
-border-radius:18px;padding:18px;cursor:pointer;
-}
-.quick span{font-size:27px}
-.quick h3{margin:12px 0 5px}
-.quick p{font-size:12px;color:var(--muted)}
 .empty{
 text-align:center;padding:35px 15px;
 background:var(--card);border:1px dashed #394A65;
@@ -73,77 +58,136 @@ border-radius:20px;
 }
 .empty span{font-size:40px}
 
-/* PARTY FEED STYLES (Screenshot 3) */
-.party-top-tabs{
+/* HOME TOP BAR & TABS (Screenshot 9072_2.jpg) */
+.home-topbar{
 display:flex;align-items:center;justify-content:space-between;
-margin-bottom:14px;gap:8px;
+gap:8px;margin-bottom:12px;padding:2px 2px;
 }
-.tab-group{display:flex;align-items:center;gap:12px}
-.p-tab{
-background:none;border:0;color:var(--muted);
-font-size:16px;font-weight:bold;cursor:pointer;padding:4px 0;
+.home-tabs{
+display:flex;align-items:center;gap:12px;flex:1;min-width:0;
 }
-.p-tab.active{color:var(--pink);font-size:18px}
-.pill-all{
+.h-tab{
+background:none;border:0;color:#8E9BB0;
+font-size:16px;font-weight:700;cursor:pointer;padding:2px 0;
+white-space:nowrap;
+}
+.h-tab.active{
+color:var(--pink);font-size:18px;font-weight:800;
+}
+.all-pill{
 background:var(--pink);color:white;border:0;
-padding:4px 12px;border-radius:20px;font-size:12px;font-weight:bold;
+padding:3px 11px;border-radius:20px;
+font-size:11px;font-weight:800;cursor:pointer;
 }
-.region-pill{
-background:#152238;border:1px solid var(--border);
-color:white;padding:6px 12px;border-radius:20px;font-size:12px;
+.global-select{
+background:#171D2E;border:1px solid #2A354E;
+color:#E2E8F0;padding:6px 10px;border-radius:20px;
+font-size:11px;font-weight:700;outline:none;cursor:pointer;
 }
-.promo-banner{
-background:linear-gradient(135deg,#2B1055,#7597DE);
-border:1px solid #594496;border-radius:16px;
-padding:14px;margin-bottom:14px;
-display:flex;justify-content:space-between;align-items:center;
+.top-icon-btn{
+background:none;border:0;color:#E2E8F0;
+font-size:19px;cursor:pointer;padding:4px;flex-shrink:0;
 }
-.promo-banner h4{color:#FFD15C;font-size:15px}
-.promo-banner p{font-size:11px;color:#E2E8F0;margin-top:3px}
+
+/* COIN SELLER BANNERS */
+.seller-banner{
+border-radius:16px;padding:12px 14px;
+margin-bottom:11px;
+display:flex;justify-content:space-between;align-items:center;gap:10px;
+border:1px solid rgba(255,255,255,0.14);
+cursor:pointer;
+}
+.seller-banner.top-banner{
+background:linear-gradient(105deg,#1B0D42 0%,#3B1469 52%,#13294B 100%);
+}
+.seller-banner.mid-banner{
+background:linear-gradient(105deg,#141336 0%,#2B1254 50%,#4A154B 100%);
+margin:11px 0;
+}
+.banner-left{min-width:0}
+.banner-tag{
+display:inline-block;background:rgba(255,181,46,0.18);
+color:#FFD15C;border:1px solid rgba(255,181,46,0.4);
+font-size:10px;font-weight:800;padding:2px 8px;border-radius:10px;
+margin-bottom:4px;
+}
+.banner-title{
+font-size:15px;font-weight:900;color:#FFE66D;
+text-shadow:0 2px 6px rgba(0,0,0,0.5);
+line-height:1.15;
+}
+.banner-sub{
+font-size:11px;color:#E2E8F0;margin-top:3px;
+}
+.banner-right{
+display:flex;flex-direction:column;gap:4px;flex-shrink:0;
+}
+.pay-chip{
+background:rgba(9,13,26,0.78);border:1px solid rgba(255,255,255,0.14);
+padding:3px 8px;border-radius:8px;font-size:10px;font-weight:700;
+color:#F8FAFC;white-space:nowrap;
+}
+
+/* 2-COLUMN ROOM GRID */
 .room-grid{
-display:grid;grid-template-columns:1fr 1fr;gap:11px;
+display:grid;grid-template-columns:1fr 1fr;gap:10px;
 }
 .room-card{
-position:relative;height:185px;border-radius:18px;
-overflow:hidden;border:1px solid var(--border);
+position:relative;height:188px;border-radius:16px;
+overflow:hidden;border:1px solid rgba(255,255,255,0.09);
 cursor:pointer;display:flex;flex-direction:column;
-justify-content:space-between;padding:10px;
-background-size:cover;background-position:center;
+justify-content:space-between;padding:8px;
 }
 .room-card::after{
 content:"";position:absolute;inset:0;
-background:linear-gradient(180deg,rgba(0,0,0,0.35) 0%,rgba(0,0,0,0.1) 45%,rgba(5,10,24,0.92) 100%);
+background:linear-gradient(180deg,rgba(0,0,0,0.35) 0%,rgba(0,0,0,0.05) 45%,rgba(4,7,18,0.92) 100%);
 z-index:1;
 }
-.rc-top, .rc-bottom{position:relative;z-index:2}
-.rc-top{display:flex;justify-content:space-between;align-items:center;gap:4px}
-.badge-party{
-background:rgba(15,23,42,0.75);backdrop-filter:blur(4px);
-padding:3px 8px;border-radius:12px;font-size:10px;font-weight:bold;
+.rc-top, .rc-center, .rc-bottom{position:relative;z-index:2}
+.rc-top{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.tag-party{
+background:rgba(15,23,42,0.78);color:#F1F5F9;
+padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700;
 }
-.badge-live{
-background:#00C4CC;color:#041E24;
-padding:3px 8px;border-radius:12px;font-size:10px;font-weight:900;
+.tag-party-eq{
+background:#00B8B8;color:#041A1F;
+padding:2px 7px;border-radius:10px;font-size:10px;font-weight:900;
 }
-.badge-count{
-background:rgba(0,0,0,0.65);padding:3px 7px;
-border-radius:12px;font-size:10px;color:#FF86C2;
+.tag-live{
+background:#00D4C8;color:#041A1F;
+padding:2px 7px;border-radius:10px;font-size:10px;font-weight:900;
 }
-.rc-host{font-size:13px;font-weight:bold;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rc-tag{
-display:inline-block;background:rgba(255,255,255,0.16);
-padding:3px 8px;border-radius:8px;font-size:10px;color:#E2E8F0;margin-top:4px;
+.tag-fire{
+background:rgba(0,0,0,0.62);color:#FF7EB6;
+padding:2px 6px;border-radius:10px;font-size:10px;font-weight:700;
+margin-left:auto;
 }
+.rc-center{
+text-align:center;font-size:48px;line-height:1;
+filter:drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+}
+.rc-host{
+font-size:13px;font-weight:800;color:white;
+white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.rc-sub{
+display:inline-block;background:rgba(255,255,255,0.14);
+color:#E2E8F0;padding:2px 7px;border-radius:7px;
+font-size:10px;margin-top:3px;
+max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+
+/* FLOATING PINK GO LIVE BUTTON */
 .go-live-fab{
-position:fixed;right:18px;bottom:92px;z-index:20;
-background:linear-gradient(90deg,#FF2E7E,#FF5E62);
-color:white;border:0;border-radius:30px;
-padding:14px 22px;font-size:15px;font-weight:900;
-box-shadow:0 8px 24px rgba(244,63,133,0.45);
+position:fixed;right:14px;bottom:86px;z-index:25;
+background:linear-gradient(90deg,#F52F7E,#FF577F);
+color:white;border:0;border-radius:28px;
+padding:11px 18px;font-size:15px;font-weight:900;
+box-shadow:0 8px 22px rgba(245,47,126,0.5);
 display:flex;align-items:center;gap:8px;cursor:pointer;
 }
 
-/* GO LIVE SETUP OVERLAY (Screenshot 1) */
+/* GO LIVE SETUP SCREEN */
 .fullscreen-modal{
 display:none;position:fixed;inset:0;
 background:#090B14;z-index:40;
@@ -151,24 +195,20 @@ padding:18px;overflow-y:auto;
 flex-direction:column;justify-content:space-between;
 }
 .setup-preview{
-position:relative;height:245px;border-radius:24px;
+position:relative;height:240px;border-radius:24px;
 background:linear-gradient(160deg,#1F2937,#0F172A);
 border:1px solid #2D3A54;padding:16px;
 display:flex;flex-direction:column;justify-content:space-between;
 overflow:hidden;
 }
-.setup-preview::before{
-content:"🌃";position:absolute;right:15px;bottom:10px;
-font-size:110px;opacity:0.15;pointer-events:none;
-}
 .setup-top{display:flex;justify-content:space-between;align-items:center}
 .circle-back{
 width:38px;height:38px;border-radius:50%;
-background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.15);
+background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.15);
 color:white;font-size:18px;cursor:pointer;
 }
 .host-pill{
-background:rgba(0,0,0,0.55);padding:5px 10px;border-radius:20px;
+background:rgba(0,0,0,0.6);padding:5px 10px;border-radius:20px;
 display:flex;align-items:center;gap:8px;font-size:13px;font-weight:bold;
 }
 .live-dot{
@@ -202,16 +242,14 @@ color:white;font-size:17px;font-weight:900;cursor:pointer;
 display:flex;align-items:center;justify-content:center;gap:10px;
 }
 
-/* LIVE AUDIO PARTY ROOM (Screenshot 2) */
+/* 17-SEAT LIVE PARTY ROOM */
 .live-room-screen{
 display:none;position:fixed;inset:0;z-index:45;
 background:radial-gradient(circle at 80% 15%,#1E3A5F 0%,#0B162C 45%,#060A14 100%);
 flex-direction:column;justify-content:space-between;
 padding:14px 12px 18px;overflow:hidden;
 }
-.room-header{
-display:flex;justify-content:space-between;align-items:center;
-}
+.room-header{display:flex;justify-content:space-between;align-items:center}
 .room-owner-badge{
 display:flex;align-items:center;gap:8px;
 background:rgba(10,18,34,0.75);border:1px solid rgba(255,255,255,0.15);
@@ -228,9 +266,7 @@ background:rgba(0,0,0,0.45);padding:4px 10px;
 border-radius:15px;font-size:12px;font-weight:bold;
 color:#7CE8FF;margin-top:8px;
 }
-.vip-row{
-display:flex;justify-content:center;gap:24px;margin:8px 0 14px;
-}
+.vip-row{display:flex;justify-content:center;gap:24px;margin:8px 0 14px}
 .vip-seat{text-align:center}
 .vip-ring{
 width:64px;height:64px;border-radius:50%;
@@ -238,31 +274,23 @@ margin:0 auto 5px;display:grid;place-items:center;
 font-size:28px;background:#1A263E;
 border:3px solid #FFB52E;box-shadow:0 0 15px rgba(255,181,46,0.5);
 }
-.vip-seat span{font-size:11px;font-weight:bold;text-shadow:0 1px 3px #000}
-.seats-grid{
-display:grid;grid-template-columns:repeat(5,1fr);
-gap:10px 6px;margin:4px 0;
-}
+.vip-seat span{font-size:11px;font-weight:bold}
+.seats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px 6px;margin:4px 0}
 .seat-item{text-align:center;cursor:pointer}
 .seat-circle{
 width:52px;height:52px;border-radius:50%;margin:0 auto 4px;
 background:radial-gradient(circle,#3B1D6E,#1A1438);
 border:2px solid #38BDF8;
 box-shadow:0 0 10px rgba(56,189,248,0.35);
-display:grid;place-items:center;font-size:22px;
-transition:0.2s;
+display:grid;place-items:center;font-size:22px;transition:0.2s;
 }
-.seat-circle.occupied{
-border-color:#F43F85;background:#2A193D;
-}
+.seat-circle.occupied{border-color:#F43F85;background:#2A193D}
 .seat-item p{font-size:10px;color:#E2E8F0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-/* ROOM CHAT & BOTTOM BAR */
 .room-chat{
 height:145px;overflow-y:auto;
 display:flex;flex-direction:column;gap:6px;
 padding:6px 4px;margin-top:auto;
-mask-image:linear-gradient(to bottom,transparent 0%,black 18%);
 }
 .chat-msg{
 align-self:flex-start;max-width:85%;
@@ -275,9 +303,7 @@ background:linear-gradient(90deg,#F59E0B,#EF4444);
 font-size:9px;padding:1px 5px;border-radius:6px;
 font-weight:bold;margin-right:4px;
 }
-.room-bottom-bar{
-display:flex;align-items:center;gap:8px;margin-top:8px;
-}
+.room-bottom-bar{display:flex;align-items:center;gap:8px;margin-top:8px}
 .r-icon-btn{
 width:40px;height:40px;border-radius:50%;border:0;
 background:rgba(18,28,48,0.85);color:white;
@@ -288,15 +314,10 @@ flex:1;display:flex;align-items:center;
 background:rgba(18,28,48,0.85);border:1px solid rgba(255,255,255,0.12);
 border-radius:25px;padding:0 12px;height:40px;
 }
-.chat-input-wrap input{
-flex:1;background:none;border:0;color:white;font-size:13px;outline:none;
-}
-.gift-btn{
-background:linear-gradient(135deg,#FF9800,#F43F85);
-box-shadow:0 0 12px rgba(244,63,133,0.5);
-}
+.chat-input-wrap input{flex:1;background:none;border:0;color:white;font-size:13px;outline:none}
+.gift-btn{background:linear-gradient(135deg,#FF9800,#F43F85);box-shadow:0 0 12px rgba(244,63,133,0.5)}
 
-/* PROFILE & EXISTING STYLES */
+/* PROFILE & OTHER PAGES */
 .profile-actions{display:flex;justify-content:space-between;align-items:center}
 .profile-actions div{display:flex;gap:8px}
 .icon-btn{
@@ -332,9 +353,8 @@ display:grid;place-items:center;font-size:48px;
 .tools{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .tool{
 background:var(--card);border:1px solid var(--border);
-border-radius:20px;min-height:135px;
-display:flex;flex-direction:column;align-items:center;justify-content:center;
-text-align:center;padding:10px 4px;cursor:pointer;
+border-radius:20px;min-height:135px;display:flex;flex-direction:column;
+align-items:center;justify-content:center;text-align:center;padding:10px 4px;cursor:pointer;
 }
 .tool-icon{width:55px;height:55px;border-radius:50%;display:grid;place-items:center;font-size:26px;margin-bottom:10px}
 .tool strong{font-size:14px}
@@ -344,15 +364,10 @@ text-align:center;padding:10px 4px;cursor:pointer;
 .t3 .tool-icon{background:#432C68;color:#D3A0FF}
 .t4 .tool-icon{background:#15515D;color:#5BE9EE}
 .t5 .tool-icon{background:#155345;color:#66EDB4}
-.agent{
-padding:20px;border-radius:22px;
-background:linear-gradient(120deg,#241541,#40225F);
-border:1px solid #7550A9;margin:25px 0;
-}
+.agent{padding:20px;border-radius:22px;background:linear-gradient(120deg,#241541,#40225F);border:1px solid #7550A9;margin:25px 0}
 .row{
 width:100%;display:flex;align-items:center;gap:13px;text-align:left;color:white;
-background:var(--card);border:1px solid var(--border);
-border-radius:18px;padding:15px;margin-bottom:11px;cursor:pointer;
+background:var(--card);border:1px solid var(--border);border-radius:18px;padding:15px;margin-bottom:11px;cursor:pointer;
 }
 .row-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;font-size:22px;flex-shrink:0}
 .row-info{flex:1}
@@ -363,13 +378,21 @@ border-radius:18px;padding:15px;margin-bottom:11px;cursor:pointer;
 .setting-line p{font-size:12px;color:var(--muted);margin-top:5px}
 .switch{accent-color:var(--cyan);width:20px;height:20px}
 .search{width:100%;padding:14px;background:var(--card);border:1px solid var(--border);border-radius:13px;color:white;margin:18px 0}
+
+/* BOTTOM NAVIGATION */
 nav{
-position:fixed;bottom:0;left:0;width:100%;height:75px;background:#090E1B;
-border-top:1px solid var(--border);display:flex;justify-content:space-around;align-items:center;z-index:10;
+position:fixed;bottom:0;left:0;width:100%;height:74px;
+background:#070912;border-top:1px solid rgba(255,255,255,0.08);
+display:flex;justify-content:space-around;align-items:center;z-index:20;
 }
-nav button{border:0;background:none;color:#8592A9;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:10px;cursor:pointer}
-nav b{font-size:23px}
+nav button{
+border:0;background:none;color:#7C879B;
+display:flex;flex-direction:column;align-items:center;gap:4px;
+font-size:10px;font-weight:700;cursor:pointer;
+}
+nav b{font-size:22px}
 nav button.active{color:white}
+
 .overlay{display:none;position:fixed;inset:0;background:#000B;z-index:50;align-items:center;justify-content:center;padding:17px}
 .modal{width:100%;max-width:390px;max-height:85vh;overflow:auto;background:#142039;border:1px solid #354765;border-radius:22px;padding:21px}
 .modal h2{margin-bottom:17px}
@@ -384,35 +407,60 @@ nav button.active{color:white}
 <button class="icon-btn" onclick="notify('No new notifications')">🔔</button>
 </header>
 
-<!-- HOME -->
-<section id="home" class="page">
-<div class="hero">
-<h1>Welcome to SANO LIVE ✨</h1>
-<p>Connect Together • Enjoy Together</p>
-</div>
-<h2 class="heading">Discover</h2>
-<div class="quick-grid">
-<div class="quick" onclick="go('explore')">
-<span>🌍</span><h3>Explore</h3><p>Discover people</p>
-</div>
-<div class="quick" onclick="go('party')">
-<span>🎉</span><h3>Party</h3><p>Join communities</p>
-</div>
-<div class="quick" onclick="go('messages')">
-<span>💬</span><h3>Messages</h3><p>Chat with friends</p>
-</div>
-<div class="quick" onclick="go('profile')">
-<span>👤</span><h3>Profile</h3><p>Your account</p>
-</div>
-</div>
-<h2 class="heading">Popular Parties</h2>
-<div class="card" style="display:flex;justify-content:space-between;align-items:center" onclick="go('party')">
-<div>
-<h3>🎧 Live Voice Rooms</h3>
-<p class="muted">Join 17-seat audio parties now</p>
-</div>
-<button class="btn">Join ›</button>
-</div>
+<!-- HOME PAGE (Screenshot 9072_2.jpg Style) -->
+<section id="home" class="page active">
+  <div class="home-topbar">
+    <button class="top-icon-btn" onclick="go('explore')" title="Search">🔍</button>
+    <div class="home-tabs">
+      <button class="h-tab" onclick="setHomeTab('follow',this)">Follow</button>
+      <button class="h-tab active" onclick="setHomeTab('popular',this)">Popular</button>
+      <button class="all-pill" onclick="setHomeTab('all',this)">All</button>
+    </div>
+    <select class="global-select" id="regionSelect" onchange="notify('Region: '+this.value)">
+      <option value="Global">🌐 Global</option>
+      <option value="Nepal">🇳🇵 Nepal</option>
+      <option value="India">🇮🇳 India</option>
+      <option value="Bangladesh">🇧🇩 Bangladesh</option>
+    </select>
+    <button class="top-icon-btn" onclick="openTool('Top Ranks','🏆','Daily & Weekly Top Hosts')" title="Leaderboard">🏆</button>
+  </div>
+
+  <!-- Top Coin Seller Banner -->
+  <div class="seller-banner top-banner" onclick="wallet('Coins')">
+    <div class="banner-left">
+      <span class="banner-tag">★ OFFICIAL COIN SELLER ★</span>
+      <div class="banner-title">SANO LIVE COIN SELLER</div>
+      <div class="banner-sub">Name: SMART • ID: 00196 • Fast Top-Up</div>
+    </div>
+    <div class="banner-right">
+      <span class="pay-chip">💬 WhatsApp</span>
+      <span class="pay-chip">🪙 Instant Coins</span>
+    </div>
+  </div>
+
+  <!-- First 4 Cards Grid -->
+  <div class="room-grid" id="homeGridTop"></div>
+
+  <!-- Middle Official Seller Banner -->
+  <div class="seller-banner mid-banner" onclick="wallet('Coins')">
+    <div class="banner-left">
+      <span class="banner-tag">24/7 TRUSTED SELLER</span>
+      <div class="banner-title">OFFICIAL COIN PRICE</div>
+      <div class="banner-sub">45K = 290 • 90K = 580 • 180K = 1150</div>
+    </div>
+    <div class="banner-right">
+      <span class="pay-chip">⚡ Fast Delivery</span>
+      <span class="pay-chip">🛡️ 100% Safe</span>
+    </div>
+  </div>
+
+  <!-- Remaining Cards Grid -->
+  <div class="room-grid" id="homeGridBottom"></div>
+
+  <!-- Floating Go Live Button -->
+  <button class="go-live-fab" onclick="openGoLiveSetup()">
+    📹 Go Live
+  </button>
 </section>
 
 <!-- EXPLORE -->
@@ -426,31 +474,14 @@ nav button.active{color:white}
 </div>
 </section>
 
-<!-- PARTY FEED (Screenshot 3 Design) -->
+<!-- PARTY -->
 <section id="party" class="page">
-<div class="party-top-tabs">
-<div class="tab-group">
-<button class="p-tab" onclick="filterParty('follow',this)">Follow</button>
-<button class="p-tab active" onclick="filterParty('popular',this)">Popular</button>
-<span class="pill-all">All</span>
+<h1>Party 🎉</h1>
+<div class="card" style="margin-top:16px">
+<h2>🎧 Party Rooms</h2>
+<p class="muted" style="margin:10px 0">Join audio party rooms or create your own 17-seat room.</p>
+<button class="btn" onclick="openGoLiveSetup()">＋ Create Party</button>
 </div>
-<div class="region-pill">🌐 Global ⌄</div>
-</div>
-
-<div class="promo-banner">
-<div>
-<h4>👑 SANO LIVE COIN SELLER</h4>
-<p>Official Fast & Trusted Top-Up Agency</p>
-</div>
-<button class="btn" style="padding:8px 12px;font-size:12px;background:#FFB52E" onclick="wallet('Coins')">Top Up</button>
-</div>
-
-<div class="room-grid" id="partyRoomsGrid"></div>
-
-<!-- Floating Pink Go Live Button -->
-<button class="go-live-fab" onclick="openGoLiveSetup()">
-📹 Go Live
-</button>
 </section>
 
 <!-- MESSAGES -->
@@ -526,50 +557,3 @@ nav button.active{color:white}
 </div>
 <div class="tool t5" onclick="openTool('Invite','💝','Invite your friends')">
 <div class="tool-icon">💝</div>
-<strong>Invite</strong><small>Invite Friends</small>
-</div>
-</div>
-
-<div class="agent">
-<span style="color:#FF86C2;font-size:12px">● COMMUNITY</span>
-<h2 style="margin:12px 0">Become an Agent</h2>
-<p class="muted">Build your team and grow together.</p>
-<button class="btn" style="margin-top:15px;background:#9270F5;color:white" onclick="openTool('Become an Agent','👑','Agent registration coming soon')">
-Join →
-</button>
-</div>
-
-<h2 class="heading" style="border-color:#FFB52E">Settings & More</h2>
-<div id="menu"></div>
-</section>
-
-<!-- SETTINGS -->
-<section id="settings" class="page">
-<button class="btn secondary" onclick="go('profile')">← Back</button>
-<h1 style="margin-top:22px">Settings ⚙️</h1>
-<h2 class="heading">Preferences</h2>
-<div class="card">
-<div class="setting-line">
-<div><b>Notifications</b><p>App notifications</p></div>
-<input class="switch" type="checkbox" checked onchange="saveSettings()">
-</div>
-<div class="setting-line">
-<div><b>Sound</b><p>Sound effects</p></div>
-<input class="switch" type="checkbox" checked onchange="saveSettings()">
-</div>
-<div class="setting-line">
-<div><b>Vibration</b><p>Vibration preference</p></div>
-<input class="switch" type="checkbox" onchange="saveSettings()">
-</div>
-</div>
-<h2 class="heading">Account & Security</h2>
-<div id="settingsMenu"></div>
-<h2 class="heading">About</h2>
-<div class="card">
-<h3>SANO LIVE</h3>
-<p class="muted" style="margin-top:8px">Version 1.0.0</p>
-</div>
-</section>
-
-<!-- GO LIVE SETUP SCREEN (Screenshot 1 Design) -->
-<d
