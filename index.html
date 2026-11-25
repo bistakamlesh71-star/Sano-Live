@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#080D1D">
 <title>SANO LIVE</title>
-
 <style>
 :root{
 --bg:#080D1D;
@@ -13,7 +12,7 @@
 --border:#26344B;
 --cyan:#00D9FF;
 --purple:#9875FF;
---pink:#F45C9C;
+--pink:#F43F85;
 --gold:#FFB52E;
 --muted:#93A1B7;
 }
@@ -22,6 +21,7 @@ body{
 background:var(--bg);color:white;
 font-family:Arial,sans-serif;
 padding-bottom:85px;
+overflow-x:hidden;
 }
 header{
 height:62px;background:#0B1221;
@@ -72,15 +72,237 @@ background:var(--card);border:1px dashed #394A65;
 border-radius:20px;
 }
 .empty span{font-size:40px}
-.profile-actions{
-display:flex;justify-content:space-between;
-align-items:center;
+
+/* PARTY FEED STYLES (Screenshot 3) */
+.party-top-tabs{
+display:flex;align-items:center;justify-content:space-between;
+margin-bottom:14px;gap:8px;
 }
+.tab-group{display:flex;align-items:center;gap:12px}
+.p-tab{
+background:none;border:0;color:var(--muted);
+font-size:16px;font-weight:bold;cursor:pointer;padding:4px 0;
+}
+.p-tab.active{color:var(--pink);font-size:18px}
+.pill-all{
+background:var(--pink);color:white;border:0;
+padding:4px 12px;border-radius:20px;font-size:12px;font-weight:bold;
+}
+.region-pill{
+background:#152238;border:1px solid var(--border);
+color:white;padding:6px 12px;border-radius:20px;font-size:12px;
+}
+.promo-banner{
+background:linear-gradient(135deg,#2B1055,#7597DE);
+border:1px solid #594496;border-radius:16px;
+padding:14px;margin-bottom:14px;
+display:flex;justify-content:space-between;align-items:center;
+}
+.promo-banner h4{color:#FFD15C;font-size:15px}
+.promo-banner p{font-size:11px;color:#E2E8F0;margin-top:3px}
+.room-grid{
+display:grid;grid-template-columns:1fr 1fr;gap:11px;
+}
+.room-card{
+position:relative;height:185px;border-radius:18px;
+overflow:hidden;border:1px solid var(--border);
+cursor:pointer;display:flex;flex-direction:column;
+justify-content:space-between;padding:10px;
+background-size:cover;background-position:center;
+}
+.room-card::after{
+content:"";position:absolute;inset:0;
+background:linear-gradient(180deg,rgba(0,0,0,0.35) 0%,rgba(0,0,0,0.1) 45%,rgba(5,10,24,0.92) 100%);
+z-index:1;
+}
+.rc-top, .rc-bottom{position:relative;z-index:2}
+.rc-top{display:flex;justify-content:space-between;align-items:center;gap:4px}
+.badge-party{
+background:rgba(15,23,42,0.75);backdrop-filter:blur(4px);
+padding:3px 8px;border-radius:12px;font-size:10px;font-weight:bold;
+}
+.badge-live{
+background:#00C4CC;color:#041E24;
+padding:3px 8px;border-radius:12px;font-size:10px;font-weight:900;
+}
+.badge-count{
+background:rgba(0,0,0,0.65);padding:3px 7px;
+border-radius:12px;font-size:10px;color:#FF86C2;
+}
+.rc-host{font-size:13px;font-weight:bold;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rc-tag{
+display:inline-block;background:rgba(255,255,255,0.16);
+padding:3px 8px;border-radius:8px;font-size:10px;color:#E2E8F0;margin-top:4px;
+}
+.go-live-fab{
+position:fixed;right:18px;bottom:92px;z-index:20;
+background:linear-gradient(90deg,#FF2E7E,#FF5E62);
+color:white;border:0;border-radius:30px;
+padding:14px 22px;font-size:15px;font-weight:900;
+box-shadow:0 8px 24px rgba(244,63,133,0.45);
+display:flex;align-items:center;gap:8px;cursor:pointer;
+}
+
+/* GO LIVE SETUP OVERLAY (Screenshot 1) */
+.fullscreen-modal{
+display:none;position:fixed;inset:0;
+background:#090B14;z-index:40;
+padding:18px;overflow-y:auto;
+flex-direction:column;justify-content:space-between;
+}
+.setup-preview{
+position:relative;height:245px;border-radius:24px;
+background:linear-gradient(160deg,#1F2937,#0F172A);
+border:1px solid #2D3A54;padding:16px;
+display:flex;flex-direction:column;justify-content:space-between;
+overflow:hidden;
+}
+.setup-preview::before{
+content:"🌃";position:absolute;right:15px;bottom:10px;
+font-size:110px;opacity:0.15;pointer-events:none;
+}
+.setup-top{display:flex;justify-content:space-between;align-items:center}
+.circle-back{
+width:38px;height:38px;border-radius:50%;
+background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.15);
+color:white;font-size:18px;cursor:pointer;
+}
+.host-pill{
+background:rgba(0,0,0,0.55);padding:5px 10px;border-radius:20px;
+display:flex;align-items:center;gap:8px;font-size:13px;font-weight:bold;
+}
+.live-dot{
+background:var(--pink);color:white;font-size:10px;
+padding:2px 6px;border-radius:6px;font-weight:900;
+}
+.title-input-box{border-bottom:2px solid var(--pink);padding-bottom:6px}
+.title-label{font-size:11px;color:var(--pink);font-weight:bold;letter-spacing:0.5px}
+.title-input{
+width:100%;background:none;border:0;color:white;
+font-size:22px;font-weight:900;outline:none;margin-top:4px;
+}
+.format-card{
+display:flex;align-items:center;gap:14px;
+background:#121829;border:1px solid #25304A;
+border-radius:18px;padding:16px;margin-bottom:12px;cursor:pointer;
+}
+.format-card.selected{
+background:linear-gradient(90deg,#F43F85,#E11D48);
+border-color:#FF75A8;
+}
+.format-icon{
+width:44px;height:44px;border-radius:50%;
+background:rgba(255,255,255,0.12);
+display:grid;place-items:center;font-size:20px;
+}
+.go-now-btn{
+width:100%;padding:16px;border:0;border-radius:30px;
+background:linear-gradient(90deg,#F43F85,#EC4899);
+color:white;font-size:17px;font-weight:900;cursor:pointer;
+display:flex;align-items:center;justify-content:center;gap:10px;
+}
+
+/* LIVE AUDIO PARTY ROOM (Screenshot 2) */
+.live-room-screen{
+display:none;position:fixed;inset:0;z-index:45;
+background:radial-gradient(circle at 80% 15%,#1E3A5F 0%,#0B162C 45%,#060A14 100%);
+flex-direction:column;justify-content:space-between;
+padding:14px 12px 18px;overflow:hidden;
+}
+.room-header{
+display:flex;justify-content:space-between;align-items:center;
+}
+.room-owner-badge{
+display:flex;align-items:center;gap:8px;
+background:rgba(10,18,34,0.75);border:1px solid rgba(255,255,255,0.15);
+padding:5px 12px 5px 6px;border-radius:30px;
+}
+.owner-ava{
+width:34px;height:34px;border-radius:50%;
+background:linear-gradient(135deg,#00D9FF,#9875FF);
+display:grid;place-items:center;font-size:18px;
+}
+.diamond-pill{
+display:inline-flex;align-items:center;gap:5px;
+background:rgba(0,0,0,0.45);padding:4px 10px;
+border-radius:15px;font-size:12px;font-weight:bold;
+color:#7CE8FF;margin-top:8px;
+}
+.vip-row{
+display:flex;justify-content:center;gap:24px;margin:8px 0 14px;
+}
+.vip-seat{text-align:center}
+.vip-ring{
+width:64px;height:64px;border-radius:50%;
+margin:0 auto 5px;display:grid;place-items:center;
+font-size:28px;background:#1A263E;
+border:3px solid #FFB52E;box-shadow:0 0 15px rgba(255,181,46,0.5);
+}
+.vip-seat span{font-size:11px;font-weight:bold;text-shadow:0 1px 3px #000}
+.seats-grid{
+display:grid;grid-template-columns:repeat(5,1fr);
+gap:10px 6px;margin:4px 0;
+}
+.seat-item{text-align:center;cursor:pointer}
+.seat-circle{
+width:52px;height:52px;border-radius:50%;margin:0 auto 4px;
+background:radial-gradient(circle,#3B1D6E,#1A1438);
+border:2px solid #38BDF8;
+box-shadow:0 0 10px rgba(56,189,248,0.35);
+display:grid;place-items:center;font-size:22px;
+transition:0.2s;
+}
+.seat-circle.occupied{
+border-color:#F43F85;background:#2A193D;
+}
+.seat-item p{font-size:10px;color:#E2E8F0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ROOM CHAT & BOTTOM BAR */
+.room-chat{
+height:145px;overflow-y:auto;
+display:flex;flex-direction:column;gap:6px;
+padding:6px 4px;margin-top:auto;
+mask-image:linear-gradient(to bottom,transparent 0%,black 18%);
+}
+.chat-msg{
+align-self:flex-start;max-width:85%;
+background:rgba(10,16,30,0.68);
+border:1px solid rgba(255,255,255,0.08);
+padding:6px 11px;border-radius:14px;font-size:12px;line-height:1.4;
+}
+.chat-badge{
+background:linear-gradient(90deg,#F59E0B,#EF4444);
+font-size:9px;padding:1px 5px;border-radius:6px;
+font-weight:bold;margin-right:4px;
+}
+.room-bottom-bar{
+display:flex;align-items:center;gap:8px;margin-top:8px;
+}
+.r-icon-btn{
+width:40px;height:40px;border-radius:50%;border:0;
+background:rgba(18,28,48,0.85);color:white;
+font-size:18px;display:grid;place-items:center;cursor:pointer;flex-shrink:0;
+}
+.chat-input-wrap{
+flex:1;display:flex;align-items:center;
+background:rgba(18,28,48,0.85);border:1px solid rgba(255,255,255,0.12);
+border-radius:25px;padding:0 12px;height:40px;
+}
+.chat-input-wrap input{
+flex:1;background:none;border:0;color:white;font-size:13px;outline:none;
+}
+.gift-btn{
+background:linear-gradient(135deg,#FF9800,#F43F85);
+box-shadow:0 0 12px rgba(244,63,133,0.5);
+}
+
+/* PROFILE & EXISTING STYLES */
+.profile-actions{display:flex;justify-content:space-between;align-items:center}
 .profile-actions div{display:flex;gap:8px}
 .icon-btn{
 width:43px;height:43px;border-radius:50%;
 background:#18243A;color:white;
-border:1px solid var(--border);font-size:19px;
+border:1px solid var(--border);font-size:19px;cursor:pointer;
 }
 .profile-center{text-align:center;padding:24px 0}
 .avatar{
@@ -91,60 +313,30 @@ border:4px solid var(--purple);
 display:grid;place-items:center;font-size:48px;
 }
 .name{font-size:26px;font-weight:900}
-.details{
-display:flex;justify-content:center;
-flex-wrap:wrap;gap:8px;margin:17px 0;
-}
-.detail{
-background:#18243A;border:1px solid var(--border);
-border-radius:20px;padding:9px 12px;font-size:13px;
-}
-.bio{
-display:inline-block;background:#18243A;
-padding:12px 20px;border-radius:20px;
-color:#B9C5D8;margin-top:12px;
-}
-.stats{
-display:grid;grid-template-columns:repeat(3,1fr);
-text-align:center;padding:20px 5px;
-}
+.details{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:17px 0}
+.detail{background:#18243A;border:1px solid var(--border);border-radius:20px;padding:9px 12px;font-size:13px}
+.bio{display:inline-block;background:#18243A;padding:12px 20px;border-radius:20px;color:#B9C5D8;margin-top:12px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);text-align:center;padding:20px 5px}
 .stats>div+div{border-left:1px solid var(--border)}
 .stats strong{font-size:24px}
 .stats p{font-size:11px;color:var(--muted);margin-top:7px}
-.money-grid{
-display:grid;grid-template-columns:1fr 1fr;gap:11px;
-}
-.money{
-padding:16px;border-radius:21px;
-min-width:0;
-}
+.money-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.money{padding:16px;border-radius:21px;min-width:0}
 .money h3{font-size:15px;margin-bottom:20px}
 .money strong{font-size:28px}
-.money button{
-width:100%;padding:12px 4px;
-border:0;border-radius:25px;
-margin-top:19px;font-weight:bold;
-}
+.money button{width:100%;padding:12px 4px;border:0;border-radius:25px;margin-top:19px;font-weight:bold}
 .coins{background:#1B2435;border:1px solid #D99B30}
 .coins button{background:#FFB32D;color:#211300}
 .money-card{background:#142A3B;border:1px solid #00D9FF}
 .money-card button{background:#00CDE8;color:#00121B}
-.tools{
-display:grid;grid-template-columns:repeat(3,1fr);
-gap:10px;
-}
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .tool{
 background:var(--card);border:1px solid var(--border);
 border-radius:20px;min-height:135px;
-display:flex;flex-direction:column;
-align-items:center;justify-content:center;
+display:flex;flex-direction:column;align-items:center;justify-content:center;
 text-align:center;padding:10px 4px;cursor:pointer;
 }
-.tool-icon{
-width:55px;height:55px;border-radius:50%;
-display:grid;place-items:center;font-size:26px;
-margin-bottom:10px;
-}
+.tool-icon{width:55px;height:55px;border-radius:50%;display:grid;place-items:center;font-size:26px;margin-bottom:10px}
 .tool strong{font-size:14px}
 .tool small{font-size:11px;color:var(--muted);margin-top:7px}
 .t1 .tool-icon{background:#562747;color:#FF83B9}
@@ -158,79 +350,38 @@ background:linear-gradient(120deg,#241541,#40225F);
 border:1px solid #7550A9;margin:25px 0;
 }
 .row{
-width:100%;display:flex;align-items:center;
-gap:13px;text-align:left;color:white;
+width:100%;display:flex;align-items:center;gap:13px;text-align:left;color:white;
 background:var(--card);border:1px solid var(--border);
-border-radius:18px;padding:15px;margin-bottom:11px;
-cursor:pointer;
+border-radius:18px;padding:15px;margin-bottom:11px;cursor:pointer;
 }
-.row-icon{
-width:48px;height:48px;display:grid;
-place-items:center;border-radius:15px;
-font-size:22px;flex-shrink:0;
-}
+.row-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;font-size:22px;flex-shrink:0}
 .row-info{flex:1}
 .row-info p{font-size:12px;color:var(--muted);margin-top:6px}
 .arrow{font-size:23px;color:#8999B0}
-.setting-line{
-display:flex;justify-content:space-between;
-align-items:center;padding:15px 0;
-border-bottom:1px solid var(--border);
-}
+.setting-line{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid var(--border)}
 .setting-line:last-child{border:0}
 .setting-line p{font-size:12px;color:var(--muted);margin-top:5px}
 .switch{accent-color:var(--cyan);width:20px;height:20px}
-.search{
-width:100%;padding:14px;background:var(--card);
-border:1px solid var(--border);border-radius:13px;
-color:white;margin:18px 0;
-}
+.search{width:100%;padding:14px;background:var(--card);border:1px solid var(--border);border-radius:13px;color:white;margin:18px 0}
 nav{
-position:fixed;bottom:0;left:0;width:100%;
-height:75px;background:#090E1B;
-border-top:1px solid var(--border);
-display:flex;justify-content:space-around;
-align-items:center;z-index:10;
+position:fixed;bottom:0;left:0;width:100%;height:75px;background:#090E1B;
+border-top:1px solid var(--border);display:flex;justify-content:space-around;align-items:center;z-index:10;
 }
-nav button{
-border:0;background:none;color:#8592A9;
-display:flex;flex-direction:column;
-align-items:center;gap:5px;font-size:10px;
-}
+nav button{border:0;background:none;color:#8592A9;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:10px;cursor:pointer}
 nav b{font-size:23px}
 nav button.active{color:white}
-.overlay{
-display:none;position:fixed;inset:0;
-background:#000B;z-index:30;
-align-items:center;justify-content:center;padding:17px;
-}
-.modal{
-width:100%;max-width:390px;max-height:85vh;
-overflow:auto;background:#142039;
-border:1px solid #354765;
-border-radius:22px;padding:21px;
-}
+.overlay{display:none;position:fixed;inset:0;background:#000B;z-index:50;align-items:center;justify-content:center;padding:17px}
+.modal{width:100%;max-width:390px;max-height:85vh;overflow:auto;background:#142039;border:1px solid #354765;border-radius:22px;padding:21px}
 .modal h2{margin-bottom:17px}
-.field{
-width:100%;padding:13px;margin:8px 0 14px;
-border:1px solid #354765;background:#091426;
-color:white;border-radius:12px;
-}
-.toast{
-display:none;position:fixed;bottom:90px;
-left:50%;transform:translateX(-50%);
-background:#263952;padding:13px 18px;
-border-radius:25px;z-index:50;
-font-size:13px;white-space:nowrap;
-}
+.field{width:100%;padding:13px;margin:8px 0 14px;border:1px solid #354765;background:#091426;color:white;border-radius:12px}
+.toast{display:none;position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#263952;padding:13px 18px;border-radius:25px;z-index:60;font-size:13px;white-space:nowrap}
 </style>
 </head>
-
 <body>
 
 <header>
 <div class="logo">SANO LIVE</div>
-<button class="icon-btn" onclick="notify('No new notifications')">♧</button>
+<button class="icon-btn" onclick="notify('No new notifications')">🔔</button>
 </header>
 
 <!-- HOME -->
@@ -255,10 +406,12 @@ font-size:13px;white-space:nowrap;
 </div>
 </div>
 <h2 class="heading">Popular Parties</h2>
-<div class="empty">
-<span>🎧</span>
-<h3 style="margin:12px">No Active Parties</h3>
-<p class="muted">Active parties will appear here.</p>
+<div class="card" style="display:flex;justify-content:space-between;align-items:center" onclick="go('party')">
+<div>
+<h3>🎧 Live Voice Rooms</h3>
+<p class="muted">Join 17-seat audio parties now</p>
+</div>
+<button class="btn">Join ›</button>
 </div>
 </section>
 
@@ -266,22 +419,38 @@ font-size:13px;white-space:nowrap;
 <section id="explore" class="page">
 <h1>Explore 🌍</h1>
 <p class="muted">Discover SANO LIVE community.</p>
-<input class="search" id="search" placeholder="🔍 Search people..."
-oninput="searchPeople()">
+<input class="search" id="search" placeholder="🔍 Search people..." oninput="searchPeople()">
 <div class="empty" id="searchBox">
 <span>🌐</span><h3>Discover People</h3>
 <p class="muted">Connect database later to find users.</p>
 </div>
 </section>
 
-<!-- PARTY -->
+<!-- PARTY FEED (Screenshot 3 Design) -->
 <section id="party" class="page">
-<h1>Party 🎉</h1>
-<div class="card" style="margin-top:20px">
-<h2>🎧 Party Rooms</h2>
-<p class="muted" style="margin:10px 0">No Active Parties</p>
-<button class="btn" onclick="notify('Party creation coming soon')">＋ Create Party</button>
+<div class="party-top-tabs">
+<div class="tab-group">
+<button class="p-tab" onclick="filterParty('follow',this)">Follow</button>
+<button class="p-tab active" onclick="filterParty('popular',this)">Popular</button>
+<span class="pill-all">All</span>
 </div>
+<div class="region-pill">🌐 Global ⌄</div>
+</div>
+
+<div class="promo-banner">
+<div>
+<h4>👑 SANO LIVE COIN SELLER</h4>
+<p>Official Fast & Trusted Top-Up Agency</p>
+</div>
+<button class="btn" style="padding:8px 12px;font-size:12px;background:#FFB52E" onclick="wallet('Coins')">Top Up</button>
+</div>
+
+<div class="room-grid" id="partyRoomsGrid"></div>
+
+<!-- Floating Pink Go Live Button -->
+<button class="go-live-fab" onclick="openGoLiveSetup()">
+📹 Go Live
+</button>
 </section>
 
 <!-- MESSAGES -->
@@ -324,14 +493,12 @@ oninput="searchPeople()">
 <div><strong>0</strong><p>FRIENDS</p></div>
 </div>
 
-<!-- COINS AND MONEY -->
 <div class="money-grid">
 <div class="money coins">
 <h3>🪙 COINS</h3>
 <strong id="coinBalance">0</strong>
 <button onclick="wallet('Coins')">＋ Top Up</button>
 </div>
-
 <div class="money money-card">
 <h3>💵 MONEY</h3>
 <strong id="moneyBalance">0</strong>
@@ -339,30 +506,24 @@ oninput="searchPeople()">
 </div>
 </div>
 
-<!-- TOOLS -->
 <h2 class="heading">My Tools</h2>
-
 <div class="tools">
 <div class="tool t1" onclick="openTool('Rewards','🎁','Daily rewards and tasks')">
 <div class="tool-icon">🎁</div>
 <strong>Rewards</strong><small>Daily & Tasks</small>
 </div>
-
 <div class="tool t2" onclick="openTool('Ranks','🏆','Leaderboard and ranks')">
 <div class="tool-icon">🏆</div>
 <strong>Ranks</strong><small>Leaderboard</small>
 </div>
-
 <div class="tool t3" onclick="openTool('My Bag','🎒','Your profile decorations')">
 <div class="tool-icon">🎒</div>
 <strong>My Bag</strong><small>Backpack & Decor</small>
 </div>
-
 <div class="tool t4" onclick="openAll()">
 <div class="tool-icon">✨</div>
 <strong>All</strong><small>All Features</small>
 </div>
-
 <div class="tool t5" onclick="openTool('Invite','💝','Invite your friends')">
 <div class="tool-icon">💝</div>
 <strong>Invite</strong><small>Invite Friends</small>
@@ -373,8 +534,7 @@ oninput="searchPeople()">
 <span style="color:#FF86C2;font-size:12px">● COMMUNITY</span>
 <h2 style="margin:12px 0">Become an Agent</h2>
 <p class="muted">Build your team and grow together.</p>
-<button class="btn" style="margin-top:15px;background:#9270F5;color:white"
-onclick="openTool('Become an Agent','👑','Agent registration coming soon')">
+<button class="btn" style="margin-top:15px;background:#9270F5;color:white" onclick="openTool('Become an Agent','👑','Agent registration coming soon')">
 Join →
 </button>
 </div>
@@ -387,7 +547,6 @@ Join →
 <section id="settings" class="page">
 <button class="btn secondary" onclick="go('profile')">← Back</button>
 <h1 style="margin-top:22px">Settings ⚙️</h1>
-
 <h2 class="heading">Preferences</h2>
 <div class="card">
 <div class="setting-line">
@@ -403,10 +562,8 @@ Join →
 <input class="switch" type="checkbox" onchange="saveSettings()">
 </div>
 </div>
-
 <h2 class="heading">Account & Security</h2>
 <div id="settingsMenu"></div>
-
 <h2 class="heading">About</h2>
 <div class="card">
 <h3>SANO LIVE</h3>
@@ -414,214 +571,5 @@ Join →
 </div>
 </section>
 
-<!-- MODAL -->
-<div class="overlay" id="overlay" onclick="outsideClose(event)">
-<div class="modal" id="modal"></div>
-</div>
-
-<div class="toast" id="toast"></div>
-
-<nav>
-<button id="nav-home" onclick="go('home')"><b>⌂</b>HOME</button>
-<button id="nav-explore" onclick="go('explore')"><b>◎</b>EXPLORE</button>
-<button id="nav-party" onclick="go('party')"><b>✧</b>PARTY</button>
-<button id="nav-messages" onclick="go('messages')"><b>☏</b>MESSAGES</button>
-<button id="nav-profile" class="active" onclick="go('profile')"><b>♟</b>PROFILE</button>
-</nav>
-
-<script>
-const $=id=>document.getElementById(id);
-
-let user={
-name:"SANO USER",
-bio:"Hello guys!",
-country:"Nepal",
-gender:"Male",
-avatar:"👤",
-id:"1111"
-};
-
-function load(){
-try{
-const old=JSON.parse(localStorage.getItem("sano_profile"));
-if(old)user={...user,...old};
-}catch(e){}
-render();
-}
-
-function save(){
-try{
-localStorage.setItem("sano_profile",JSON.stringify(user));
-}catch(e){notify("Could not save profile")}
-}
-
-function render(){
-$("name").textContent=user.name;
-$("bio").textContent=user.bio;
-$("country").textContent="🌍 "+user.country;
-$("gender").textContent=user.gender==="Male"?"♂ Male":user.gender==="Female"?"♀ Female":"Other";
-$("uid").textContent=user.id;
-$("avatar").textContent=user.avatar;
-}
-
-function go(id){
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-$(id).classList.add("active");
-document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
-if($("nav-"+id))$("nav-"+id).classList.add("active");
-window.scrollTo(0,0);
-}
-
-function notify(message){
-$("toast").textContent=message;
-$("toast").style.display="block";
-clearTimeout(window.toastTimer);
-window.toastTimer=setTimeout(()=>$("toast").style.display="none",2200);
-}
-
-function showModal(html){
-$("modal").innerHTML=html;
-$("overlay").style.display="flex";
-}
-function closeModal(){$("overlay").style.display="none"}
-function outsideClose(e){if(e.target.id==="overlay")closeModal()}
-
-function editProfile(){
-showModal(`
-<h2>✏️ Edit Profile</h2>
-<label>Username</label>
-<input class="field" id="editName" maxlength="25" value="${escapeHTML(user.name)}">
-<label>Bio</label>
-<textarea class="field" id="editBio" maxlength="120">${escapeHTML(user.bio)}</textarea>
-<label>Country</label>
-<select class="field" id="editCountry">
-<option>Nepal</option><option>India</option>
-<option>Bangladesh</option><option>Other</option>
-</select>
-<label>Gender</label>
-<select class="field" id="editGender">
-<option>Male</option><option>Female</option><option>Other</option>
-</select>
-<label>Avatar</label>
-<select class="field" id="editAvatar">
-<option>👤</option><option>👑</option>
-<option>🎮</option><option>🌟</option><option>🎧</option>
-</select>
-<button class="btn" onclick="saveProfile()">Save Changes</button>
-<button class="btn secondary" onclick="closeModal()">Cancel</button>
-`);
-$("editCountry").value=user.country;
-$("editGender").value=user.gender;
-$("editAvatar").value=user.avatar;
-}
-
-function saveProfile(){
-let n=$("editName").value.trim();
-if(!n){notify("Enter your name");return}
-user.name=n;
-user.bio=$("editBio").value.trim();
-user.country=$("editCountry").value;
-user.gender=$("editGender").value;
-user.avatar=$("editAvatar").value;
-save();render();closeModal();
-notify("Profile updated successfully!");
-}
-
-function escapeHTML(s){
-return String(s).replace(/[&<>"']/g,c=>({
-"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-}[c]));
-}
-
-function copyID(){
-if(navigator.clipboard && window.isSecureContext){
-navigator.clipboard.writeText(user.id)
-.then(()=>notify("User ID copied!"))
-.catch(()=>notify("Your ID: "+user.id));
-}else{
-showModal(`<h2>Your User ID</h2><input class="field" value="${user.id}" readonly><button class="btn" onclick="closeModal()">Close</button>`);
-}
-}
-
-function preview(){
-showModal(`
-<div style="text-align:center">
-<div style="font-size:55px;margin:15px">${escapeHTML(user.avatar)}</div>
-<h2>${escapeHTML(user.name)}</h2>
-<p class="muted">${escapeHTML(user.bio)}</p>
-<p style="margin:15px">🌍 ${escapeHTML(user.country)}</p>
-<p class="muted">ID: ${user.id}</p>
-<button class="btn" onclick="closeModal()">Close</button>
-</div>`);
-}
-
-function openTool(name,emoji,description){
-showModal(`
-<div style="text-align:center">
-<div style="font-size:48px;margin-bottom:15px">${emoji}</div>
-<h2>${escapeHTML(name)}</h2>
-<p class="muted" style="margin:15px 0">${escapeHTML(description)}</p>
-<button class="btn" onclick="closeModal()">Continue</button>
-</div>`);
-}
-
-function openAll(){
-showModal(`
-<h2>✨ All Features</h2>
-<div class="quick-grid">
-<div class="quick" onclick="closeModal();openTool('Rewards','🎁','Daily rewards')">🎁<h3>Rewards</h3></div>
-<div class="quick" onclick="closeModal();openTool('Ranks','🏆','Leaderboard')">🏆<h3>Ranks</h3></div>
-<div class="quick" onclick="closeModal();openTool('My Bag','🎒','Profile items')">🎒<h3>My Bag</h3></div>
-<div class="quick" onclick="closeModal();openTool('Invite','💝','Invite friends')">💝<h3>Invite</h3></div>
-</div>
-<button class="btn secondary" style="margin-top:18px" onclick="closeModal()">Close</button>
-`);
-}
-
-function wallet(type){
-showModal(`
-<h2>${type==="Coins"?"🪙":"💵"} ${type}</h2>
-<p class="muted">Your current ${type} balance</p>
-<h1 style="margin:20px 0">0</h1>
-<p class="muted">${type==="Money"?"Money transactions and withdrawals will require secure backend verification.":"Coin top-up will be connected later."}</p>
-<button class="btn" style="margin-top:20px" onclick="closeModal()">Close</button>
-`);
-}
-
-function menuRow(icon,title,desc,color,action){
-return `<button class="row" onclick="${action}">
-<span class="row-icon" style="background:${color}">${icon}</span>
-<span class="row-info"><b>${title}</b><p>${desc}</p></span>
-<span class="arrow">›</span></button>`;
-}
-
-function buildMenu(){
-$("menu").innerHTML=
-menuRow("👥","My Agent","Agency information","#30295C","openTool('My Agent','👥','Agency information')")
-+menuRow("📊","Live Insights","Streaming analytics","#553044","openTool('Live Insights','📊','Streaming analytics')")
-+menuRow("💬","Help & Support","FAQ and feedback","#16475B","openTool('Help & Support','💬','Support center')")
-+menuRow("🏅","Level & Privileges","XP and levels","#57431D","openTool('Level & Privileges','🏅','Level information')")
-+menuRow("⚙️","Settings","Account preferences","#214B65","go('settings')");
-
-$("settingsMenu").innerHTML=
-menuRow("👤","Edit Profile","Personal details","#214B65","editProfile()")
-+menuRow("🔒","Privacy","Privacy preferences","#493064","openTool('Privacy','🔒','Privacy preferences')")
-+menuRow("🚫","Blocked Users","Manage blocked users","#59333A","openTool('Blocked Users','🚫','Blocked users')")
-+menuRow("🆔","Account ID","Your unique ID","#57431D","copyID()");
-}
-
-function saveSettings(){notify("Settings saved")}
-function searchPeople(){
-let q=$("search").value.trim();
-$("searchBox").innerHTML=q?
-"<span>🔍</span><h3>Supabase Required</h3><p class='muted'>Real user search will work after database connection.</p>":
-"<span>🌐</span><h3>Discover People</h3><p class='muted'>Discover the community.</p>";
-}
-
-load();
-buildMenu();
-go("profile");
-</script>
-
-</body>
-</html>
+<!-- GO LIVE SETUP SCREEN (Screenshot 1 Design) -->
+<d
