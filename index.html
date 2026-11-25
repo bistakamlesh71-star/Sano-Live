@@ -1,1497 +1,778 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>NEPAL X ESPORTS — Dark Neon Social & Party App</title>
-  <style>
-    :root {
-      --bg-outer: #04050a;
-      --bg-main: #090b14;
-      --bg-card: #121626;
-      --bg-card-2: #181e34;
-      --border-neon: rgba(34, 211, 238, 0.28);
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --cyan: #22d3ee;
-      --cyan-glow: rgba(34, 211, 238, 0.35);
-      --pink: #f43f5e;
-      --purple: #a855f7;
-      --gold: #fbbf24;
-      --gold-glow: rgba(251, 191, 36, 0.3);
-      --green: #10b981;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    body {
-      background: var(--bg-outer);
-      color: var(--text-main);
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
-    }
-
-    .app-container {
-      width: 100%;
-      max-width: 430px;
-      background: radial-gradient(circle at top right, rgba(168, 85, 247, 0.12), transparent 45%),
-                  radial-gradient(circle at top left, rgba(34, 211, 238, 0.12), transparent 45%),
-                  var(--bg-main);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      padding-bottom: 84px;
-      border-left: 1px solid var(--border-subtle);
-      border-right: 1px solid var(--border-subtle);
-    }
-
-    /* Top Header */
-    .header-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 16px 10px;
-      position: sticky;
-      top: 0;
-      background: rgba(9, 11, 20, 0.88);
-      backdrop-filter: blur(12px);
-      z-index: 30;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .brand-title {
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: 0.6px;
-      background: linear-gradient(90deg, var(--cyan), var(--purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .header-wallet-chips {
-      display: flex;
-      gap: 8px;
-    }
-
-    .mini-chip {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      cursor: pointer;
-    }
-
-    .mini-chip.coins { border-color: rgba(251, 191, 36, 0.4); color: var(--gold); }
-    .mini-chip.diamonds { border-color: rgba(34, 211, 238, 0.4); color: var(--cyan); }
-
-    /* Views */
-    .view {
-      display: none;
-      padding: 14px 16px 24px;
-      animation: fadeSlide 0.2s ease;
-    }
-
-    .view.active {
-      display: block;
-    }
-
-    @keyframes fadeSlide {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Common Section Headings */
-    .sec-title {
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .sec-title span.accent {
-      border-left: 3px solid var(--cyan);
-      padding-left: 8px;
-    }
-
-    /* Cards */
-    .neon-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 18px;
-      padding: 14px;
-      margin-bottom: 14px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-    }
-
-    .neon-card.highlight {
-      border-color: var(--border-neon);
-      box-shadow: 0 0 18px rgba(34, 211, 238, 0.12);
-    }
-
-    .tag-live {
-      display: inline-block;
-      background: rgba(244, 63, 94, 0.2);
-      color: #fb7185;
-      border: 1px solid rgba(244, 63, 94, 0.45);
-      font-size: 10px;
-      font-weight: 800;
-      padding: 2px 8px;
-      border-radius: 10px;
-      margin-bottom: 6px;
-    }
-
-    /* Buttons */
-    .btn {
-      border: none;
-      border-radius: 12px;
-      padding: 10px 14px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.12s ease, opacity 0.12s ease;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .btn:active { transform: scale(0.96); }
-
-    .btn-cyan {
-      background: linear-gradient(135deg, #22d3ee, #06b6d4);
-      color: #041e24;
-      box-shadow: 0 0 14px var(--cyan-glow);
-    }
-
-    .btn-gold {
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
-      color: #1f1300;
-      box-shadow: 0 0 14px var(--gold-glow);
-    }
-
-    .btn-purple {
-      background: linear-gradient(135deg, #a855f7, #7e22ce);
-      color: #fff;
-    }
-
-    .btn-danger {
-      background: rgba(244, 63, 94, 0.18);
-      color: #fb7185;
-      border: 1px solid rgba(244, 63, 94, 0.45);
-    }
-
-    .btn-ghost {
-      background: var(--bg-card-2);
-      color: var(--text-main);
-      border: 1px solid var(--border-subtle);
-    }
-
-    .btn-full { width: 100%; }
-
-    /* PARTY ROOM (8 SEATS) */
-    .party-banner {
-      background: linear-gradient(135deg, rgba(34, 211, 238, 0.14), rgba(168, 85, 247, 0.16));
-      border: 1px solid var(--border-neon);
-      border-radius: 20px;
-      padding: 14px;
-      margin-bottom: 14px;
-    }
-
-    .party-top-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 12px;
-    }
-
-    .participant-pill {
-      background: rgba(16, 185, 129, 0.16);
-      border: 1px solid rgba(16, 185, 129, 0.45);
-      color: #34d399;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 20px;
-    }
-
-    .seats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin: 14px 0;
-    }
-
-    .seat-slot {
-      background: rgba(18, 22, 38, 0.9);
-      border: 1px dashed rgba(148, 163, 184, 0.3);
-      border-radius: 16px;
-      padding: 10px 4px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      cursor: pointer;
-      position: relative;
-      transition: all 0.18s ease;
-    }
-
-    .seat-slot.occupied {
-      border-style: solid;
-      border-color: var(--cyan);
-      box-shadow: 0 0 12px rgba(34, 211, 238, 0.2);
-    }
-
-    .seat-slot.speaking {
-      border-color: var(--green);
-      box-shadow: 0 0 15px rgba(16, 185, 129, 0.45);
-    }
-
-    .seat-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--bg-card-2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      font-weight: 800;
-      margin-bottom: 6px;
-      border: 2px solid transparent;
-    }
-
-    .seat-slot.occupied .seat-avatar {
-      background: linear-gradient(135deg, #22d3ee, #a855f7);
-      color: #050811;
-    }
-
-    .seat-num {
-      position: absolute;
-      top: 5px;
-      left: 7px;
-      font-size: 9px;
-      font-weight: 700;
-      color: var(--text-muted);
-    }
-
-    .seat-mic-badge {
-      position: absolute;
-      bottom: 24px;
-      right: 10px;
-      background: #0f172a;
-      border: 1px solid var(--border-subtle);
-      border-radius: 50%;
-      width: 18px;
-      height: 18px;
-      font-size: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .seat-name {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--text-main);
-      max-width: 68px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .party-controls {
-      display: flex;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    /* Explore Room List */
-    .explore-room-card {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-    }
-
-    /* Profile View */
-    .profile-hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      margin-bottom: 16px;
-    }
-
-    .profile-avatar {
-      width: 82px;
-      height: 82px;
-      border-radius: 50%;
-      padding: 3px;
-      background: linear-gradient(135deg, var(--cyan), var(--gold));
-      margin-bottom: 10px;
-    }
-
-    .profile-avatar-inner {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: var(--bg-card-2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      font-weight: 800;
-      color: #fff;
-    }
-
-    .profile-meta-row {
-      display: flex;
-      gap: 8px;
-      margin-top: 8px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .badge-pill {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      padding: 4px 10px;
-      border-radius: 16px;
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 12px 6px;
-      text-align: center;
-      margin-bottom: 14px;
-    }
-
-    .stats-row div:not(:last-child) {
-      border-right: 1px solid var(--border-subtle);
-    }
-
-    /* Dual Wallet Cards */
-    .wallet-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .w-card {
-      background: var(--bg-card);
-      border-radius: 18px;
-      padding: 14px;
-      border: 1px solid var(--border-subtle);
-    }
-
-    .w-card.coins {
-      border-color: rgba(251, 191, 36, 0.38);
-      background: linear-gradient(180deg, rgba(251, 191, 36, 0.08), var(--bg-card));
-    }
-
-    .w-card.diamonds {
-      border-color: rgba(34, 211, 238, 0.38);
-      background: linear-gradient(180deg, rgba(34, 211, 238, 0.08), var(--bg-card));
-    }
-
-    .w-val {
-      font-size: 21px;
-      font-weight: 800;
-      margin: 8px 0 10px;
-    }
-
-    /* Sub-tabs inside Wallet/Profile */
-    .sub-nav {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      background: var(--bg-card);
-      padding: 5px;
-      border-radius: 14px;
-      border: 1px solid var(--border-subtle);
-      margin-bottom: 14px;
-    }
-
-    .sub-tab {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-size: 11px;
-      font-weight: 700;
-      padding: 8px 4px;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-    .sub-tab.active {
-      background: var(--bg-card-2);
-      color: var(--cyan);
-      border: 1px solid var(--border-neon);
-    }
-
-    .sub-panel { display: none; }
-    .sub-panel.active { display: block; }
-
-    /* Form Controls */
-    .field-label {
-      display: block;
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 5px;
-      font-weight: 600;
-    }
-
-    .neon-input {
-      width: 100%;
-      background: var(--bg-card-2);
-      border: 1px solid var(--border-subtle);
-      color: #fff;
-      padding: 11px 12px;
-      border-radius: 12px;
-      font-size: 13px;
-      margin-bottom: 10px;
-      outline: none;
-    }
-
-    .neon-input:focus {
-      border-color: var(--cyan);
-    }
-
-    .calc-box {
-      background: rgba(34, 211, 238, 0.08);
-      border: 1px solid var(--border-neon);
-      border-radius: 14px;
-      padding: 12px;
-      margin-bottom: 12px;
-      font-size: 12px;
-    }
-
-    .calc-highlight {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--green);
-      margin-top: 4px;
-    }
-
-    /* Transaction List */
-    .tx-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--border-subtle);
-      font-size: 12px;
-    }
-
-    .tx-item:last-child { border-bottom: none; }
-
-    /* Bottom Navigation */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      max-width: 430px;
-      height: 68px;
-      background: rgba(13, 17, 31, 0.96);
-      backdrop-filter: blur(12px);
-      border-top: 1px solid var(--border-subtle);
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      align-items: center;
-      z-index: 40;
-    }
-
-    .nav-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      color: var(--text-muted);
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .nav-btn.active {
-      color: var(--cyan);
-      text-shadow: 0 0 10px var(--cyan-glow);
-    }
-
-    .nav-btn .ico { font-size: 20px; }
-
-    /* Toast */
-    .toast {
-      position: fixed;
-      top: 66px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #13192e;
-      border: 1px solid var(--cyan);
-      color: #fff;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
-      z-index: 100;
-      display: none;
-      box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
-      white-space: nowrap;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080D1D">
+<title>SANO LIVE</title>
+
+<style>
+:root{
+--bg:#080D1D;
+--card:#121C30;
+--border:#26344B;
+--cyan:#00D9FF;
+--purple:#9875FF;
+--pink:#F45C9C;
+--gold:#FFB52E;
+--muted:#93A1B7;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+background:var(--bg);color:white;
+font-family:Arial,sans-serif;
+padding-bottom:85px;
+}
+header{
+height:62px;background:#0B1221;
+display:flex;justify-content:space-between;
+align-items:center;padding:0 18px;
+position:sticky;top:0;z-index:5;
+border-bottom:1px solid var(--border);
+}
+.logo{font-size:22px;font-weight:900;color:var(--cyan)}
+.page{display:none;padding:18px 15px 30px}
+.page.active{display:block}
+h1{font-size:25px;margin-bottom:10px}
+h2{font-size:20px}
+.muted{font-size:13px;color:var(--muted);line-height:1.6}
+.card{
+background:var(--card);border:1px solid var(--border);
+border-radius:20px;padding:17px;margin-bottom:13px;
+}
+.btn{
+border:0;border-radius:13px;padding:12px 17px;
+background:var(--cyan);color:#06111D;
+font-weight:bold;cursor:pointer;
+}
+.secondary{background:#202D43;color:white}
+.heading{
+font-size:20px;margin:25px 0 15px;
+border-left:5px solid var(--cyan);
+padding-left:11px;
+}
+.hero{
+background:linear-gradient(120deg,#153B67,#44317D);
+border-radius:22px;padding:24px;margin-bottom:23px;
+}
+.hero p{margin-top:8px;color:#D6E5FF;font-size:13px}
+.quick-grid{
+display:grid;grid-template-columns:1fr 1fr;gap:12px;
+}
+.quick{
+background:var(--card);border:1px solid var(--border);
+border-radius:18px;padding:18px;cursor:pointer;
+}
+.quick span{font-size:27px}
+.quick h3{margin:12px 0 5px}
+.quick p{font-size:12px;color:var(--muted)}
+.empty{
+text-align:center;padding:35px 15px;
+background:var(--card);border:1px dashed #394A65;
+border-radius:20px;
+}
+.empty span{font-size:40px}
+.profile-actions{
+display:flex;justify-content:space-between;
+align-items:center;
+}
+.profile-actions div{display:flex;gap:8px}
+.icon-btn{
+width:43px;height:43px;border-radius:50%;
+background:#18243A;color:white;
+border:1px solid var(--border);font-size:19px;
+}
+.profile-center{text-align:center;padding:24px 0}
+.avatar{
+width:112px;height:112px;border-radius:50%;
+margin:0 auto 16px;
+background:linear-gradient(135deg,#00BFD9,#7952D9);
+border:4px solid var(--purple);
+display:grid;place-items:center;font-size:48px;
+}
+.name{font-size:26px;font-weight:900}
+.details{
+display:flex;justify-content:center;
+flex-wrap:wrap;gap:8px;margin:17px 0;
+}
+.detail{
+background:#18243A;border:1px solid var(--border);
+border-radius:20px;padding:9px 12px;font-size:13px;
+}
+.bio{
+display:inline-block;background:#18243A;
+padding:12px 20px;border-radius:20px;
+color:#B9C5D8;margin-top:12px;
+}
+.stats{
+display:grid;grid-template-columns:repeat(3,1fr);
+text-align:center;padding:20px 5px;
+}
+.stats>div+div{border-left:1px solid var(--border)}
+.stats strong{font-size:24px}
+.stats p{font-size:11px;color:var(--muted);margin-top:7px}
+.money-grid{
+display:grid;grid-template-columns:1fr 1fr;gap:11px;
+}
+.money{
+padding:16px;border-radius:21px;
+min-width:0;
+}
+.money h3{font-size:15px;margin-bottom:20px}
+.money strong{font-size:28px}
+.money button{
+width:100%;padding:12px 4px;
+border:0;border-radius:25px;
+margin-top:19px;font-weight:bold;
+}
+.coins{background:#1B2435;border:1px solid #D99B30}
+.coins button{background:#FFB32D;color:#211300}
+.money-card{background:#142A3B;border:1px solid #00D9FF}
+.money-card button{background:#00CDE8;color:#00121B}
+.tools{
+display:grid;grid-template-columns:repeat(3,1fr);
+gap:10px;
+}
+.tool{
+background:var(--card);border:1px solid var(--border);
+border-radius:20px;min-height:135px;
+display:flex;flex-direction:column;
+align-items:center;justify-content:center;
+text-align:center;padding:10px 4px;cursor:pointer;
+}
+.tool-icon{
+width:55px;height:55px;border-radius:50%;
+display:grid;place-items:center;font-size:26px;
+margin-bottom:10px;
+}
+.tool strong{font-size:14px}
+.tool small{font-size:11px;color:var(--muted);margin-top:7px}
+.t1 .tool-icon{background:#562747;color:#FF83B9}
+.t2 .tool-icon{background:#57441E;color:#FFD15C}
+.t3 .tool-icon{background:#432C68;color:#D3A0FF}
+.t4 .tool-icon{background:#15515D;color:#5BE9EE}
+.t5 .tool-icon{background:#155345;color:#66EDB4}
+.agent{
+padding:20px;border-radius:22px;
+background:linear-gradient(120deg,#241541,#40225F);
+border:1px solid #7550A9;margin:25px 0;
+}
+.row{
+width:100%;display:flex;align-items:center;
+gap:13px;text-align:left;color:white;
+background:var(--card);border:1px solid var(--border);
+border-radius:18px;padding:15px;margin-bottom:11px;
+cursor:pointer;
+}
+.row-icon{
+width:48px;height:48px;display:grid;
+place-items:center;border-radius:15px;
+font-size:22px;flex-shrink:0;
+}
+.row-info{flex:1}
+.row-info p{font-size:12px;color:var(--muted);margin-top:6px}
+.arrow{font-size:23px;color:#8999B0}
+.setting-line{
+display:flex;justify-content:space-between;
+align-items:center;padding:15px 0;
+border-bottom:1px solid var(--border);
+}
+.setting-line:last-child{border:0}
+.setting-line p{font-size:12px;color:var(--muted);margin-top:5px}
+.switch{accent-color:var(--cyan);width:20px;height:20px}
+.search{
+width:100%;padding:14px;background:var(--card);
+border:1px solid var(--border);border-radius:13px;
+color:white;margin:18px 0;
+}
+nav{
+position:fixed;bottom:0;left:0;width:100%;
+height:75px;background:#090E1B;
+border-top:1px solid var(--border);
+display:flex;justify-content:space-around;
+align-items:center;z-index:10;
+}
+nav button{
+border:0;background:none;color:#8592A9;
+display:flex;flex-direction:column;
+align-items:center;gap:5px;font-size:10px;
+}
+nav b{font-size:23px}
+nav button.active{color:white}
+.overlay{
+display:none;position:fixed;inset:0;
+background:#000B;z-index:30;
+align-items:center;justify-content:center;padding:17px;
+}
+.modal{
+width:100%;max-width:390px;max-height:85vh;
+overflow:auto;background:#142039;
+border:1px solid #354765;
+border-radius:22px;padding:21px;
+}
+.modal h2{margin-bottom:17px}
+.field{
+width:100%;padding:13px;margin:8px 0 14px;
+border:1px solid #354765;background:#091426;
+color:white;border-radius:12px;
+}
+.toast{
+display:none;position:fixed;bottom:90px;
+left:50%;transform:translateX(-50%);
+background:#263952;padding:13px 18px;
+border-radius:25px;z-index:50;
+font-size:13px;white-space:nowrap;
+}
+</style>
 </head>
+
 <body>
-  <div class="app-container">
-    <div id="toast" class="toast"></div>
-
-    <!-- Top Sticky Header -->
-    <header class="header-bar">
-      <div class="brand-title">NEPAL X ESPORTS</div>
-      <div class="header-wallet-chips">
-        <div class="mini-chip coins" onclick="goToWalletSection('exchange')">🪙 <span id="hdrCoins">520,000</span></div>
-        <div class="mini-chip diamonds" onclick="goToWalletSection('withdraw')">💎 <span id="hdrDiamonds">724,600</span></div>
-      </div>
-    </header>
-
-    <!-- ================= 1. HOME SCREEN (PARTY ROOM + FEED) ================= -->
-    <section id="view-home" class="view active">
-      <div class="sec-title">
-        <span class="accent">Live Party Room</span>
-        <span class="participant-pill" id="participantCountBadge">👥 4 / 8 Seated</span>
-      </div>
-
-      <div class="party-banner">
-        <div class="party-top-row">
-          <div>
-            <span class="tag-live">● LIVE VOICE LOBBY</span>
-            <h3 id="activeRoomName" style="font-size:16px; margin-top:2px;">Kathmandu Night Chill &amp; Gaming</h3>
-            <p style="font-size:11px; color:var(--text-muted); margin-top:2px;">Room ID: #8841 • Tap any empty seat or Join Party</p>
-          </div>
-        </div>
-
-        <!-- 8 Seats Grid -->
-        <div class="seats-grid" id="seatsGrid"></div>
-
-        <!-- Join / Leave & Mic Toggle Controls -->
-        <div class="party-controls">
-          <button id="joinLeaveBtn" class="btn btn-cyan" style="flex:1.4;" onclick="toggleJoinParty()">🎙️ Join Party</button>
-          <button id="micToggleBtn" class="btn btn-ghost" style="flex:1;" onclick="toggleMic()" disabled>🔇 Mic Off</button>
-        </div>
-      </div>
-
-      <div class="sec-title"><span class="accent">Quick Reward Milestone</span></div>
-      <div class="neon-card highlight">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <div>
-            <div style="font-size:13px; font-weight:700;">500K Coins = $7.14 Demo Payout</div>
-            <div style="font-size:11px; color:var(--text-muted); margin-top:3px;">Current Coins: <strong style="color:var(--gold);" id="homeCoinProgress">520,000</strong> (Eligible!)</div>
-          </div>
-          <button class="btn btn-gold" onclick="goToWalletSection('withdraw')">Cash Out</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= 2. EXPLORE SCREEN ================= -->
-    <section id="view-explore" class="view">
-      <div class="sec-title"><span class="accent">Explore Active Party Rooms</span></div>
-
-      <div class="neon-card explore-room-card">
-        <div>
-          <span class="tag-live">🔥 HOT • 6/8</span>
-          <h4 style="font-size:14px;">NEPAL X ESPORTS Squad Lobby</h4>
-          <p style="font-size:11px; color:var(--text-muted); margin-top:3px;">Free Fire &amp; Blood Strike Custom Talk</p>
-        </div>
-        <button class="btn btn-cyan" onclick="switchRoom('NEPAL X ESPORTS Squad Lobby', 6)">Enter</button>
-      </div>
-
-      <div class="neon-card explore-room-card">
-        <div>
-          <span class="tag-live" style="color:#38bdf8; border-color:rgba(56,189,248,0.4); background:rgba(56,189,248,0.12);">🎵 MUSIC • 4/8</span>
-          <h4 style="font-size:14px;">Kathmandu Night Chill &amp; Gaming</h4>
-          <p style="font-size:11px; color:var(--text-muted); margin-top:3px;">Acoustic vibe &amp; coin gifting</p>
-        </div>
-        <button class="btn btn-ghost" onclick="switchRoom('Kathmandu Night Chill & Gaming', 4)">Enter</button>
-      </div>
-
-      <div class="neon-card explore-room-card">
-        <div>
-          <span class="tag-live" style="color:#c084fc; border-color:rgba(192,132,252,0.4); background:rgba(192,132,252,0.12);">💎 VIP • 3/8</span>
-          <h4 style="font-size:14px;">Pokhara late night Guff</h4>
-          <p style="font-size:11px; color:var(--text-muted); margin-top:3px;">Open mic • Earn bonus Coins</p>
-        </div>
-        <button class="btn btn-purple" onclick="switchRoom('Pokhara late night Guff', 3)">Enter</button>
-      </div>
-    </section>
-
-    <!-- ================= 3. PROFILE & WALLET SCREEN ================= -->
-    <section id="view-profile" class="view">
-      <!-- Profile Header -->
-      <div class="profile-hero">
-        <div class="profile-avatar">
-          <div class="profile-avatar-inner" id="profAvatar">KB</div>
-        </div>
-        <h2 id="profName" style="font-size:20px; font-weight:800;">Kamlesh Bista</h2>
-        <p id="profBio" style="font-size:12px; color:var(--text-muted); margin-top:3px;">NEPAL X ESPORTS • Host &amp; Gamer</p>
-        <div class="profile-meta-row">
-          <span class="badge-pill">🇳🇵 <span id="profCity">Nepal</span></span>
-          <span class="badge-pill" style="color:var(--gold); border-color:rgba(251,191,36,0.35);">ID: 5449288</span>
-          <span class="badge-pill" style="color:var(--cyan); border-color:var(--border-neon);">Lv.14</span>
-        </div>
-      </div>
-
-      <!-- Social Stats -->
-      <div class="stats-row">
-        <div>
-          <div style="font-size:16px; font-weight:800;">24</div>
-          <div style="font-size:10px; color:var(--text-muted);">FOLLOWING</div>
-        </div>
-        <div>
-          <div style="font-size:16px; font-weight:800;">15</div>
-          <div style="font-size:10px; color:var(--text-muted);">FOLLOWERS</div>
-        </div>
-        <div>
-          <div style="font-size:16px; font-weight:800;">11</div>
-          <div style="font-size:10px; color:var(--text-muted);">FRIENDS</div>
-        </div>
-      </div>
-
-      <!-- Dual Wallet: Coins & Diamonds -->
-      <div class="wallet-cards">
-        <div class="w-card coins">
-          <div style="font-size:11px; font-weight:700; color:var(--gold);">🪙 COINS WALLET</div>
-          <div class="w-val" id="walletCoinsText">520,000</div>
-          <button class="btn btn-gold btn-full" onclick="openSubPanel('exchange')">Exchange</button>
-        </div>
-
-        <div class="w-card diamonds">
-          <div style="font-size:11px; font-weight:700; color:var(--cyan);">💎 DIAMONDS</div>
-          <div class="w-val" id="walletDiamondsText">724,600</div>
-          <button class="btn btn-cyan btn-full" onclick="openSubPanel('withdraw')">Withdraw</button>
-        </div>
-      </div>
-
-      <!-- Sub-Navigation Tabs -->
-      <div class="sub-nav">
-        <button id="subbtn-exchange" class="sub-tab active" onclick="openSubPanel('exchange')">🔄 Coin Exchange</button>
-        <button id="subbtn-withdraw" class="sub-tab" onclick="openSubPanel('withdraw')">💸 Withdraw ($)</button>
-        <button id="subbtn-history" class="sub-tab" onclick="openSubPanel('history')">📜 History &amp; Edit</button>
-      </div>
-
-      <!-- PANEL A: COIN EXCHANGE SCREEN -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>NEPAL X ESPORTS - App UI</title>
-  <style>
-    :root {
-      --bg-main: #0b0d17;
-      --bg-card: #151828;
-      --bg-card-soft: #1b2036;
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --gold: #ffb800;
-      --gold-dark: #d99400;
-      --cyan: #22d3ee;
-      --cyan-dark: #0891b2;
-      --text-main: #ffffff;
-      --text-muted: #8e96b2;
-      --nav-bg: #111423;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    body {
-      background-color: #05060b;
-      color: var(--text-main);
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
-    }
-
-    .app-shell {
-      width: 100%;
-      max-width: 430px;
-      background-color: var(--bg-main);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      padding-bottom: 84px;
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
-    }
-
-    /* Top Bar */
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 18px 8px;
-    }
-
-    .icon-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 16px;
-      transition: transform 0.15s ease, background 0.15s ease;
-    }
-
-    .icon-btn:active {
-      transform: scale(0.92);
-    }
-
-    .top-actions {
-      display: flex;
-      gap: 10px;
-    }
-
-    /* Screens */
-    .screen {
-      display: none;
-      padding: 8px 18px 20px;
-      animation: fadeIn 0.2s ease;
-    }
-
-    .screen.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Profile Header */
-    .profile-header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      margin-top: 4px;
-    }
-
-    .avatar-ring {
-      width: 88px;
-      height: 88px;
-      border-radius: 50%;
-      padding: 3px;
-      background: linear-gradient(135deg, var(--cyan), var(--gold));
-      margin-bottom: 12px;
-      position: relative;
-    }
-
-    .avatar-img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: #1f253d;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      font-weight: 700;
-      color: #fff;
-      overflow: hidden;
-    }
-
-    .name-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-
-    .user-name {
-      font-size: 21px;
-      font-weight: 700;
-      letter-spacing: 0.2px;
-    }
-
-    .age-badge {
-      background: #2563eb;
-      color: #fff;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 12px;
-    }
-
-    .meta-pills {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .pill {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      color: #d1d6e8;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-    }
-
-    .pill-id {
-      border-color: rgba(255, 184, 0, 0.35);
-      color: var(--gold);
-      font-weight: 600;
-    }
-
-    .id-tag {
-      background: var(--gold);
-      color: #000;
-      font-size: 10px;
-      font-weight: 800;
-      padding: 1px 5px;
-      border-radius: 6px;
-    }
-
-    .level-badges {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-
-    .lvl-chip {
-      padding: 3px 12px;
-      border-radius: 12px;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .lvl-green {
-      background: linear-gradient(90deg, #10b981, #34d399);
-      color: #06281e;
-    }
-
-    .lvl-purple {
-      background: linear-gradient(90deg, #8b5cf6, #c084fc);
-      color: #1e0a3c;
-    }
-
-    /* Stats Card */
-    .stats-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 18px;
-      padding: 14px 10px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      text-align: center;
-      margin-bottom: 16px;
-    }
-
-    .stat-item {
-      cursor: pointer;
-    }
-
-    .stat-item:not(:last-child) {
-      border-right: 1px solid var(--border-subtle);
-    }
-
-    .stat-num {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 3px;
-    }
-
-    .stat-label {
-      font-size: 11px;
-      color: var(--text-muted);
-      letter-spacing: 0.6px;
-      font-weight: 600;
-    }
-
-    /* Dual Wallets */
-    .wallet-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 22px;
-    }
-
-    .wallet-card {
-      background: var(--bg-card);
-      border-radius: 18px;
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 132px;
-    }
-
-    .wallet-coins {
-      border: 1px solid rgba(255, 184, 0, 0.35);
-      background: linear-gradient(180deg, rgba(255, 184, 0, 0.08) 0%, var(--bg-card) 100%);
-    }
-
-    .wallet-diamonds {
-      border: 1px solid rgba(34, 211, 238, 0.35);
-      background: linear-gradient(180deg, rgba(34, 211, 238, 0.08) 0%, var(--bg-card) 100%);
-    }
-
-    .wallet-title {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    .wallet-coins .wallet-title { color: var(--gold); }
-    .wallet-diamonds .wallet-title { color: var(--cyan); }
-
-    .wallet-amount {
-      font-size: 24px;
-      font-weight: 800;
-      margin: 10px 0;
-    }
-
-    .btn-topup {
-      width: 100%;
-      background: var(--gold);
-      color: #0b0d17;
-      border: none;
-      border-radius: 20px;
-      padding: 9px 10px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .btn-topup:active { background: var(--gold-dark); }
-
-    .diamond-actions {
-      display: flex;
-      gap: 6px;
-    }
-
-    .btn-withdraw {
-      flex: 1.3;
-      background: var(--cyan);
-      color: #062129;
-      border: none;
-      border-radius: 20px;
-      padding: 9px 6px;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .btn-view {
-      flex: 1;
-      background: rgba(255, 255, 255, 0.08);
-      color: #d1d6e8;
-      border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: 9px 6px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    /* Section Title */
-    .section-heading {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 14px;
-    }
-
-    .section-bar {
-      width: 4px;
-      height: 16px;
-      border-radius: 4px;
-      background: var(--cyan);
-    }
-
-    /* My Tools Grid */
-    .tools-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    .tool-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 18px;
-      padding: 16px 8px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.15s ease, border-color 0.15s ease;
-    }
-
-    .tool-card:active {
-      transform: scale(0.95);
-      border-color: var(--cyan);
-    }
-
-    .tool-icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background: var(--bg-card-soft);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      margin-bottom: 10px;
-      border: 1px solid var(--border-subtle);
-    }
-
-    .tool-title {
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 3px;
-    }
-
-    .tool-sub {
-      font-size: 10px;
-      color: var(--text-muted);
-    }
-
-    /* Secondary Tab Cards */
-    .feed-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 14px;
-      margin-bottom: 12px;
-    }
-
-    .feed-card h4 {
-      font-size: 15px;
-      margin-bottom: 6px;
-    }
-
-    .feed-card p {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-
-    .badge-live {
-      display: inline-block;
-      background: #ef4444;
-      color: #fff;
-      font-size: 10px;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 8px;
-      margin-bottom: 6px;
-    }
-
-    /* Bottom Navigation */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      max-width: 430px;
-      height: 70px;
-      background: var(--nav-bg);
-      border-top: 1px solid var(--border-subtle);
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      align-items: center;
-      padding: 0 6px;
-      z-index: 50;
-    }
-
-    .nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      font-size: 10px;
-      font-weight: 700;
-      gap: 4px;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .nav-item.active {
-      color: #ffffff;
-    }
-
-    .nav-icon {
-      font-size: 19px;
-      line-height: 1;
-    }
-
-    .nav-party {
-      position: relative;
-      top: -12px;
-    }
-
-    .party-circle {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #252b45, #181c30);
-      border: 2px solid rgba(34, 211, 238, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
-      margin-bottom: 2px;
-    }
-
-    .nav-item.active .party-circle {
-      border-color: var(--cyan);
-      box-shadow: 0 0 16px rgba(34, 211, 238, 0.35);
-    }
-
-    /* Modal */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      display: none;
-      align-items: flex-end;
-      justify-content: center;
-      z-index: 100;
-    }
-
-    .modal-backdrop.open {
-      display: flex;
-    }
-
-    .modal-sheet {
-      width: 100%;
-      max-width: 430px;
-      background: #161a2c;
-      border-top-left-radius: 24px;
-      border-top-right-radius: 24px;
-      padding: 20px 18px 28px;
-      border-top: 1px solid var(--border-subtle);
-      animation: slideUp 0.2s ease;
-    }
-
-    @keyframes slideUp {
-      from { transform: translateY(100%); }
-      to { transform: translateY(0); }
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .modal-title {
-      font-size: 17px;
-      font-weight: 700;
-    }
-
-    .modal-close {
-      background: var(--bg-card-soft);
-      border: none;
-      color: #fff;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    .pkg-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .pkg-btn {
-      background: var(--bg-card-soft);
-      border: 1px solid var(--border-subtle);
-      border-radius: 14px;
-      padding: 12px;
-      color: #fff;
-      text-align: left;
-      cursor: pointer;
-    }
-
-    .pkg-btn:active {
-      border-color: var(--gold);
-    }
-
-    .pkg-coins {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--gold);
-    }
-
-    .pkg-price {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    .input-field {
-      width: 100%;
-      background: var(--bg-card-soft);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 11px 12px;
-      color: #fff;
-      font-size: 14px;
-      margin-bottom: 10px;
-      outline: none;
-    }
-
-    .primary-action {
-      width: 100%;
-      background: var(--cyan);
-      color: #062129;
-      border: none;
-      border-radius: 14px;
-      padding: 12px;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 4px;
-    }
-
-    /* Toast */
-    .toast {
-      position: fixed;
-      top: 18px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #1f2642;
-      color: #fff;
-      border: 1px solid var(--cyan);
-      padding: 9px 16px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
-      display: none;
-      z-index: 200;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-    }
-  </style>
-</head>
-<body>
-  <div class="app-shell">
-    <!-- Toast Notification -->
-    <div id="toast" class="toast"></div>
-
-    <!-- Top Action Bar -->
-    <header class="top-bar">
-      <button class="icon-btn" onclick="showToast('Profile refreshed')" title="Refresh">↻</button>
-      <div class="top-actions">
-        <button class="icon-btn" onclick="showToast('Public profile preview mode')" title="Preview">👁</button>
-        <button class="icon-btn" onclick="openEditModal()" title="Edit Profile">✎</button>
-        <button class="icon-btn" onclick="openModal('Settings', '<p style=\'color:#8e96b2;font-size:13px;\'>Account ID: 5449288<br>Region: Nepal<br>Notifications: Enabled</p>')" title="Settings">⚙</button>
-      </div>
-    </header>
-
-    <!-- HOME SCREEN -->
-    <main id="screen-home" class="screen">
-      <div class="section-heading"><span class="section-bar"></span> NEPAL X ESPORTS Hub</div>
-      <div class="feed-card">
-        <span class="badge-live">LIVE REGISTRATION</span>
-        <h4>Season 1 Squad Clash — Prize Pool 10,000 Diamonds</h4>
-        <p>Register your 4-player roster before 8:00 PM NPT. Top 3 teams earn instant Diamond payouts.</p>
-      </div>
-      <div class="feed-card">
-        <h4>Daily Check-In Bonus</h4>
-        <p>Claim +5 Coins every day and complete tournament matches to unlock Diamond rewards.</p>
-      </div>
-    </main>
-
-    <!-- EXPLORE SCREEN -->
-    <main id="screen-explore" class="screen">
-      <div class="section-heading"><span class="section-bar"></span> Explore Rooms & Events</div>
-      <div class="feed-card">
-        <h4>🔥 Free Fire Custom Room #402</h4>
-        <p>Host: NEPAL X ESPORTS • Entry: 5 Coins • Mode: Bermuda Squad</p>
-      </div>
-      <div class="feed-card">
-        <h4>🎯 Blood Strike Scrims</h4>
-        <p>Host: Kathmandu Strikers • Entry: Free • Reward: 500 Diamonds</p>
-      </div>
-    </main>
-
-    <!-- PARTY SCREEN -->
-    <main id="screen-party" class="screen">
-      <div class="section-heading"><span class="section-bar"></span> Live Party Rooms</div>
-      <div class="feed-card">
-        <span class="badge-live">VOICE ROOM</span>
-        <h4>🎙️ Nepal Gaming Hangout (18 Online)</h4>
-        <p>Join squad voice lobby, send gifts with Coins, and team up for ranked matches.</p>
-      </div>
-    </main>
-
-    <!-- MESSAGES SCREEN -->
-    <main id="screen-messages" class="screen">
-      <div class="section-heading"><span class="section-bar"></span> Messages & Alerts</div>
-      <div class="feed-card">
-        <h4>System Reward</h4>
-        <p>Your Diamond balance is active. Minimum withdrawal threshold: 1,000 Diamonds via eSewa / Khalti.</p>
-      </div>
-    </main>
-
-    <!-- PROFILE SCREEN (DEFAULT ACTIVE) -->
-    <main id="screen-profile" class="screen active">
-      <section class="profile-header">
-        <div class="avatar-ring">
-          <div class="avatar-img" id="avatarInitials">KB</div>
-        </div>
-        <div class="name-row">
-          <h1 class="user-name" id="displayName">Kamlesh Bista</h1>
-          <span class="age-badge" id="displayAge">♂ 26</span>
-        </div>
-        <div class="meta-pills">
-          <div class="pill">🇳🇵 <span id="displayCountry">Nepal</span></div>
-          <div class="pill pill-id" onclick="copyUserId()">
-            <span class="id-tag">ID</span>
-            <span id="userIdText">5449288</span>
-            <span>❐</span>
-          </div>
-        </div>
-        <div class="level-badges">
-          <span class="lvl-chip lvl-green">🛡️ 1</span>
-          <span class="lvl-chip lvl-purple">💎 4</span>
-        </div>
-      </section>
-
-      <!-- Followers / Following / Friends -->
-      <section class="stats-card">
-        <div class="stat-item" onclick="showToast('24 Following')">
-          <div class="stat-num" id="statFollowing">24</div>
-          <div class="stat-label">FOLLOWING</div>
-        </div>
-        <div class="stat-item" onclick="showToast('15 Followers')">
-          <div class="stat-num" id="statFollowers">15</div>
-          <div class="stat-label">FOLLOWERS</div>
-        </div>
-        <div class="stat-item" onclick="showToast('11 Friends')">
-          <div class="stat-num" id="statFriends">11</div>
-          <div class="stat-label">FRIENDS</div>
-        </div>
-      </section>
-
-      <!-- Dual Wallet: Coins & Diamonds -->
-      <section class="wallet-grid">
-        <div class="wallet-card wallet-coins">
-          <div class="wallet-title">🪙 COINS</div>
-          <div class="wallet-amount" id="coinBalance">7</div>
-          <button class="btn-topup" onclick="openTopUpModal()">+ Top Up</button>
-        </div>
-
-        <div class="wallet-card wallet-diamonds">
-          <div class="wallet-title">💎 DIAMONDS</div>
-          <div class="wallet-amount" id="diamondBalance">724.6K</div>
-          <div class="diamond-actions">
-            <button class="btn-withdraw" onclick="openWithdrawModal()">Withdraw</button>
-            <button class="btn-view" onclick="openDiamondHistory()">View &gt;</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- My Tools -->
-      <section>
-        <div class="section-heading">
-          <span class="section-bar"></span>
-          <span>My Tools</span>
-        </div>
-
-        <div class="tools-grid">
-          <div class="tool-card" onclick="claimDailyReward()">
-            <div class="tool-icon">🎁</div>
-            <div class="tool-title">Rewards</div>
-            <div class="tool-sub">Daily &amp; Tasks</div>
-          </div>
-
-          <div class="tool-card" onclick="openRanksModal()">
-            <div class="tool-icon">🏆</div>
-            <div class="tool-title">Ranks</div>
-            <div class="tool-sub">Leaderboard</div>
-          </div>
-
-          <div class="tool-card" onclick="switchTab('explore')">
-            <div class="tool-icon">🎮</div>
-            <div class="tool-title">Play Zone</div>
-            <div class="tool-sub">Games &amp; Fun</div>
-          </div>
-
-          <div class="tool-card" onclick="openModal('My Bag', '<p style=\'color:#8e96b2;font-size:13px;\'>• VIP Avatar Frame (Active)<br>• NEPAL X ESPORTS Clan Tag<br>• 2x Double XP Card</p>')">
-            <div class="tool-icon">🎒</div>
-            <div class="tool-title">My Bag</div>
-            <div class="tool-sub">Inventory</div>
-          </div>
-
-          <div class="tool-card" onclick="openMallModal()">
-            <div class="tool-icon">🏪</div>
-            <div class="tool-title">Mall</div>
-            <div class="tool-sub">Store &amp; Passes</div>
-          </div>
-
-          <div class="tool-card" onclick="copyInviteLink()">
-            <div class="tool-icon">📨</div>
-            <div class="tool-title">Invite</div>
-            <div class="tool-sub">Earn Coins</div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-      <div class="nav-item" id="nav-home" onclick="switchTab('home')">
-        <span class="nav-icon">🏠</span>
-        <span>HOME</span>
-      </div>
-      <div c
+
+.avatar img{
+ width:100%;
+ height:100%;
+ object-fit:cover;
+ border-radius:50%;
+}
+.photo-upload{
+ width:100%;
+ padding:16px;
+ border:1px dashed #00D9FF;
+ background:#101D32;
+ border-radius:15px;
+ color:white;
+ margin:10px 0 18px;
+}
+  
+<header>
+<div class="logo">SANO LIVE</div>
+<button class="icon-btn" onclick="notify('No new notifications')">♧</button>
+</header>
+
+<!-- HOME -->
+<section id="home" class="page">
+<div class="hero">
+<h1>Welcome to SANO LIVE ✨</h1>
+<p>Connect Together • Enjoy Together</p>
+</div>
+<h2 class="heading">Discover</h2>
+<div class="quick-grid">
+<div class="quick" onclick="go('explore')">
+<span>🌍</span><h3>Explore</h3><p>Discover people</p>
+</div>
+<div class="quick" onclick="go('party')">
+<span>🎉</span><h3>Party</h3><p>Join communities</p>
+</div>
+<div class="quick" onclick="go('messages')">
+<span>💬</span><h3>Messages</h3><p>Chat with friends</p>
+</div>
+<div class="quick" onclick="go('profile')">
+<span>👤</span><h3>Profile</h3><p>Your account</p>
+</div>
+</div>
+<h2 class="heading">Popular Parties</h2>
+<div class="empty">
+<span>🎧</span>
+<h3 style="margin:12px">No Active Parties</h3>
+<p class="muted">Active parties will appear here.</p>
+</div>
+</section>
+
+<!-- EXPLORE -->
+<section id="explore" class="page">
+<h1>Explore 🌍</h1>
+<p class="muted">Discover SANO LIVE community.</p>
+<input class="search" id="search" placeholder="🔍 Search people..."
+oninput="searchPeople()">
+<div class="empty" id="searchBox">
+<span>🌐</span><h3>Discover People</h3>
+<p class="muted">Connect database later to find users.</p>
+</div>
+</section>
+
+<!-- PARTY -->
+<section id="party" class="page">
+<h1>Party 🎉</h1>
+<div class="card" style="margin-top:20px">
+<h2>🎧 Party Rooms</h2>
+<p class="muted" style="margin:10px 0">No Active Parties</p>
+<button class="btn" onclick="notify('Party creation coming soon')">＋ Create Party</button>
+</div>
+</section>
+
+let selectedPhoto = null;
+
+function editProfile(){
+selectedPhoto = user.photo || null;
+
+showModal(`
+<h2>✏️ Edit Profile</h2>
+
+<div style="text-align:center;margin-bottom:15px">
+<div class="avatar" id="photoPreview">
+${user.photo ? `<img src="${user.photo}">` : user.avatar}
+</div>
+
+<label class="photo-upload" style="display:block">
+📷 Upload Profile Photo
+<input type="file" id="photoInput"
+accept="image/*" hidden onchange="previewPhoto(event)">
+</label>
+<button class="btn secondary" onclick="removePhoto()">
+Remove Photo
+</button>
+</div>
+
+<label>Username</label>
+<input class="field" id="editName"
+maxlength="25" value="${escapeHTML(user.name)}">
+
+<label>Bio</label>
+<textarea class="field" id="editBio"
+maxlength="120">${escapeHTML(user.bio)}</textarea>
+
+<label>Date of Birth</label>
+<input class="field" type="date" id="editDOB"
+value="${user.dob || ''}">
+
+<label>Country</label>
+<select class="field" id="editCountry">
+<option>Nepal</option>
+<option>India</option>
+<option>Bangladesh</option>
+<option>Other</option>
+</select>
+
+<label>Gender</label>
+<select class="field" id="editGender">
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+</select>
+
+<label>Unique User ID</label>
+<input class="field" value="${user.id}" readonly>
+
+<button class="btn" style="width:100%"
+onclick="saveProfile()">Save Changes ✓</button>
+
+<button class="btn secondary"
+style="width:100%;margin-top:10px"
+onclick="closeModal()">Cancel</button>
+`);
+
+$("editCountry").value=user.country;
+$("editGender").value=user.gender;
+}
+
+function previewPhoto(event){
+const file=event.target.files[0];
+if(!file)return;
+
+if(!file.type.startsWith("image/")){
+notify("Please select an image");
+return;
+}
+
+if(file.size>8*1024*1024){
+notify("Photo must be under 8 MB");
+return;
+}
+
+const reader=new FileReader();
+
+reader.onload=e=>{
+const img=new Image();
+
+img.onload=()=>{
+const canvas=document.createElement("canvas");
+const max=512;
+const scale=Math.min(1,max/Math.max(img.width,img.height));
+
+canvas.width=Math.round(img.width*scale);
+canvas.height=Math.round(img.height*scale);
+
+const ctx=canvas.getContext("2d");
+ctx.drawImage(img,0,0,canvas.width,canvas.height);
+
+selectedPhoto=canvas.toDataURL("image/jpeg",0.75);
+
+$("photoPreview").innerHTML=
+`<img src="${selectedPhoto}">`;
+};
+
+img.src=e.target.result;
+};
+
+reader.readAsDataURL(file);
+}
+
+function removePhoto(){
+selectedPhoto=null;
+$("photoPreview").textContent=user.avatar || "👤";
+}
+
+function saveProfile(){
+const name=$("editName").value.trim();
+
+if(!name){
+notify("Enter your username");
+return;
+}
+
+user.name=name;
+user.bio=$("editBio").value.trim();
+user.dob=$("editDOB").value;
+user.country=$("editCountry").value;
+user.gender=$("editGender").value;
+user.photo=selectedPhoto;
+
+save();
+render();
+closeModal();
+
+notify("Profile updated successfully!");
+}
+  
+<!-- MESSAGES -->
+<section id="messages" class="page">
+<h1>Messages 💬</h1>
+<div class="empty" style="margin-top:30px">
+<span>✉️</span><h3 style="margin:12px">No Messages Yet</h3>
+<p class="muted">Your conversations will appear here.</p>
+</div>
+</section>
+
+<!-- PROFILE -->
+<section id="profile" class="page">
+<div class="profile-actions">
+<button class="icon-btn" onclick="notify('Profile refreshed')">↻</button>
+<div>
+<button class="icon-btn" onclick="preview()">◉</button>
+<button class="icon-btn" onclick="editProfile()">✎</button>
+<button class="icon-btn" onclick="go('settings')">⚙</button>
+</div>
+</div>
+
+<div class="profile-center">
+<div class="avatar" id="avatar">👤</div>
+<div class="name" id="name">SANO USER</div>
+<div class="details">
+<span class="detail" id="gender">♂ Male</span>
+<span class="detail" id="country">🇳🇵 Nepal</span>
+<span class="detail">
+🆔 <b id="uid">1111</b>
+<button onclick="copyID()" style="background:none;border:0;color:#FFD15C">▣</button>
+</span>
+</div>
+<div class="bio" id="bio">Hello guys!</div>
+</div>
+
+<div class="card stats">
+<div><strong>0</strong><p>FOLLOWING</p></div>
+<div><strong>0</strong><p>FOLLOWERS</p></div>
+<div><strong>0</strong><p>FRIENDS</p></div>
+</div>
+
+<!-- COINS AND MONEY -->
+<div class="money-grid">
+<div class="money coins">
+<h3>🪙 COINS</h3>
+<strong id="coinBalance">0</strong>
+<button onclick="wallet('Coins')">＋ Top Up</button>
+</div>
+
+<div class="money money-card">
+<h3>💵 MONEY</h3>
+<strong id="moneyBalance">0</strong>
+<button onclick="wallet('Money')">View ›</button>
+</div>
+</div>
+
+<!-- TOOLS -->
+<h2 class="heading">My Tools</h2>
+
+<div class="tools">
+<div class="tool t1" onclick="openTool('Rewards','🎁','Daily rewards and tasks')">
+<div class="tool-icon">🎁</div>
+<strong>Rewards</strong><small>Daily & Tasks</small>
+</div>
+
+<div class="tool t2" onclick="openTool('Ranks','🏆','Leaderboard and ranks')">
+<div class="tool-icon">🏆</div>
+<strong>Ranks</strong><small>Leaderboard</small>
+</div>
+
+<div class="tool t3" onclick="openTool('My Bag','🎒','Your profile decorations')">
+<div class="tool-icon">🎒</div>
+<strong>My Bag</strong><small>Backpack & Decor</small>
+</div>
+
+<div class="tool t4" onclick="openAll()">
+<div class="tool-icon">✨</div>
+<strong>All</strong><small>All Features</small>
+</div>
+
+<div class="tool t5" onclick="openTool('Invite','💝','Invite your friends')">
+<div class="tool-icon">💝</div>
+<strong>Invite</strong><small>Invite Friends</small>
+</div>
+</div>
+
+<div class="agent">
+<span style="color:#FF86C2;font-size:12px">● COMMUNITY</span>
+<h2 style="margin:12px 0">Become an Agent</h2>
+<p class="muted">Build your team and grow together.</p>
+<button class="btn" style="margin-top:15px;background:#9270F5;color:white"
+onclick="openTool('Become an Agent','👑','Agent registration coming soon')">
+Join →
+</button>
+</div>
+
+<h2 class="heading" style="border-color:#FFB52E">Settings & More</h2>
+<div id="menu"></div>
+</section>
+
+<!-- SETTINGS -->
+<section id="settings" class="page">
+<button class="btn secondary" onclick="go('profile')">← Back</button>
+<h1 style="margin-top:22px">Settings ⚙️</h1>
+
+<h2 class="heading">Preferences</h2>
+<div class="card">
+<div class="setting-line">
+<div><b>Notifications</b><p>App notifications</p></div>
+<input class="switch" type="checkbox" checked onchange="saveSettings()">
+</div>
+<div class="setting-line">
+<div><b>Sound</b><p>Sound effects</p></div>
+<input class="switch" type="checkbox" checked onchange="saveSettings()">
+</div>
+<div class="setting-line">
+<div><b>Vibration</b><p>Vibration preference</p></div>
+<input class="switch" type="checkbox" onchange="saveSettings()">
+</div>
+</div>
+
+<h2 class="heading">Account & Security</h2>
+<div id="settingsMenu"></div>
+
+<h2 class="heading">About</h2>
+<div class="card">
+<h3>SANO LIVE</h3>
+<p class="muted" style="margin-top:8px">Version 1.0.0</p>
+</div>
+</section>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="outsideClose(event)">
+<div class="modal" id="modal"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<nav>
+<button id="nav-home" onclick="go('home')"><b>⌂</b>HOME</button>
+<button id="nav-explore" onclick="go('explore')"><b>◎</b>EXPLORE</button>
+<button id="nav-party" onclick="go('party')"><b>✧</b>PARTY</button>
+<button id="nav-messages" onclick="go('messages')"><b>☏</b>MESSAGES</button>
+<button id="nav-profile" class="active" onclick="go('profile')"><b>♟</b>PROFILE</button>
+</nav>
+
+<script>
+const $=id=>document.getElementById(id);
+
+let user={
+name:"SANO USER",
+bio:"Hello guys!",
+country:"Nepal",
+gender:"Male",
+avatar:"👤",
+id:"1111"
+};
+
+function load(){
+try{
+const old=JSON.parse(localStorage.getItem("sano_profile"));
+if(old)user={...user,...old};
+}catch(e){}
+render();
+}
+
+function save(){
+try{
+localStorage.setItem("sano_profile",JSON.stringify(user));
+}catch(e){notify("Could not save profile")}
+}
+
+function render(){
+$("name").textContent=user.name;
+$("bio").textContent=user.bio;
+$("country").textContent="🌍 "+user.country;
+$("gender").textContent=user.gender==="Male"?"♂ Male":user.gender==="Female"?"♀ Female":"Other";
+$("uid").textContent=user.id;
+$("avatar").textContent=user.avatar;
+}
+
+function go(id){
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+$(id).classList.add("active");
+document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+if($("nav-"+id))$("nav-"+id).classList.add("active");
+window.scrollTo(0,0);
+}
+
+function notify(message){
+$("toast").textContent=message;
+$("toast").style.display="block";
+clearTimeout(window.toastTimer);
+window.toastTimer=setTimeout(()=>$("toast").style.display="none",2200);
+}
+
+function showModal(html){
+$("modal").innerHTML=html;
+$("overlay").style.display="flex";
+}
+function closeModal(){$("overlay").style.display="none"}
+function outsideClose(e){if(e.target.id==="overlay")closeModal()}
+
+function editProfile(){
+showModal(`
+<h2>✏️ Edit Profile</h2>
+<label>Username</label>
+<input class="field" id="editName" maxlength="25" value="${escapeHTML(user.name)}">
+<label>Bio</label>
+<textarea class="field" id="editBio" maxlength="120">${escapeHTML(user.bio)}</textarea>
+<label>Country</label>
+<select class="field" id="editCountry">
+<option>Nepal</option><option>India</option>
+<option>Bangladesh</option><option>Other</option>
+</select>
+<label>Gender</label>
+<select class="field" id="editGender">
+<option>Male</option><option>Female</option><option>Other</option>
+</select>
+<label>Avatar</label>
+<select class="field" id="editAvatar">
+<option>👤</option><option>👑</option>
+<option>🎮</option><option>🌟</option><option>🎧</option>
+</select>
+<button class="btn" onclick="saveProfile()">Save Changes</button>
+<button class="btn secondary" onclick="closeModal()">Cancel</button>
+`);
+$("editCountry").value=user.country;
+$("editGender").value=user.gender;
+$("editAvatar").value=user.avatar;
+}
+
+function saveProfile(){
+let n=$("editName").value.trim();
+if(!n){notify("Enter your name");return}
+user.name=n;
+user.bio=$("editBio").value.trim();
+user.country=$("editCountry").value;
+user.gender=$("editGender").value;
+user.avatar=$("editAvatar").value;
+save();render();closeModal();
+notify("Profile updated successfully!");
+}
+
+function escapeHTML(s){
+return String(s).replace(/[&<>"']/g,c=>({
+"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+}[c]));
+}
+
+function copyID(){
+if(navigator.clipboard && window.isSecureContext){
+navigator.clipboard.writeText(user.id)
+.then(()=>notify("User ID copied!"))
+.catch(()=>notify("Your ID: "+user.id));
+}else{
+showModal(`<h2>Your User ID</h2><input class="field" value="${user.id}" readonly><button class="btn" onclick="closeModal()">Close</button>`);
+}
+}
+
+function preview(){
+showModal(`
+<div style="text-align:center">
+<div style="font-size:55px;margin:15px">${escapeHTML(user.avatar)}</div>
+<h2>${escapeHTML(user.name)}</h2>
+<p class="muted">${escapeHTML(user.bio)}</p>
+<p style="margin:15px">🌍 ${escapeHTML(user.country)}</p>
+<p class="muted">ID: ${user.id}</p>
+<button class="btn" onclick="closeModal()">Close</button>
+</div>`);
+}
+
+function openTool(name,emoji,description){
+showModal(`
+<div style="text-align:center">
+<div style="font-size:48px;margin-bottom:15px">${emoji}</div>
+<h2>${escapeHTML(name)}</h2>
+<p class="muted" style="margin:15px 0">${escapeHTML(description)}</p>
+<button class="btn" onclick="closeModal()">Continue</button>
+</div>`);
+}
+
+function openAll(){
+showModal(`
+<h2>✨ All Features</h2>
+<div class="quick-grid">
+<div class="quick" onclick="closeModal();openTool('Rewards','🎁','Daily rewards')">🎁<h3>Rewards</h3></div>
+<div class="quick" onclick="closeModal();openTool('Ranks','🏆','Leaderboard')">🏆<h3>Ranks</h3></div>
+<div class="quick" onclick="closeModal();openTool('My Bag','🎒','Profile items')">🎒<h3>My Bag</h3></div>
+<div class="quick" onclick="closeModal();openTool('Invite','💝','Invite friends')">💝<h3>Invite</h3></div>
+</div>
+<button class="btn secondary" style="margin-top:18px" onclick="closeModal()">Close</button>
+`);
+}
+
+function wallet(type){
+showModal(`
+<h2>${type==="Coins"?"🪙":"💵"} ${type}</h2>
+<p class="muted">Your current ${type} balance</p>
+<h1 style="margin:20px 0">0</h1>
+<p class="muted">${type==="Money"?"Money transactions and withdrawals will require secure backend verification.":"Coin top-up will be connected later."}</p>
+<button class="btn" style="margin-top:20px" onclick="closeModal()">Close</button>
+`);
+}
+
+function menuRow(icon,title,desc,color,action){
+return `<button class="row" onclick="${action}">
+<span class="row-icon" style="background:${color}">${icon}</span>
+<span class="row-info"><b>${title}</b><p>${desc}</p></span>
+<span class="arrow">›</span></button>`;
+}
+
+function buildMenu(){
+$("menu").innerHTML=
+menuRow("👥","My Agent","Agency information","#30295C","openTool('My Agent','👥','Agency information')")
++menuRow("📊","Live Insights","Streaming analytics","#553044","openTool('Live Insights','📊','Streaming analytics')")
++menuRow("💬","Help & Support","FAQ and feedback","#16475B","openTool('Help & Support','💬','Support center')")
++menuRow("🏅","Level & Privileges","XP and levels","#57431D","openTool('Level & Privileges','🏅','Level information')")
++menuRow("⚙️","Settings","Account preferences","#214B65","go('settings')");
+
+$("settingsMenu").innerHTML=
+menuRow("👤","Edit Profile","Personal details","#214B65","editProfile()")
++menuRow("🔒","Privacy","Privacy preferences","#493064","openTool('Privacy','🔒','Privacy preferences')")
++menuRow("🚫","Blocked Users","Manage blocked users","#59333A","openTool('Blocked Users','🚫','Blocked users')")
++menuRow("🆔","Account ID","Your unique ID","#57431D","copyID()");
+}
+
+function saveSettings(){notify("Settings saved")}
+function searchPeople(){
+let q=$("search").value.trim();
+$("searchBox").innerHTML=q?
+"<span>🔍</span><h3>Supabase Required</h3><p class='muted'>Real user search will work after database connection.</p>":
+"<span>🌐</span><h3>Discover People</h3><p class='muted'>Discover the community.</p>";
+}
+
+load();
+buildMenu();
+go("profile");
+</script>
+
+</body>
+</html>
