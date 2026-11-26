@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,584 +9,446 @@
 
 <style>
 :root{
---bg:#080D1D;
---card:#121C30;
---border:#26344B;
---pink:#FF2780;
---cyan:#00D9FF;
---purple:#9875FF;
---muted:#93A1B7;
+ --bg:#080D1D;
+ --card:#121C30;
+ --border:#263B57;
+ --pink:#FF2780;
+ --cyan:#00D9FF;
+ --purple:#9875FF;
+ --muted:#93A1B7;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{
-background:var(--bg);color:white;
-font-family:Arial,sans-serif;
-padding-bottom:90px;
+ background:var(--bg);color:white;
+ font-family:Arial,sans-serif;
+ padding-bottom:90px;
 }
+button{cursor:pointer;font-family:inherit}
 header{
-height:65px;padding:0 17px;
-display:flex;align-items:center;
-justify-content:space-between;
-background:#0B1221;
-border-bottom:1px solid var(--border);
-position:sticky;top:0;z-index:10;
+ height:65px;padding:0 17px;
+ display:flex;align-items:center;
+ justify-content:space-between;
+ background:#0B1221;
+ border-bottom:1px solid var(--border);
+ position:sticky;top:0;z-index:10;
 }
 .logo{font-size:23px;font-weight:900;color:var(--cyan)}
-button{cursor:pointer;font-family:inherit}
 .page{display:none;padding:17px 15px 30px}
 .page.active{display:block}
 h1{font-size:25px;margin-bottom:10px}
 h2{font-size:19px}
-.muted{color:var(--muted);font-size:13px;line-height:1.6}
+h3{font-size:15px}
+p.muted,.muted{
+ color:var(--muted);font-size:13px;line-height:1.6
+}
 .card{
-background:var(--card);
-border:1px solid var(--border);
-border-radius:20px;padding:17px;
-margin-bottom:14px;
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:20px;padding:17px;margin-bottom:14px;
 }
 .btn{
-background:var(--pink);color:white;
-border:0;border-radius:13px;
-padding:13px 19px;font-weight:900;
+ background:var(--pink);color:white;
+ border:0;border-radius:13px;
+ padding:13px 19px;font-weight:900;
 }
 .secondary{background:#26344B;color:white}
 .heading{
-font-size:20px;margin:24px 0 14px;
-border-left:4px solid var(--pink);
-padding-left:11px;
+ font-size:20px;margin:24px 0 14px;
+ border-left:4px solid var(--pink);padding-left:11px;
 }
 .hero{
-padding:25px 20px;border-radius:22px;
-background:linear-gradient(130deg,#163D69,#563078);
-margin-bottom:20px;
+ padding:25px 20px;border-radius:22px;
+ background:linear-gradient(130deg,#163D69,#563078);
+ margin-bottom:20px;
 }
 .hero h1{font-size:27px}
 .hero p{color:#DFE8FF;margin-top:8px;font-size:13px}
 .quick-grid{
-display:grid;grid-template-columns:1fr 1fr;gap:12px;
+ display:grid;grid-template-columns:1fr 1fr;gap:12px;
 }
 .quick{
-background:var(--card);
-border:1px solid var(--border);
-border-radius:18px;padding:17px;
-cursor:pointer;
+ background:var(--card);border:1px solid var(--border);
+ border-radius:18px;padding:17px;cursor:pointer;
 }
-.quick span{font-size:28px}
+.quick span,.quick-icon{font-size:28px}
 .quick h3{margin:10px 0 5px}
 .quick p{font-size:12px;color:var(--muted)}
 .go-live-btn{
-position:fixed;right:18px;bottom:91px;
-z-index:8;background:linear-gradient(135deg,#FF348B,#E91E63);
-color:white;border:0;border-radius:40px;
-padding:14px 21px;font-size:16px;font-weight:900;
-box-shadow:0 5px 25px #F45C9C66;
-display:flex;align-items:center;gap:9px;
+ position:fixed;right:18px;bottom:91px;z-index:8;
+ background:linear-gradient(135deg,#FF348B,#E91E63);
+ color:white;border:0;border-radius:40px;
+ padding:14px 21px;font-size:16px;font-weight:900;
+ box-shadow:0 5px 25px #F45C9C66;
 }
 .party-grid{
-display:grid;grid-template-columns:1fr 1fr;gap:12px;
+ display:grid;grid-template-columns:1fr 1fr;gap:12px;
 }
 .party-card{
-background:linear-gradient(145deg,#202B4A,#24152F);
-border:1px solid #394363;border-radius:19px;
-padding:15px;min-height:160px;
-display:flex;flex-direction:column;
-justify-content:space-between;
+ background:linear-gradient(145deg,#202B4A,#24152F);
+ border:1px solid #394363;border-radius:19px;
+ padding:15px;min-height:175px;
+ display:flex;flex-direction:column;
+ justify-content:space-between;
 }
 .party-card .emoji{font-size:32px}
 .tag{
-display:inline-block;background:#26344B;
-padding:6px 10px;border-radius:20px;
-font-size:11px;margin-top:8px;
+ display:inline-block;background:#26344B;
+ padding:6px 10px;border-radius:20px;
+ font-size:11px;margin-top:8px;
 }
 .user-list{display:flex;flex-direction:column;gap:11px}
 .user-row{
-display:flex;align-items:center;gap:12px;
-background:var(--card);border:1px solid var(--border);
-border-radius:16px;padding:13px;
+ display:flex;align-items:center;gap:12px;
+ background:var(--card);border:1px solid var(--border);
+ border-radius:16px;padding:13px;
 }
 .avatar-small{
-width:48px;height:48px;border-radius:50%;
-background:linear-gradient(135deg,#00D9FF,#9875FF);
-display:grid;place-items:center;font-size:24px;
+ width:48px;height:48px;flex-shrink:0;
+ border-radius:50%;
+ background:linear-gradient(135deg,#00D9FF,#9875FF);
+ display:grid;place-items:center;font-size:24px;
+ overflow:hidden;
 }
-.user-info{flex:1}
+.avatar-small img{width:100%;height:100%;object-fit:cover}
+.user-info{flex:1;min-width:0}
 .user-info p{color:var(--muted);font-size:12px;margin-top:5px}
 .follow{
-background:#26344B;color:white;
-border:0;border-radius:20px;padding:9px 13px;
+ background:#26344B;color:white;border:0;
+ border-radius:20px;padding:9px 13px;
 }
-.search{
-width:100%;padding:14px;
-background:var(--card);border:1px solid var(--border);
-border-radius:13px;color:white;margin:15px 0;
+.search,.field{
+ width:100%;padding:14px;
+ background:#091426;border:1px solid #354765;
+ border-radius:13px;color:white;margin:9px 0 14px;
+ outline:none;
 }
+.field option{background:#091426}
 .empty{
-text-align:center;padding:25px;
-background:var(--card);border:1px dashed #394A65;
-border-radius:18px;color:var(--muted);
+ text-align:center;padding:25px;
+ background:var(--card);border:1px dashed #394A65;
+ border-radius:18px;color:var(--muted);
 }
 nav{
-position:fixed;bottom:0;left:0;width:100%;
-height:76px;background:#090E1B;
-border-top:1px solid var(--border);
-display:flex;justify-content:space-around;
-align-items:center;z-index:12;
+ position:fixed;bottom:0;left:0;width:100%;
+ height:76px;background:#090E1B;
+ border-top:1px solid var(--border);
+ display:flex;justify-content:space-around;
+ align-items:center;z-index:12;
 }
 nav button{
-background:none;border:0;color:#8592A9;
-display:flex;flex-direction:column;
-align-items:center;gap:5px;font-size:10px;
+ background:none;border:0;color:#8592A9;
+ display:flex;flex-direction:column;
+ align-items:center;gap:5px;font-size:10px;
 }
 nav b{font-size:23px}
 nav button.active{color:var(--pink)}
-.profile-center{text-align:center;padding:22px 0}
+
+/* PREMIUM PROFILE */
+.profile-center{
+ text-align:center;padding:28px 15px;
+ background:linear-gradient(160deg,#182B48,#17152D);
+ border:1px solid #354765;border-radius:22px;
+ margin-top:18px;
+}
 .avatar{
-width:105px;height:105px;border-radius:50%;
-margin:0 auto 13px;
-background:linear-gradient(135deg,#00D9FF,#7952D9);
-border:4px solid var(--purple);
-display:grid;place-items:center;font-size:43px;
-overflow:hidden;
+ width:112px;height:112px;border-radius:50%;
+ margin:0 auto 15px;
+ background:linear-gradient(135deg,#00D9FF,#7952D9);
+ border:3px solid var(--cyan);
+ box-shadow:0 0 17px #00D9FF55;
+ display:grid;place-items:center;
+ font-size:43px;overflow:hidden;
 }
 .avatar img{width:100%;height:100%;object-fit:cover}
-.name{font-size:25px;font-weight:900}
+.name{font-size:24px;font-weight:900;letter-spacing:.4px}
+.vip-badge{
+ display:inline-block;padding:6px 14px;margin:9px 0;
+ background:linear-gradient(90deg,#7450CF,#B35AFF);
+ border-radius:20px;font-size:11px;font-weight:bold;
+}
 .details{
-display:flex;justify-content:center;
-flex-wrap:wrap;gap:8px;margin:15px 0;
+ display:flex;justify-content:center;
+ flex-wrap:wrap;gap:8px;margin:15px 0;
 }
 .detail{
-background:#18243A;border:1px solid var(--border);
-border-radius:20px;padding:8px 11px;font-size:12px;
+ background:#202D47;border:1px solid #40516D;
+ border-radius:20px;padding:8px 11px;font-size:12px;
 }
-.stats{
-display:grid;grid-template-columns:repeat(3,1fr);
-text-align:center;padding:19px 5px;
+.profile-stats,.stats{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ background:#121F34;border:1px solid #263B57;
+ border-radius:17px;padding:18px 5px;
+ text-align:center;margin:15px 0;
 }
-.stats strong{font-size:22px}
-.stats p{font-size:10px;color:var(--muted);margin-top:6px}
+.profile-stats strong,.stats strong{
+ display:block;font-size:21px;color:var(--cyan)
+}
+.profile-stats small,.stats p{
+ color:var(--muted);font-size:10px;margin-top:6px;
+}
+.profile-menu{
+ display:flex;align-items:center;gap:13px;
+ padding:16px;background:#121C30;
+ border:1px solid #26344B;border-radius:15px;
+ margin-bottom:10px;color:white;width:100%;
+ text-align:left;
+}
+.profile-menu span:first-child{font-size:23px}
+.profile-menu b{flex:1;font-size:13px}
 .money-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 .money{
-padding:16px;border-radius:20px;
-background:#1B2435;border:1px solid #D99B30;
+ padding:16px;border-radius:20px;
+ background:#1B2435;border:1px solid #D99B30;
 }
 .money.money-card{background:#142A3B;border-color:var(--cyan)}
 .money h3{font-size:14px;margin-bottom:18px}
 .money strong{font-size:25px}
 .money button{
-width:100%;padding:11px;border:0;
-border-radius:20px;margin-top:15px;font-weight:bold;
-background:#FFB32D;
+ width:100%;padding:11px;border:0;
+ border-radius:20px;margin-top:15px;
+ font-weight:bold;background:#FFB32D;
 }
 .money-card button{background:var(--cyan)}
 .row{
-width:100%;display:flex;align-items:center;gap:13px;
-text-align:left;color:white;background:var(--card);
-border:1px solid var(--border);
-border-radius:17px;padding:15px;margin-bottom:10px;
+ width:100%;display:flex;align-items:center;gap:13px;
+ text-align:left;color:white;background:var(--card);
+ border:1px solid var(--border);
+ border-radius:17px;padding:15px;margin-bottom:10px;
 }
 .row-icon{font-size:23px}
 .row-info{flex:1}
 .row-info p{font-size:12px;color:var(--muted);margin-top:5px}
+
+/* MODALS */
 .overlay{
-display:none;position:fixed;inset:0;
-background:#000C;z-index:30;
-align-items:center;justify-content:center;padding:15px;
+ display:none;position:fixed;inset:0;
+ background:#000C;z-index:30;
+ align-items:center;justify-content:center;padding:15px;
 }
 .modal{
-width:100%;max-width:410px;max-height:88vh;
-overflow:auto;background:#142039;
-border:1px solid #354765;border-radius:23px;padding:21px;
+ width:100%;max-width:410px;max-height:88vh;
+ overflow:auto;background:#142039;
+ border:1px solid #354765;border-radius:23px;padding:21px;
 }
 .modal h2{margin-bottom:17px}
-.field{
-width:100%;padding:13px;margin:8px 0 14px;
-border:1px solid #354765;background:#091426;
-color:white;border-radius:12px;
-}
-.field option{background:#091426}
 .modal .btn{width:100%;margin-top:9px}
 .modal .secondary{margin-bottom:5px}
 .format{
-padding:17px;border-radius:18px;
-border:1px solid var(--border);
-background:#10192B;margin:12px 0;
+ padding:17px;border-radius:18px;
+ border:1px solid var(--border);
+ background:#10192B;margin:12px 0;cursor:pointer;
 }
-.format.selected{
-background:#512044;border-color:var(--pink);
-}
+.format.selected{background:#512044;border-color:var(--pink)}
 .format strong{font-size:18px}
 .format p{color:#B9C5D8;font-size:13px;margin-top:7px}
 .switch{accent-color:var(--pink);width:20px;height:20px}
 .chat{
-background:var(--card);border-radius:16px;
-padding:15px;margin-bottom:10px;
-display:flex;gap:12px;align-items:center;
+ background:var(--card);border-radius:16px;
+ padding:15px;margin-bottom:10px;
+ display:flex;gap:12px;align-items:center;
 }
 .chat p{font-size:12px;color:var(--muted);margin-top:5px}
 .toast{
-display:none;position:fixed;bottom:90px;
-left:50%;transform:translateX(-50%);
-background:#263952;padding:13px 18px;
-border-radius:25px;z-index:50;font-size:13px;
+ display:none;position:fixed;bottom:90px;
+ left:50%;transform:translateX(-50%);
+ background:#263952;padding:13px 18px;
+ border-radius:25px;z-index:50;font-size:13px;
+ white-space:nowrap;
 }
-</style> 
-<head>
-<meta charset="UTF-8">
-
-/* SANO LIVE PREMIUM PROFILE */
-
-.profile-center{
- text-align:center;
- padding:28px 15px;
- background:linear-gradient(160deg,#182B48,#17152D);
- border:1px solid #354765;
- border-radius:22px;
- margin-top:18px;
-}
-
-.profile-center .avatar{
- width:112px;
- height:112px;
- border-radius:50%;
- border:3px solid #00D9FF;
- box-shadow:0 0 15px #00D9FF55;
- margin-bottom:15px;
-}
-
-.profile-center .name{
- font-size:24px;
- font-weight:900;
- letter-spacing:.4px;
-}
-
-
-<style>
-
-/* GO LIVE BUTTON */
-
-.go-live-btn{
-position:fixed;
-right:22px;
-bottom:95px;
-z-index:20;
-background:linear-gradient(135deg,#FF348B,#E91E63);
-color:white;
-border:0;
-border-radius:40px;
-padding:15px 23px;
-font-size:17px;
-font-weight:900;
-box-shadow:0 5px 25px #F45C9C66;
-display:flex;
-align-items:center;
-gap:10px;
-cursor:pointer;
-}
-
-/* SIMPLE SMART PARTY ROOM */
-
 .seats{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:22px 12px;
- margin-top:25px;
+ display:grid;grid-template-columns:repeat(4,1fr);
+ gap:12px;margin:20px 0;
 }
-
 .seat{
- height:100px;
- background:#202033;
- border:1px solid #44445c;
- border-radius:16px;
- display:flex;
- flex-direction:column;
- justify-content:center;
- align-items:center;
- animation:softMove 4s ease-in-out infinite alternate;
- box-shadow:none;
+ min-height:100px;background:#202B42;
+ border:1px solid #40516D;border-radius:16px;
+ display:flex;flex-direction:column;
+ justify-content:center;align-items:center;
+ gap:5px;font-size:11px;
 }
-
-.seat:nth-child(1){
- transform:translateY(-12px);
- background:#29243a;
- border-color:#d6b65e;
+.seat.host{border-color:#D6B65E;background:#29243A}
+.seat-avatar{
+ width:43px;height:43px;border-radius:50%;
+ background:#34344A;display:grid;place-items:center;
+ font-size:20px;
 }
-
-.seat:nth-child(even){
- animation-delay:1s;
+.seat small{color:#AAB6C9}
+.room-controls{
+ display:grid;grid-template-columns:repeat(3,1fr);gap:9px;
 }
-
-@keyframes softMove{
- from{margin-left:0}
- to{margin-left:3px}
+.room-controls button{
+ background:#222F49;color:white;border:1px solid #40516D;
+ border-radius:13px;padding:13px 5px;font-size:12px;
 }
-
-.avatar{
- width:45px;
- height:45px;
- border-radius:50%;
- background:#34344a;
- border:1px solid #777;
- display:grid;
- place-items:center;
- font-size:21px;
-}
-
-.seat b{
- font-size:11px;
- margin-top:7px;
- color:white;
-}
-
-.seat small{
- font-size:10px;
- color:#aaa;
- margin-top:3px;
-}
-
-.member-panel{
- background:#191929;
- border:1px solid #34344b;
- border-radius:14px;
- padding:14px;
-}
-
-.member{
- display:flex;
- align-items:center;
- gap:12px;
- padding:11px 0;
- border-bottom:1px solid #303044;
- font-size:12px;
-}
-
-.controls .control{
- background:#222236;
- border:1px solid #39394f;
- border-radius:12px;
- color:white;
-}
-  
 </style>
 </head>
 
 <body>
 
 <header>
-<div class="logo">SANO LIVE</div>
-<button onclick="notify('No new notifications')" class="btn secondary">♧</button>
+ <div class="logo">SANO LIVE</div>
+ <button class="btn secondary" onclick="notify('No new notifications')">♧</button>
 </header>
 
 <!-- HOME -->
 <section id="home" class="page active">
-<div class="hero">
-<h1>Welcome to SANO LIVE ✨</h1>
-<p>Connect Together • Enjoy Together</p>
-</div>
-
-<h2 class="heading">Discover</h2>
-<div class="quick-grid">
-<div class="quick" onclick="go('explore')">
-<span>🌍</span><h3>Explore</h3><p>Discover people</p>
-</div>
-<div class="quick" onclick="go('party')">
-<span>🎉</span><h3>Party</h3><p>Join party rooms</p>
-</div>
-<div class="quick" onclick="go('messages')">
-<span>💬</span><h3>Messages</h3><p>Your conversations</p>
-</div>
-<div class="quick" onclick="go('profile')">
-<span>👤</span><h3>Profile</h3><p>Your account</p>
-</div>
-</div>
-
-<h2 class="heading">Popular Parties 🔥</h2>
-<div id="homeParties" class="party-grid"></div>
-
-<h2 class="heading">People to Discover</h2>
-<div class="user-list">
-<div class="user-row"><div class="avatar-small">🎧</div>
-<div class="user-info"><b>Music Lover</b><p>🇳🇵 Nepal · Online</p></div>
-<button class="follow" onclick="notify('Follow feature coming soon')">Follow</button></div>
-<div class="user-row"><div class="avatar-small">👑</div>
-<div class="user-info"><b>Live Star</b><p>🇳🇵 Nepal · Online</p></div>
-<button class="follow" onclick="notify('Follow feature coming soon')">Follow</button></div>
-</div>
+ <div class="hero">
+  <h1>Welcome to SANO LIVE ✨</h1>
+  <p>Connect Together • Enjoy Together</p>
+ </div>
+ <h2 class="heading">Discover</h2>
+ <div class="quick-grid">
+  <div class="quick" onclick="go('explore')"><span>🌍</span><h3>Explore</h3><p>Discover people</p></div>
+  <div class="quick" onclick="go('party')"><span>🎉</span><h3>Party</h3><p>Join party rooms</p></div>
+  <div class="quick" onclick="go('messages')"><span>💬</span><h3>Messages</h3><p>Your conversations</p></div>
+  <div class="quick" onclick="go('profile')"><span>👤</span><h3>Profile</h3><p>Your account</p></div>
+ </div>
+ <h2 class="heading">Popular Parties 🔥</h2>
+ <div id="homeParties" class="party-grid"></div>
+ <h2 class="heading">People to Discover</h2>
+ <div class="user-list">
+  <div class="user-row"><div class="avatar-small">🎧</div><div class="user-info"><b>Music Lover</b><p>🇳🇵 Nepal · Online</p></div><button class="follow" onclick="follow(this)">Follow</button></div>
+  <div class="user-row"><div class="avatar-small">👑</div><div class="user-info"><b>Live Star</b><p>🇳🇵 Nepal · Online</p></div><button class="follow" onclick="follow(this)">Follow</button></div>
+ </div>
 </section>
 
 <!-- EXPLORE -->
 <section id="explore" class="page">
-<h1>Explore 🌍</h1>
-<p class="muted">Discover the SANO LIVE community.</p>
-<input class="search" id="search" placeholder="🔍 Search people..." oninput="searchPeople()">
-<div id="people" class="user-list">
-<div class="user-row"><div class="avatar-small">🎮</div>
-<div class="user-info"><b>Gaming Star</b><p>🇳🇵 Nepal · Online</p></div>
-<button class="follow" onclick="notify('Follow feature coming soon')">Follow</button></div>
-<div class="user-row"><div class="avatar-small">🎵</div>
-<div class="user-info"><b>Music World</b><p>🇳🇵 Nepal · Online</p></div>
-<button class="follow" onclick="notify('Follow feature coming soon')">Follow</button></div>
-<div class="user-row"><div class="avatar-small">🌟</div>
-<div class="user-info"><b>Happy User</b><p>🇮🇳 India · Online</p></div>
-<button class="follow" onclick="notify('Follow feature coming soon')">Follow</button></div>
-</div>
+ <h1>Explore 🌍</h1>
+ <p class="muted">Discover the SANO LIVE community.</p>
+ <input class="search" id="search" placeholder="🔍 Search people..." oninput="searchPeople()">
+ <div id="people" class="user-list">
+  <div class="user-row"><div class="avatar-small">🎮</div><div class="user-info"><b>Gaming Star</b><p>🇳🇵 Nepal · Online</p></div><button class="follow" onclick="follow(this)">Follow</button></div>
+  <div class="user-row"><div class="avatar-small">🎵</div><div class="user-info"><b>Music World</b><p>🇳🇵 Nepal · Online</p></div><button class="follow" onclick="follow(this)">Follow</button></div>
+  <div class="user-row"><div class="avatar-small">🌟</div><div class="user-info"><b>Happy User</b><p>🇮🇳 India · Online</p></div><button class="follow" onclick="follow(this)">Follow</button></div>
+ </div>
 </section>
 
 <!-- PARTY -->
 <section id="party" class="page">
-<h1>Party Rooms 🎉</h1>
-<p class="muted">Create a room and enjoy with friends.</p>
-<button class="btn" style="width:100%;margin:18px 0" onclick="createParty()">＋ Create Party</button>
-<h2 class="heading">Active Parties</h2>
-<div id="partyList" class="party-grid"></div>
+ <h1>Party Rooms 🎉</h1>
+ <p class="muted">Create a room and enjoy with friends.</p>
+ <button class="btn" style="width:100%;margin:18px 0" onclick="createParty()">＋ Create Party</button>
+ <h2 class="heading">Active Parties</h2>
+ <div id="partyList" class="party-grid"></div>
 </section>
 
 <!-- MESSAGES -->
 <section id="messages" class="page">
-<h1>Messages 💬</h1>
-<p class="muted">Your recent conversations.</p>
-<div class="chat" style="margin-top:20px" onclick="openChat('SANO FRIEND')">
-<div class="avatar-small">👤</div>
-<div style="flex:1"><b>SANO FRIEND</b><p>Welcome to SANO LIVE!</p></div>
-<span>›</span>
-</div>
-<div class="chat" onclick="openChat('LIVE FRIEND')">
-<div class="avatar-small">🎧</div>
-<div style="flex:1"><b>LIVE FRIEND</b><p>Hello 👋</p></div>
-<span>›</span>
-</div>
+ <h1>Messages 💬</h1>
+ <p class="muted">Your recent conversations.</p>
+ <div class="chat" style="margin-top:20px" onclick="openChat('SANO FRIEND')">
+  <div class="avatar-small">👤</div><div style="flex:1"><b>SANO FRIEND</b><p>Welcome to SANO LIVE!</p></div><span>›</span>
+ </div>
+ <div class="chat" onclick="openChat('LIVE FRIEND')">
+  <div class="avatar-small">🎧</div><div style="flex:1"><b>LIVE FRIEND</b><p>Hello 👋</p></div><span>›</span>
+ </div>
 </section>
 
 <!-- PROFILE -->
 <section id="profile" class="page">
-<div style="display:flex;justify-content:space-between">
-<button class="btn secondary" onclick="notify('Profile refreshed')">↻ Refresh</button>
-<button class="btn secondary" onclick="go('settings')">⚙ Settings</button>
-</div>
+ <div style="display:flex;justify-content:space-between;gap:10px">
+  <button class="btn secondary" onclick="renderProfile();notify('Profile refreshed')">↻ Refresh</button>
+  <button class="btn secondary" onclick="go('settings')">⚙ Settings</button>
+ </div>
 
-<div class="profile-center">
-<div class="avatar" id="avatar">👤</div>
-<div class="name" id="name">SANO USER</div>
-<div class="details">
-<span class="detail" id="gender">♂ Male</span>
-<span class="detail" id="country">🇳🇵 Nepal</span>
-<span class="detail">🆔 <b id="uid">1111</b></span>
-</div>
-<p class="muted" id="bio">Hello guys!</p>
-<button class="btn" style="margin-top:15px" onclick="editProfile()">✏ Edit Profile</button>
-</div>
+ <div class="profile-center">
+  <div class="avatar" id="avatar">👤</div>
+  <div class="name" id="name">SANO USER</div>
+  <div class="vip-badge">💎 VIP MEMBER</div>
+  <div class="details">
+   <span class="detail" id="gender">♂ Male</span>
+   <span class="detail" id="country">🇳🇵 Nepal</span>
+   <span class="detail">🆔 <b id="uid">1111</b></span>
+  </div>
+  <p class="muted" id="bio">Hello guys!</p>
+  <button class="btn" style="margin-top:15px" onclick="editProfile()">✏ Edit Profile</button>
+ </div>
 
-<div class="card stats">
-<div><strong>0</strong><p>FOLLOWING</p></div>
-<div><strong>0</strong><p>FOLLOWERS</p></div>
-<div><strong>0</strong><p>FRIENDS</p></div>
-</div>
+ <div class="profile-stats">
+  <div><strong id="followingCount">0</strong><small>FOLLOWING</small></div>
+  <div><strong id="followerCount">0</strong><small>FOLLOWERS</small></div>
+  <div><strong id="friendCount">0</strong><small>FRIENDS</small></div>
+ </div>
 
-<div class="money-grid">
-<div class="money">
-<h3>🪙 COINS</h3><strong id="coinBalance">0</strong>
-<button onclick="wallet('Coins')">＋ Top Up</button>
-</div>
-<div class="money money-card">
-<h3>💵 MONEY</h3><strong id="moneyBalance">0</strong>
-<button onclick="wallet('Money')">View ›</button>
-</div>
-</div>
+ <div class="money-grid">
+  <div class="money"><h3>🪙 COINS</h3><strong id="coinBalance">0</strong><button onclick="wallet('Coins')">＋ Top Up</button></div>
+  <div class="money money-card"><h3>💵 MONEY</h3><strong id="moneyBalance">0</strong><button onclick="wallet('Money')">View ›</button></div>
+ </div>
 
-<h2 class="heading">My Tools</h2>
-<div class="quick-grid">
-<div class="quick" onclick="openTool('Rewards','🎁')">🎁<h3>Rewards</h3><p>Daily tasks</p></div>
-<div class="quick" onclick="openTool('Ranks','🏆')">🏆<h3>Ranks</h3><p>Leaderboard</p></div>
-<div class="quick" onclick="openTool('My Bag','🎒')">🎒<h3>My Bag</h3><p>Decorations</p></div>
-<div class="quick" onclick="openTool('Invite','💝')">💝<h3>Invite</h3><p>Invite friends</p></div>
-</div>
+ <h2 class="heading">My Tools</h2>
+ <div class="quick-grid">
+  <div class="quick" onclick="openTool('Rewards','🎁')">🎁<h3>Rewards</h3><p>Daily tasks</p></div>
+  <div class="quick" onclick="openTool('Ranks','🏆')">🏆<h3>Ranks</h3><p>Leaderboard</p></div>
+  <div class="quick" onclick="openTool('My Bag','🎒')">🎒<h3>My Bag</h3><p>Decorations</p></div>
+  <div class="quick" onclick="openTool('Invite','💝')">💝<h3>Invite</h3><p>Invite friends</p></div>
+ </div>
 
-<h2 class="heading">More</h2>
-<button class="row" onclick="go('settings')">⚙️ <span class="row-info"><b>Settings</b><p>Account preferences</p></span>›</button>
-<button class="row" onclick="openTool('Help & Support','💬')">💬 <span class="row-info"><b>Help & Support</b><p>Get help</p></span>›</button>
+ <h2 class="heading">VIP & My Account</h2>
+ <button class="profile-menu" onclick="openTool('VIP Membership','💎')"><span>💎</span><b>VIP Membership</b><span>›</span></button>
+ <button class="profile-menu" onclick="openTool('My Badges','👑')"><span>👑</span><b>My Badges</b><span>›</span></button>
+ <button class="profile-menu" onclick="openTool('My Gifts','🎁')"><span>🎁</span><b>My Gifts</b><span>›</span></button>
+ <button class="profile-menu" onclick="openTool('My Visitors','👀')"><span>👀</span><b>My Visitors</b><span>›</span></button>
+ <button class="profile-menu" onclick="openTool('My Level','⭐')"><span>⭐</span><b>My Level</b><span>›</span></button>
+
+ <h2 class="heading">More</h2>
+ <button class="row" onclick="go('settings')">⚙️ <span class="row-info"><b>Settings</b><p>Account preferences</p></span>›</button>
+ <button class="row" onclick="openTool('Help & Support','💬')">💬 <span class="row-info"><b>Help & Support</b><p>Get help</p></span>›</button>
+ <button class="row" onclick="notify('You are using the local demo version')">🚪 <span class="row-info"><b>About SANO LIVE</b><p>Version 1.0.0</p></span>›</button>
 </section>
 
 <!-- SETTINGS -->
 <section id="settings" class="page">
-<button class="btn secondary" onclick="go('profile')">← Back</button>
-<h1 style="margin-top:20px">Settings ⚙️</h1>
-<div class="card" style="margin-top:20px">
-<div style="padding:13px 0;border-bottom:1px solid #26344B">
-<b>Notifications</b>
-<input type="checkbox" class="switch" checked style="float:right">
-</div>
-<div style="padding:13px 0;border-bottom:1px solid #26344B">
-<b>Sound</b>
-<input type="checkbox" class="switch" checked style="float:right">
-</div>
-<div style="padding:13px 0">
-<b>Vibration</b>
-<input type="checkbox" class="switch" style="float:right">
-</div>
-</div>
-<button class="row" onclick="editProfile()">👤 <span class="row-info"><b>Edit Profile</b><p>Update your information</p></span>›</button>
-<button class="row" onclick="openTool('Privacy','🔒')">🔒 <span class="row-info"><b>Privacy</b><p>Privacy settings</p></span>›</button>
-<div class="card"><b>SANO LIVE</b><p class="muted">Version 1.0.0</p></div>
+ <button class="btn secondary" onclick="go('profile')">← Back</button>
+ <h1 style="margin-top:20px">Settings ⚙️</h1>
+ <div class="card" style="margin-top:20px">
+  <div style="padding:13px 0;border-bottom:1px solid #26344B"><b>Notifications</b><input type="checkbox" class="switch" checked style="float:right"></div>
+  <div style="padding:13px 0;border-bottom:1px solid #26344B"><b>Sound</b><input type="checkbox" class="switch" checked style="float:right"></div>
+  <div style="padding:13px 0"><b>Vibration</b><input type="checkbox" class="switch" style="float:right"></div>
+ </div>
+ <button class="row" onclick="editProfile()">👤 <span class="row-info"><b>Edit Profile</b><p>Update your information</p></span>›</button>
+ <button class="row" onclick="openTool('Privacy','🔒')">🔒 <span class="row-info"><b>Privacy</b><p>Privacy settings</p></span>›</button>
+ <div class="card"><b>SANO LIVE</b><p class="muted">Version 1.0.0</p></div>
 </section>
 
 <!-- GO LIVE -->
 <section id="golive" class="page">
-<button class="btn secondary" onclick="go('home')">← Back</button>
-
-<div style="margin-top:20px;padding:25px 18px;border-radius:23px;background:linear-gradient(135deg,#392044,#182D50)">
-<p style="color:#FF70AA;font-weight:bold">● CREATE YOUR LIVE</p>
-<h1 style="margin-top:15px">Start Your Moment ✨</h1>
-<p class="muted">Bring friends together and enjoy your time.</p>
-</div>
-
-<h2 class="heading">Select Live Format</h2>
-
-<div class="format selected" id="audioFormat" onclick="selectFormat('Audio')">
-<strong>🎙️ Audio Party</strong>
-<p>Voice room · Maximum 8 people</p>
-</div>
-<div class="format" id="videoFormat" onclick="selectFormat('Video')">
-<strong>📹 Video Live</strong>
-<p>Face-to-face video stream</p>
-</div>
-
-<h2 class="heading">Room Information</h2>
-<div class="card">
-<label>Room Title</label>
-<input class="field" id="liveTitle" maxlength="35" placeholder="Enter your room title">
-<label>Choose Room Privacy</label>
-<select class="field" id="privacy">
-<option value="Public">Public Room</option>
-<option value="Private">Private Room</option>
-</select>
-<label>Party Seats</label>
-<select class="field" id="liveSeats">
-<option value="8">8 People Maximum</option>
-</select>
-<p class="muted">Your room supports up to 8 people including the host.</p>
-</div>
-
-<div class="card">
-<label style="display:flex;align-items:center;gap:10px">
-<input type="checkbox" id="terms" checked>
-I agree to the Terms & Conditions
-</label>
-</div>
-<button class="btn" style="width:100%;padding:17px;font-size:17px;border-radius:35px" onclick="startLive()">📡 Go Live Now →</button>
+ <button class="btn secondary" onclick="go('home')">← Back</button>
+ <div style="margin-top:20px;padding:25px 18px;border-radius:23px;background:linear-gradient(135deg,#392044,#182D50)">
+  <p style="color:#FF70AA;font-weight:bold">● CREATE YOUR LIVE</p>
+  <h1 style="margin-top:15px">Start Your Moment ✨</h1>
+  <p class="muted">Bring friends together and enjoy your time.</p>
+ </div>
+ <h2 class="heading">Select Live Format</h2>
+ <div class="format selected" id="audioFormat" onclick="selectFormat('Audio')"><strong>🎙️ Audio Party</strong><p>Voice room · Maximum 8 people</p></div>
+ <div class="format" id="videoFormat" onclick="selectFormat('Video')"><strong>📹 Video Live</strong><p>Face-to-face video stream</p></div>
+ <h2 class="heading">Room Information</h2>
+ <div class="card">
+  <label>Room Title</label>
+  <input class="field" id="liveTitle" maxlength="35" placeholder="Enter your room title">
+  <label>Choose Room Privacy</label>
+  <select class="field" id="privacy"><option value="Public">Public Room</option><option value="Private">Private Room</option></select>
+  <label>Party Seats</label>
+  <select class="field" id="liveSeats"><option value="8">8 People Maximum</option></select>
+  <p class="muted">Your room supports up to 8 people including the host.</p>
+ </div>
+ <div class="card"><label style="display:flex;align-items:center;gap:10px"><input type="checkbox" id="terms" checked>I agree to the Terms & Conditions</label></div>
+ <button class="btn" style="width:100%;padding:17px;font-size:17px;border-radius:35px" onclick="startLive()">📡 Go Live Now →</button>
 </section>
 
 <!-- MODAL -->
 <div class="overlay" id="overlay" onclick="outsideClose(event)">
-<div class="modal" id="modal"></div>
+ <div class="modal" id="modal"></div>
 </div>
 
 <button class="go-live-btn" id="goLiveButton" onclick="go('golive')">📹 Go Live</button>
 
 <nav>
-<button id="nav-home" class="active" onclick="go('home')"><b>⌂</b>HOME</button>
-<button id="nav-explore" onclick="go('explore')"><b>◎</b>EXPLORE</button>
-<button id="nav-party" onclick="go('party')"><b>✧</b>PARTY</button>
-<button id="nav-messages" onclick="go('messages')"><b>☏</b>MESSAGES</button>
-<button id="nav-profile" onclick="go('profile')"><b>♟</b>PROFILE</button>
+ <button id="nav-home" class="active" onclick="go('home')"><b>⌂</b>HOME</button>
+ <button id="nav-explore" onclick="go('explore')"><b>◎</b>EXPLORE</button>
+ <button id="nav-party" onclick="go('party')"><b>✧</b>PARTY</button>
+ <button id="nav-messages" onclick="go('messages')"><b>☏</b>MESSAGES</button>
+ <button id="nav-profile" onclick="go('profile')"><b>♟</b>PROFILE</button>
 </nav>
 
 <div class="toast" id="toast"></div>
@@ -594,178 +457,75 @@ I agree to the Terms & Conditions
 const $=id=>document.getElementById(id);
 
 let user={
-name:"SANO USER",
-bio:"Hello guys!",
-country:"Nepal",
-gender:"Male",
-avatar:"👤",
-photo:"",
-id:"1111"
+ name:"SANO USER",bio:"Hello guys!",country:"Nepal",
+ gender:"Male",avatar:"👤",photo:"",id:"1111",
+ coins:0,money:0,following:0,followers:0,friends:0
 };
-
 let parties=[];
 let liveFormat="Audio";
+let currentParty=null;
 
 function load(){
-try{
-user={...user,...JSON.parse(localStorage.getItem("sano_profile")||"{}")};
-parties=JSON.parse(localStorage.getItem("sano_parties")||"[]");
-}catch(e){}
-renderProfile();
-renderParties();
+ try{
+  user={...user,...JSON.parse(localStorage.getItem("sano_profile")||"{}")};
+  parties=JSON.parse(localStorage.getItem("sano_parties")||"[]");
+ }catch(e){}
+ renderProfile();
+ renderParties();
 }
-
 function save(){
-localStorage.setItem("sano_profile",JSON.stringify(user));
+ try{localStorage.setItem("sano_profile",JSON.stringify(user))}
+ catch(e){notify("Storage full. Try a smaller photo.")}
 }
-
+function saveParties(){
+ try{localStorage.setItem("sano_parties",JSON.stringify(parties))}
+ catch(e){notify("Unable to save party")}
+}
 function go(id){
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-$(id).classList.add("active");
-document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
-if($("nav-"+id))$("nav-"+id).classList.add("active");
-$("goLiveButton").style.display=id==="home"?"flex":"none";
-window.scrollTo(0,0);
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ $(id).classList.add("active");
+ document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+ if($("nav-"+id))$("nav-"+id).classList.add("active");
+ $("goLiveButton").style.display=id==="home"?"block":"none";
+ window.scrollTo(0,0);
 }
-
 function notify(msg){
-$("toast").textContent=msg;
-$("toast").style.display="block";
-clearTimeout(window.toastTimer);
-window.toastTimer=setTimeout(()=>$("toast").style.display="none",2200);
+ $("toast").textContent=msg;
+ $("toast").style.display="block";
+ clearTimeout(window.toastTimer);
+ window.toastTimer=setTimeout(()=>$("toast").style.display="none",2300);
 }
-
 function showModal(html){
-$("modal").innerHTML=html;
-$("overlay").style.display="flex";
+ $("modal").innerHTML=html;
+ $("overlay").style.display="flex";
 }
 function closeModal(){$("overlay").style.display="none"}
 function outsideClose(e){if(e.target.id==="overlay")closeModal()}
-
 function escapeHTML(s){
-return String(s).replace(/[&<>"']/g,c=>({
-"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-}[c]));
+ return String(s).replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[c]));
 }
 
 function renderProfile(){
-$("name").textContent=user.name;
-$("bio").textContent=user.bio;
-$("country").textContent="🌍 "+user.country;
-$("gender").textContent=user.gender;
-$("uid").textContent=user.id;
-$("avatar").innerHTML=user.photo?
-'<img src="'+user.photo+'" alt="Profile photo">':user.avatar;
+ $("name").textContent=user.name;
+ $("bio").textContent=user.bio;
+ $("country").textContent="🌍 "+user.country;
+ $("gender").textContent=user.gender;
+ $("uid").textContent=user.id;
+ $("avatar").innerHTML=user.photo?
+  '<img src="'+user.photo+'" alt="Profile photo">':user.avatar;
+ $("coinBalance").textContent=Number(user.coins)||0;
+ $("moneyBalance").textContent=Number(user.money)||0;
+ $("followingCount").textContent=user.following||0;
+ $("followerCount").textContent=user.followers||0;
+ $("friendCount").textContent=user.friends||0;
 }
 
 function editProfile(){
-showModal(`
-<h2>✏️ Edit Profile</h2>
-<label>Username</label>
-<input class="field" id="editName" maxlength="25" value="${escapeHTML(user.name)}">
-<label>Bio</label>
-<textarea class="field" id="editBio" maxlength="120">${escapeHTML(user.bio)}</textarea>
-<label>Country</label>
-<select class="field" id="editCountry">
-<option>Nepal</option><option>India</option><option>Bangladesh</option><option>Other</option>
-</select>
-<label>Gender</label>
-<select class="field" id="editGender">
-<option>Male</option><option>Female</option><option>Other</option>
-</select>
-<label>Avatar</label>
-<select class="field" id="editAvatar">
-<option>👤</option><option>👑</option><option>🎮</option><option>🌟</option><option>🎧</option>
-</select>
-<label>Profile Photo</label>
-<input class="field" type="file" id="editPhoto" accept="image/*">
-<button class="btn" onclick="saveProfile()">Save Changes</button>
-<button class="btn secondary" onclick="closeModal()">Cancel</button>
-`);
-$("editCountry").value=user.country;
-$("editGender").value=user.gender;
-$("editAvatar").value=user.avatar;
-}
-
-function saveProfile(){
-let n=$("editName").value.trim();
-if(!n){notify("Enter your name");return}
-user.name=n;
-user.bio=$("editBio").value.trim();
-user.country=$("editCountry").value;
-user.gender=$("editGender").value;
-user.avatar=$("editAvatar").value;
-let file=$("editPhoto").files[0];
-if(file){
-if(file.size>1500000){notify("Please select a photo under 1.5MB");return}
-let reader=new FileReader();
-reader.onload=e=>{
-user.photo=e.target.result;
-save();renderProfile();closeModal();notify("Profile updated!");
-};
-reader.readAsDataURL(file);
-}else{
-save();renderProfile();closeModal();notify("Profile updated!");
-}
-}
-
-function selectFormat(type){
-liveFormat=type;
-$("audioFormat").classList.toggle("selected",type==="Audio");
-$("videoFormat").classList.toggle("selected",type==="Video");
-}
-
-function startLive(){
-let title=$("liveTitle").value.trim();
-if(!title){notify("Enter your room title");return}
-if(!$("terms").checked){notify("Please agree to the terms");return}
-let room={
-title:title,
-format:liveFormat,
-privacy:$("privacy").value,
-seats:8,
-host:user.name,
-members:1,
-id:Date.now()
-};
-parties.unshift(room);
-localStorage.setItem("sano_parties",JSON.stringify(parties));
-renderParties();
-closeModal();
-showModal(`
-<div style="text-align:center">
-<div style="font-size:55px">🎉</div>
-<h2>Your Room Is Created!</h2>
-<p class="muted" style="margin:15px 0">${escapeHTML(title)}</p>
-<p>🎙️ ${liveFormat} Party</p>
-<p class="muted" style="margin:10px 0">Maximum 8 people · Host: ${escapeHTML(user.name)}</p>
-<button class="btn" onclick="closeModal();go('party')">Enter Party Room</button>
-</div>
-`);
-}
-
-// Create Party
-function createParty(){
-showModal(`
-<h2>🎉 Create Party</h2>
-<label>Party Name</label>
-<input class="field" id="partyName" maxlength="35" placeholder="Enter party name">
-<label>Party Type</label>
-<select class="field" id="partyType">
-<option>Friends Party</option>
-<option>Music Party</option>
-<option>Chat Party</option>
-<option>Gaming Party</option>
-</select>
-<label>Maximum Members</label>
-<select class="field" id="partyLimit">
-<option value="8">8 People</option>
-</select>
-<p class="muted">Maximum 8 people including the host.</p>
-<button class="btn" onclick="makeParty()">Create Party →</button>
-<button class="btn secondary" onclick="closeModal()">Cancel</button>
-`);
-}
-
-function makeParty(){
-let name=$("partyName").va
+ showModal(`
+ <h2>✏️ Edit Profile</h2>
+ <label>Username</label>
+ <input class="field" id="editName" maxlength="25" value="${escapeHTML(user.name)}">
+ <label>Bio</label>
+ <textarea class="field" id="editBio" maxlength="120">${escapeHTM
