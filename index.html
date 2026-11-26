@@ -9,14 +9,21 @@
 
 <style>
 :root{
---bg:#080D1D;--card:#121C30;--border:#26344B;
---cyan:#00D9FF;--purple:#9875FF;
---pink:#F45C9C;--gold:#FFB52E;--muted:#93A1B7;
+--bg:#080D1D;
+--card:#121C30;
+--border:#26344B;
+--cyan:#00D9FF;
+--purple:#9875FF;
+--pink:#F45C9C;
+--gold:#FFB52E;
+--muted:#93A1B7;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{
-background:var(--bg);color:white;
-font-family:Arial,sans-serif;padding-bottom:85px;
+background:var(--bg);
+color:white;
+font-family:Arial,sans-serif;
+padding-bottom:85px;
 }
 header{
 height:62px;background:#0B1221;
@@ -32,7 +39,8 @@ h1{font-size:25px;margin-bottom:10px}
 h2{font-size:20px}
 .muted{font-size:13px;color:var(--muted);line-height:1.6}
 .card{
-background:var(--card);border:1px solid var(--border);
+background:var(--card);
+border:1px solid var(--border);
 border-radius:20px;padding:17px;margin-bottom:13px;
 }
 .btn{
@@ -43,7 +51,8 @@ font-weight:bold;cursor:pointer;
 .secondary{background:#202D43;color:white}
 .heading{
 font-size:20px;margin:25px 0 15px;
-border-left:5px solid var(--cyan);padding-left:11px;
+border-left:5px solid var(--cyan);
+padding-left:11px;
 }
 .hero{
 background:linear-gradient(120deg,#153B67,#44317D);
@@ -130,7 +139,8 @@ text-align:center;padding:10px 4px;cursor:pointer;
 }
 .tool-icon{
 width:55px;height:55px;border-radius:50%;
-display:grid;place-items:center;font-size:26px;margin-bottom:10px;
+display:grid;place-items:center;font-size:26px;
+margin-bottom:10px;
 }
 .tool strong{font-size:14px}
 .tool small{font-size:11px;color:var(--muted);margin-top:7px}
@@ -145,10 +155,11 @@ background:linear-gradient(120deg,#241541,#40225F);
 border:1px solid #7550A9;margin:25px 0;
 }
 .row{
-width:100%;display:flex;align-items:center;gap:13px;
-text-align:left;color:white;background:var(--card);
-border:1px solid var(--border);
-border-radius:18px;padding:15px;margin-bottom:11px;cursor:pointer;
+width:100%;display:flex;align-items:center;
+gap:13px;text-align:left;color:white;
+background:var(--card);border:1px solid var(--border);
+border-radius:18px;padding:15px;margin-bottom:11px;
+cursor:pointer;
 }
 .row-icon{
 width:48px;height:48px;display:grid;
@@ -205,19 +216,107 @@ color:white;border-radius:12px;
 display:none;position:fixed;bottom:90px;
 left:50%;transform:translateX(-50%);
 background:#263952;padding:13px 18px;
-border-radius:25px;z-index:50;font-size:13px;
-white-space:nowrap;
+border-radius:25px;z-index:50;
+font-size:13px;white-space:nowrap;
 }
 
-/* PARTY SYSTEM */
+/* GO LIVE BUTTON */
+.go-live-btn{
+position:fixed;right:22px;bottom:90px;
+z-index:20;
+background:linear-gradient(135deg,#FF348B,#E91E63);
+color:white;border:0;border-radius:40px;
+padding:15px 23px;font-size:17px;
+font-weight:900;box-shadow:0 5px 25px #F45C9C66;
+display:none;align-items:center;gap:10px;
+}
+
+/* CREATE LIVE */
+.live-screen{
+background:#080D1D;
+min-height:100vh;padding:8px 0 25px;
+}
+.live-back{
+width:45px;height:45px;border:0;
+border-radius:50%;background:#18243A;
+color:white;font-size:25px;margin-bottom:15px;
+}
+.live-preview{
+height:285px;border-radius:25px;
+border:1px solid #49304D;
+background:linear-gradient(160deg,#243A59,#11182B,#080D1D);
+display:flex;flex-direction:column;
+justify-content:space-between;
+padding:20px;margin-bottom:25px;
+box-shadow:0 5px 22px #F45C9C22;
+}
+.live-preview-top{
+display:flex;justify-content:space-between;
+align-items:center;gap:8px;
+}
+.live-host{
+background:#111A2B;padding:11px 13px;
+border-radius:30px;font-weight:bold;font-size:13px;
+}
+.live-label{
+color:#FF348B;font-size:13px;
+font-weight:900;letter-spacing:2px;
+}
+.live-preview h1{font-size:32px;margin-top:12px}
+.live-line{height:4px;background:#FF348B;border-radius:10px}
+.live-heading{
+font-size:20px;margin:25px 0 15px;
+display:flex;align-items:center;gap:10px;
+}
+.live-option{
+width:100%;display:flex;align-items:center;
+gap:15px;padding:19px;margin-bottom:12px;
+border-radius:23px;border:1px solid #26344B;
+background:#111A2B;color:white;text-align:left;
+cursor:pointer;
+}
+.live-option.selected{
+background:linear-gradient(120deg,#FF348B,#E91E63);
+border-color:#FF348B;
+}
+.live-option-icon{
+width:65px;height:65px;border-radius:50%;
+display:grid;place-items:center;font-size:28px;
+background:#263044;flex-shrink:0;
+}
+.live-option.selected .live-option-icon{background:#FFFFFF35}
+.live-option h3{font-size:19px}
+.live-option p{font-size:13px;color:#D4D9E5;margin-top:7px}
+.live-privacy{
+display:flex;justify-content:space-between;
+align-items:center;padding:20px;
+background:#111A2B;border:1px solid #293850;
+border-radius:22px;margin-bottom:18px;
+}
+.live-toggle{width:55px;height:30px;accent-color:#FF348B}
+.live-terms{
+display:flex;align-items:center;gap:12px;
+margin:24px 5px;color:#B9C2D3;font-size:14px;
+}
+.live-terms input{
+width:23px;height:23px;accent-color:#FF348B;
+}
+.live-start{
+width:100%;padding:21px;border:0;
+border-radius:50px;
+background:linear-gradient(110deg,#FF348B,#E90078);
+color:white;font-size:21px;font-weight:900;
+box-shadow:0 6px 25px #FF348B44;
+}
+
+/* PARTY */
 .party-card{
 background:var(--card);border:1px solid var(--border);
 border-radius:20px;padding:16px;margin:15px 0;
 }
 .party-top{
 display:flex;justify-content:space-between;
-align-items:center;margin-bottom:14px;
-gap:8px;
+align-items:center;margin-bottom:14px;gap:8px;
 }
 .party-seats{
 display:grid;grid-template-columns:repeat(4,1fr);
@@ -236,10 +335,10 @@ border-color:var(--cyan);background:#102B3B;
 }
 .seat-icon{font-size:25px}
 .party-seat small{color:var(--muted)}
-.live-badge{color:#FF638B;font-size:11px;font-weight:bold}
+.party-count{font-weight:bold;color:var(--cyan)}
 .party-actions{display:flex;gap:9px}
 .party-actions button{flex:1}
-.party-count{font-weight:bold;color:var(--cyan)}
+.live-badge{color:#FF638B;font-size:11px;font-weight:bold}
 </style>
 </head>
 
@@ -295,10 +394,9 @@ placeholder="🔍 Search people..." oninput="searchPeople()">
 <div class="card" style="margin-top:20px">
 <h2>🎧 Party Rooms</h2>
 <p class="muted" style="margin:10px 0">
-Create a party and invite your friends.
-Maximum 8 people including Host.
+Audio party with maximum 8 people including host.
 </p>
-<button class="btn" onclick="createParty()">＋ Create Party</button>
+<button class="btn" onclick="goLive()">＋ Create Party</button>
 </div>
 <h2 class="heading">Live Parties 🔴</h2>
 <div id="partyList"></div>
@@ -308,7 +406,8 @@ Maximum 8 people including Host.
 <section id="messages" class="page">
 <h1>Messages 💬</h1>
 <div class="empty" style="margin-top:30px">
-<span>✉️</span><h3 style="margin:12px">No Messages Yet</h3>
+<span>✉️</span>
+<h3 style="margin:12px">No Messages Yet</h3>
 <p class="muted">Your conversations will appear here.</p>
 </div>
 </section>
@@ -360,24 +459,19 @@ Maximum 8 people including Host.
 <h2 class="heading">My Tools</h2>
 <div class="tools">
 <div class="tool t1" onclick="openTool('Rewards','🎁','Daily rewards and tasks')">
-<div class="tool-icon">🎁</div>
-<strong>Rewards</strong><small>Daily & Tasks</small>
+<div class="tool-icon">🎁</div><strong>Rewards</strong><small>Daily & Tasks</small>
 </div>
 <div class="tool t2" onclick="openTool('Ranks','🏆','Leaderboard and ranks')">
-<div class="tool-icon">🏆</div>
-<strong>Ranks</strong><small>Leaderboard</small>
+<div class="tool-icon">🏆</div><strong>Ranks</strong><small>Leaderboard</small>
 </div>
 <div class="tool t3" onclick="openTool('My Bag','🎒','Your profile decorations')">
-<div class="tool-icon">🎒</div>
-<strong>My Bag</strong><small>Backpack & Decor</small>
+<div class="tool-icon">🎒</div><strong>My Bag</strong><small>Backpack & Decor</small>
 </div>
 <div class="tool t4" onclick="openAll()">
-<div class="tool-icon">✨</div>
-<strong>All</strong><small>All Features</small>
+<div class="tool-icon">✨</div><strong>All</strong><small>All Features</small>
 </div>
 <div class="tool t5" onclick="openTool('Invite','💝','Invite your friends')">
-<div class="tool-icon">💝</div>
-<strong>Invite</strong><small>Invite Friends</small>
+<div class="tool-icon">💝</div><strong>Invite</strong><small>Invite Friends</small>
 </div>
 </div>
 
@@ -386,13 +480,85 @@ Maximum 8 people including Host.
 <h2 style="margin:12px 0">Become an Agent</h2>
 <p class="muted">Build your team and grow together.</p>
 <button class="btn" style="margin-top:15px;background:#9270F5;color:white"
-onclick="openTool('Become an Agent','👑','Agent registration coming soon')">
-Join →
-</button>
+onclick="openTool('Become an Agent','👑','Agent registration coming soon')">Join →</button>
 </div>
 
 <h2 class="heading" style="border-color:#FFB52E">Settings & More</h2>
 <div id="menu"></div>
+</section>
+
+<!-- CREATE LIVE PAGE -->
+<section id="goLivePage" class="page">
+<div class="live-screen">
+
+<button class="live-back" onclick="go('home')">‹</button>
+
+<div class="live-preview">
+<div class="live-preview-top">
+<span style="font-weight:bold">🎙️ SANO LIVE</span>
+<span class="live-host">👤 <span id="liveHostName">SANO USER</span> <span style="color:#FF348B">LIVE</span></span>
+</div>
+<div>
+<div class="live-label">● YOUR LIVE ROOM</div>
+<h1 id="previewTitle">Welcome</h1>
+<div class="live-line"></div>
+</div>
+</div>
+
+<h2 class="live-heading">🔴 Select Live Format</h2>
+
+<button class="live-option selected" id="audioOption"
+onclick="selectLive('audio')">
+<div class="live-option-icon">🎤</div>
+<div>
+<h3>Audio Party</h3>
+<p>Voice room with 8 seats</p>
+</div>
+</button>
+
+<button class="live-option" id="videoOption"
+onclick="selectLive('video')">
+<div class="live-option-icon">📹</div>
+<div>
+<h3>Video Live</h3>
+<p>Face-to-face video stream</p>
+</div>
+</button>
+
+<h2 class="live-heading">🛡️ Room Privacy</h2>
+
+<div class="live-privacy">
+<div>
+<h3>🔓 Public Room</h3>
+<p class="muted" style="margin-top:8px">
+Anyone in the community can join freely
+</p>
+</div>
+<input type="checkbox" class="live-toggle" id="publicRoom" checked>
+</div>
+
+<h2 class="live-heading">✏️ Room Details</h2>
+
+<label>Room Title</label>
+<input class="live-input" id="roomTitle"
+placeholder="Enter room title" maxlength="35"
+value="Welcome" oninput="updateLiveTitle()">
+
+<label>Description</label>
+<textarea class="live-input" id="roomDescription"
+placeholder="Write something about your room"
+maxlength="120"></textarea>
+
+<label class="live-terms">
+<input type="checkbox" id="liveTerms">
+<span>I agree to the <b style="color:#FF348B">Terms & Conditions</b></span>
+</label>
+
+<button class="live-start" onclick="startLive()">
+📡 Go Live Now →
+</button>
+
+</div>
 </section>
 
 <!-- SETTINGS -->
@@ -422,9 +588,14 @@ Join →
 <h2 class="heading">About</h2>
 <div class="card">
 <h3>SANO LIVE</h3>
-<p class="muted" style="margin-top:8px">Version 1.1.0</p>
+<p class="muted" style="margin-top:8px">Version 1.2.0</p>
 </div>
 </section>
+
+<!-- FLOATING GO LIVE -->
+<button class="go-live-btn" id="goLiveBtn" onclick="goLive()">
+📹 Go Live
+</button>
 
 <!-- MODAL -->
 <div class="overlay" id="overlay" onclick="outsideClose(event)">
@@ -438,7 +609,7 @@ Join →
 <button id="nav-explore" onclick="go('explore')"><b>◎</b>EXPLORE</button>
 <button id="nav-party" onclick="go('party')"><b>✧</b>PARTY</button>
 <button id="nav-messages" onclick="go('messages')"><b>☏</b>MESSAGES</button>
-<button id="nav-profile" class="active" onclick="go('profile')"><b>♟</b>PROFILE</button>
+<button id="nav-profile" onclick="go('profile')"><b>♟</b>PROFILE</button>
 </nav>
 
 <script>
@@ -453,7 +624,53 @@ avatar:"👤",
 id:"1111"
 };
 
+let parties=[];
+let liveFormat="audio";
+
+/* NAVIGATION */
+
+function go(id){
+document.querySelectorAll(".page").forEach(p=>
+p.classList.remove("active"));
+
+$(id).classList.add("active");
+
+document.querySelectorAll("nav button").forEach(b=>
+b.classList.remove("active"));
+
+if($("nav-"+id)){
+$("nav-"+id).classList.add("active");
+}
+
+$("goLiveBtn").style.display=
+id==="home"?"flex":"none";
+
+window.scrollTo(0,0);
+}
+
+/* NOTIFICATIONS */
+
+function notify(message){
+$("toast").textContent=message;
+$("toast").style.display="block";
+clearTimeout(window.toastTimer);
+window.toastTimer=setTimeout(()=>
+$("toast").style.display="none",2200);
+}
+
+function showModal(html){
+$("modal").innerHTML=html;
+$("overlay").style.display="flex";
+}
+function closeModal(){
+$("overlay").style.display="none";
+}
+function outsideClose(e){
+if(e.target.id==="overlay")closeModal();
+}
+
 /* PROFILE */
+
 function load(){
 try{
 const old=JSON.parse(localStorage.getItem("sano_profile"));
@@ -465,7 +682,9 @@ render();
 function save(){
 try{
 localStorage.setItem("sano_profile",JSON.stringify(user));
-}catch(e){notify("Could not save profile")}
+}catch(e){
+notify("Could not save profile");
+}
 }
 
 function render(){
@@ -478,31 +697,10 @@ $("uid").textContent=user.id;
 $("avatar").textContent=user.avatar;
 }
 
-function go(id){
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-$(id).classList.add("active");
-document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
-if($("nav-"+id))$("nav-"+id).classList.add("active");
-window.scrollTo(0,0);
-}
-
-function notify(message){
-$("toast").textContent=message;
-$("toast").style.display="block";
-clearTimeout(window.toastTimer);
-window.toastTimer=setTimeout(()=>$("toast").style.display="none",2200);
-}
-
-function showModal(html){
-$("modal").innerHTML=html;
-$("overlay").style.display="flex";
-}
-function closeModal(){$("overlay").style.display="none"}
-function outsideClose(e){if(e.target.id==="overlay")closeModal()}
-
 function escapeHTML(s){
 return String(s).replace(/[&<>"']/g,c=>({
-"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+"&":"&amp;","<":"&lt;",">":"&gt;",
+'"':"&quot;","'":"&#39;"
 }[c]));
 }
 
@@ -510,7 +708,8 @@ function editProfile(){
 showModal(`
 <h2>✏️ Edit Profile</h2>
 <label>Username</label>
-<input class="field" id="editName" maxlength="25" value="${escapeHTML(user.name)}">
+<input class="field" id="editName" maxlength="25"
+value="${escapeHTML(user.name)}">
 <label>Bio</label>
 <textarea class="field" id="editBio" maxlength="120">${escapeHTML(user.bio)}</textarea>
 <label>Country</label>
@@ -525,125 +724,4 @@ showModal(`
 <label>Avatar</label>
 <select class="field" id="editAvatar">
 <option>👤</option><option>👑</option>
-<option>🎮</option><option>🌟</option><option>🎧</option>
-</select>
-<button class="btn" onclick="saveProfile()">Save Changes</button>
-<button class="btn secondary" onclick="closeModal()">Cancel</button>
-`);
-$("editCountry").value=user.country;
-$("editGender").value=user.gender;
-$("editAvatar").value=user.avatar;
-}
-
-function saveProfile(){
-let n=$("editName").value.trim();
-if(!n){notify("Enter your name");return}
-user.name=n;
-user.bio=$("editBio").value.trim();
-user.country=$("editCountry").value;
-user.gender=$("editGender").value;
-user.avatar=$("editAvatar").value;
-save();render();closeModal();
-notify("Profile updated successfully!");
-}
-
-function copyID(){
-if(navigator.clipboard && window.isSecureContext){
-navigator.clipboard.writeText(user.id)
-.then(()=>notify("User ID copied!"))
-.catch(()=>notify("Your ID: "+user.id));
-}else{
-showModal(`<h2>Your User ID</h2>
-<input class="field" value="${escapeHTML(user.id)}" readonly>
-<button class="btn" onclick="closeModal()">Close</button>`);
-}
-}
-
-function preview(){
-showModal(`
-<div style="text-align:center">
-<div style="font-size:55px;margin:15px">${escapeHTML(user.avatar)}</div>
-<h2>${escapeHTML(user.name)}</h2>
-<p class="muted">${escapeHTML(user.bio)}</p>
-<p style="margin:15px">🌍 ${escapeHTML(user.country)}</p>
-<p class="muted">ID: ${escapeHTML(user.id)}</p>
-<button class="btn" onclick="closeModal()">Close</button>
-</div>`);
-}
-
-function openTool(name,emoji,description){
-showModal(`
-<div style="text-align:center">
-<div style="font-size:48px;margin-bottom:15px">${emoji}</div>
-<h2>${escapeHTML(name)}</h2>
-<p class="muted" style="margin:15px 0">${escapeHTML(description)}</p>
-<button class="btn" onclick="closeModal()">Continue</button>
-</div>`);
-}
-
-function openAll(){
-showModal(`
-<h2>✨ All Features</h2>
-<div class="quick-grid">
-<div class="quick" onclick="closeModal();openTool('Rewards','🎁','Daily rewards')">🎁<h3>Rewards</h3></div>
-<div class="quick" onclick="closeModal();openTool('Ranks','🏆','Leaderboard')">🏆<h3>Ranks</h3></div>
-<div class="quick" onclick="closeModal();openTool('My Bag','🎒','Profile items')">🎒<h3>My Bag</h3></div>
-<div class="quick" onclick="closeModal();openTool('Invite','💝','Invite friends')">💝<h3>Invite</h3></div>
-</div>
-<button class="btn secondary" style="margin-top:18px" onclick="closeModal()">Close</button>
-`);
-}
-
-function wallet(type){
-showModal(`
-<h2>${type==="Coins"?"🪙":"💵"} ${type}</h2>
-<p class="muted">Your current ${type} balance</p>
-<h1 style="margin:20px 0">0</h1>
-<p class="muted">${type==="Money"?
-"Money transactions and withdrawals will require secure backend verification.":
-"Coin top-up will be connected later."}</p>
-<button class="btn" style="margin-top:20px" onclick="closeModal()">Close</button>
-`);
-}
-
-function menuRow(icon,title,desc,color,action){
-return `<button class="row" onclick="${action}">
-<span class="row-icon" style="background:${color}">${icon}</span>
-<span class="row-info"><b>${title}</b><p>${desc}</p></span>
-<span class="arrow">›</span></button>`;
-}
-
-function buildMenu(){
-$("menu").innerHTML=
-menuRow("👥","My Agent","Agency information","#30295C","openTool('My Agent','👥','Agency information')")
-+menuRow("📊","Live Insights","Streaming analytics","#553044","openTool('Live Insights','📊','Streaming analytics')")
-+menuRow("💬","Help & Support","FAQ and feedback","#16475B","openTool('Help & Support','💬','Support center')")
-+menuRow("🏅","Level & Privileges","XP and levels","#57431D","openTool('Level & Privileges','🏅','Level information')")
-+menuRow("⚙️","Settings","Account preferences","#214B65","go('settings')");
-
-$("settingsMenu").innerHTML=
-menuRow("👤","Edit Profile","Personal details","#214B65","editProfile()")
-+menuRow("🔒","Privacy","Privacy preferences","#493064","openTool('Privacy','🔒','Privacy preferences')")
-+menuRow("🚫","Blocked Users","Manage blocked users","#59333A","openTool('Blocked Users','🚫','Blocked users')")
-+menuRow("🆔","Account ID","Your unique ID","#57431D","copyID()");
-}
-
-function saveSettings(){notify("Settings saved")}
-function searchPeople(){
-let q=$("search").value.trim();
-$("searchBox").innerHTML=q?
-"<span>🔍</span><h3>Supabase Required</h3><p class='muted'>Real user search will work after database connection.</p>":
-"<span>🌐</span><h3>Discover People</h3><p class='muted'>Discover the community.</p>";
-}
-
-/* ==================================
-   SANO LIVE PARTY SYSTEM
-   MAXIMUM 8 PEOPLE INCLUDING HOST
-================================== */
-
-let parties=[];
-
-function loadParties(){
-try{
-parties=JSON.parse(localStorage.getItem("sano_parties"))||[];
-if(!Array.is
+<option>🎮<
