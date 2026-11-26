@@ -256,6 +256,90 @@ cursor:pointer;
 }
 
 </style>
+  
+/* SIMPLE SMART PARTY ROOM */
+
+.seats{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:22px 12px;
+ margin-top:25px;
+}
+
+.seat{
+ height:100px;
+ background:#202033;
+ border:1px solid #44445c;
+ border-radius:16px;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ animation:softMove 4s ease-in-out infinite alternate;
+ box-shadow:none;
+}
+
+.seat:nth-child(1){
+ transform:translateY(-12px);
+ background:#29243a;
+ border-color:#d6b65e;
+}
+
+.seat:nth-child(even){
+ animation-delay:1s;
+}
+
+@keyframes softMove{
+ from{margin-left:0}
+ to{margin-left:3px}
+}
+
+.avatar{
+ width:45px;
+ height:45px;
+ border-radius:50%;
+ background:#34344a;
+ border:1px solid #777;
+ display:grid;
+ place-items:center;
+ font-size:21px;
+}
+
+.seat b{
+ font-size:11px;
+ margin-top:7px;
+ color:white;
+}
+
+.seat small{
+ font-size:10px;
+ color:#aaa;
+ margin-top:3px;
+}
+
+.member-panel{
+ background:#191929;
+ border:1px solid #34344b;
+ border-radius:14px;
+ padding:14px;
+}
+
+.member{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ padding:11px 0;
+ border-bottom:1px solid #303044;
+ font-size:12px;
+}
+
+.controls .control{
+ background:#222236;
+ border:1px solid #39394f;
+ border-radius:12px;
+ color:white;
+}
+  
 </head>
 
 <body>
