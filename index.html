@@ -723,6 +723,212 @@ renderProfile();
 renderHome();
 renderParties();
 renderUsers();
+ 
+<!-- SANO LIVE PROFILE ONLY -->
+
+<style>
+.profile-page{
+ background:#080D1D;
+ color:white;
+ padding:16px;
+ font-family:Arial,sans-serif;
+ border-radius:18px;
+}
+.profile-card{
+ background:linear-gradient(145deg,#192540,#101729);
+ border:1px solid #34415D;
+ border-radius:22px;
+ padding:20px 14px;
+ text-align:center;
+}
+.profile-avatar{
+ width:100px;height:100px;
+ border-radius:50%;
+ padding:4px;
+ margin:auto;
+ background:linear-gradient(135deg,#00D9FF,#9875FF,#FFD700);
+}
+.profile-avatar img{
+ width:100%;height:100%;
+ object-fit:cover;
+ border-radius:50%;
+}
+.profile-name{font-size:23px;font-weight:bold;margin:12px 0 6px}
+.profile-id{font-size:13px;color:#93A1B7}
+.profile-copy{
+ background:#263752;color:#00D9FF;
+ border:0;border-radius:8px;padding:6px 10px;
+}
+.profile-badges{
+ display:flex;justify-content:center;
+ flex-wrap:wrap;gap:7px;margin:15px 0;
+}
+.profile-badges span{
+ padding:8px 11px;border-radius:10px;
+ font-size:12px;font-weight:bold;
+}
+.p-vip{background:#403510;color:#FFD700}
+.p-svip{background:#342050;color:#C5A5FF}
+.p-admin{background:#103A46;color:#00D9FF}
+.profile-bio{color:#A7B5CA;font-size:13px}
+.profile-stats{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:9px;margin-top:18px;
+}
+.profile-stat{
+ background:#101B30;border:1px solid #293950;
+ border-radius:12px;padding:12px 3px;
+}
+.profile-stat strong{display:block;font-size:18px}
+.profile-stat small{color:#93A1B7;font-size:11px}
+.profile-box{
+ background:#121C30;border:1px solid #293950;
+ border-radius:16px;padding:16px;margin-top:14px;
+}
+.profile-heading{font-weight:bold;margin-bottom:14px}
+.profile-progress{
+ height:8px;background:#293950;
+ border-radius:20px;overflow:hidden;margin-top:10px;
+}
+.profile-progress div{
+ width:68%;height:100%;
+ background:linear-gradient(90deg,#9875FF,#00D9FF);
+}
+.profile-wallet{
+ display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+.profile-wallet-item{
+ background:linear-gradient(135deg,#302447,#17243A);
+ padding:15px;border-radius:13px;
+}
+.profile-wallet-item.money{
+ background:linear-gradient(135deg,#10413D,#172B3B);
+}
+.profile-wallet-item small{color:#AEBBD0}
+.profile-wallet-item strong{
+ display:block;font-size:20px;margin-top:8px;
+}
+.profile-gifts{
+ display:grid;grid-template-columns:repeat(4,1fr);gap:9px;
+}
+.profile-gift{
+ background:#202D44;border-radius:12px;
+ padding:12px 3px;text-align:center;font-size:23px;
+}
+.profile-gift small{
+ display:block;font-size:10px;color:#AAB8CC;margin-top:6px;
+}
+.profile-frames{display:flex;gap:10px}
+.profile-frame{
+ flex:1;height:55px;border-radius:12px;
+ border:2px solid #9875FF;
+ background:linear-gradient(135deg,#291C49,#142C43);
+}
+.profile-frame:nth-child(2){border-color:#FFD700}
+.profile-frame:nth-child(3){border-color:#00D9FF}
+.profile-menu{
+ padding:14px 0;border-bottom:1px solid #293950;
+ display:flex;justify-content:space-between;
+ font-size:14px;
+}
+.profile-menu:last-child{border:0}
+.profile-menu span:last-child{color:#93A1B7}
+.profile-edit-btn{
+ background:linear-gradient(90deg,#9875FF,#00D9FF);
+ color:white;border:0;border-radius:10px;
+ padding:10px 17px;font-weight:bold;margin-top:13px;
+}
+</style>
+
+<div class="profile-page">
+
+ <div class="profile-card">
+
+  <div class="profile-avatar">
+   <img id="sanoProfilePhoto"
+   src="https://placehold.co/200x200/18233b/ffffff?text=USER">
+  </div>
+
+  <div class="profile-name" id="sanoProfileName">SANO USER</div>
+
+  <div class="profile-id">
+   ID: <span id="sanoProfileID">1111</span>
+   <button class="profile-copy"
+   onclick="navigator.clipboard.writeText(document.getElementById('sanoProfileID').innerText).then(()=>alert('ID Copied!'))">
+   Copy ID
+   </button>
+  </div>
+
+  <div class="profile-badges">
+   <span class="p-vip">👑 VIP</span>
+   <span class="p-svip">💜 SVIP</span>
+   <span class="p-admin">⚡ SUPER ADMIN</span>
+  </div>
+
+  <div class="profile-bio">Hello guys! Welcome to my profile 💜</div>
+
+  <div class="profile-stats">
+   <div class="profile-stat"><strong>120</strong><small>Following</small></div>
+   <div class="profile-stat"><strong>5.2K</strong><small>Followers</small></div>
+   <div class="profile-stat"><strong>350</strong><small>Friends</small></div>
+  </div>
+
+  <button class="profile-edit-btn"
+  onclick="alert('Edit Profile Coming Soon')">
+  ✏️ Edit Profile
+  </button>
+ </div>
+
+ <div class="profile-box">
+  <div class="profile-heading">⭐ Level & Experience</div>
+  <div style="display:flex;justify-content:space-between;font-size:13px">
+   <b>Level 25</b><span>6800 / 10000 XP</span>
+  </div>
+  <div class="profile-progress"><div></div></div>
+ </div>
+
+ <div class="profile-box">
+  <div class="profile-heading">💰 My Wallet</div>
+  <div class="profile-wallet">
+   <div class="profile-wallet-item">
+    <small>🪙 Coins</small><strong>125,000</strong>
+   </div>
+   <div class="profile-wallet-item money">
+    <small>💵 Money</small><strong>$7.14</strong>
+   </div>
+  </div>
+ </div>
+
+ <div class="profile-box">
+  <div class="profile-heading">🎁 Gifts & Badges</div>
+  <div class="profile-gifts">
+   <div class="profile-gift">🌹<small>Rose</small></div>
+   <div class="profile-gift">👑<small>Crown</small></div>
+   <div class="profile-gift">💎<small>Diamond</small></div>
+   <div class="profile-gift">🚀<small>Rocket</small></div>
+  </div>
+ </div>
+
+ <div class="profile-box">
+  <div class="profile-heading">🖼️ Profile Frames</div>
+  <div class="profile-frames">
+   <div class="profile-frame"></div>
+   <div class="profile-frame"></div>
+   <div class="profile-frame"></div>
+  </div>
+ </div>
+
+ <div class="profile-box">
+  <div class="profile-heading">⚙️ Settings & Privacy</div>
+  <div class="profile-menu"><span>👤 Edit Profile</span><span>›</span></div>
+  <div class="profile-menu"><span>🔒 Privacy</span><span>›</span></div>
+  <div class="profile-menu"><span>⚙️ Account Settings</span><span>›</span></div>
+  <div class="profile-menu"><span>🌐 Language</span><span>›</span></div>
+  <div class="profile-menu"><span>🎧 Help & Support</span><span>›</span></div>
+ </div>
+
+</div>
+ 
 </script>
 </body>
 </html>
