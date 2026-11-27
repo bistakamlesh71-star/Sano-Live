@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080D1D">
 <title>SANO LIVE</title>
 
@@ -11,275 +11,244 @@
 :root{
  --bg:#080D1D;
  --card:#121C30;
- --border:#263B57;
- --pink:#FF2780;
+ --card2:#19243A;
+ --border:#293750;
  --cyan:#00D9FF;
  --purple:#9875FF;
+ --pink:#FF2780;
+ --white:#FFFFFF;
  --muted:#93A1B7;
 }
-*{box-sizing:border-box;margin:0;padding:0}
+*{box-sizing:border-box}
 body{
- background:var(--bg);color:white;
+ margin:0;
+ background:var(--bg);
+ color:white;
  font-family:Arial,sans-serif;
- padding-bottom:90px;
+ padding-bottom:85px;
 }
-button{cursor:pointer;font-family:inherit}
+button,input,textarea{font:inherit}
+button{cursor:pointer;border:0}
 header{
- height:65px;padding:0 17px;
- display:flex;align-items:center;
+ padding:17px;
+ display:flex;
  justify-content:space-between;
- background:#0B1221;
+ align-items:center;
+ background:#0C1528;
+ position:sticky;
+ top:0;
+ z-index:10;
  border-bottom:1px solid var(--border);
- position:sticky;top:0;z-index:10;
 }
-.logo{font-size:23px;font-weight:900;color:var(--cyan)}
-.page{display:none;padding:17px 15px 30px}
+.logo{
+ font-size:22px;
+ font-weight:900;
+ background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
+ background-clip:text;
+ color:transparent;
+}
+.coin{
+ background:var(--card2);
+ padding:9px 13px;
+ border-radius:20px;
+ font-size:13px;
+}
+.page{display:none;padding:16px}
 .page.active{display:block}
-h1{font-size:25px;margin-bottom:10px}
-h2{font-size:19px}
-h3{font-size:15px}
-p.muted,.muted{
- color:var(--muted);font-size:13px;line-height:1.6
-}
+h2{font-size:21px;margin:8px 0 15px}
+h3{font-size:16px;margin:0 0 10px}
+.muted{color:var(--muted);font-size:13px}
 .card{
  background:var(--card);
  border:1px solid var(--border);
- border-radius:20px;padding:17px;margin-bottom:14px;
-}
-.btn{
- background:var(--pink);color:white;
- border:0;border-radius:13px;
- padding:13px 19px;font-weight:900;
-}
-.secondary{background:#26344B;color:white}
-.heading{
- font-size:20px;margin:24px 0 14px;
- border-left:4px solid var(--pink);padding-left:11px;
+ border-radius:17px;
+ padding:15px;
+ margin-bottom:14px;
 }
 .hero{
- padding:25px 20px;border-radius:22px;
- background:linear-gradient(130deg,#163D69,#563078);
- margin-bottom:20px;
+ background:linear-gradient(135deg,#142D4B,#34245F,#711D58);
+ border-radius:20px;
+ padding:23px 17px;
+ margin-bottom:18px;
 }
-.hero h1{font-size:27px}
-.hero p{color:#DFE8FF;margin-top:8px;font-size:13px}
-.quick-grid{
- display:grid;grid-template-columns:1fr 1fr;gap:12px;
+.hero h1{font-size:27px;margin:0 0 8px}
+.hero p{color:#D5D9EA;font-size:13px}
+.primary{
+ color:white;
+ background:linear-gradient(110deg,var(--pink),var(--purple));
+ padding:12px 17px;
+ border-radius:12px;
+ font-weight:bold;
 }
-.quick{
- background:var(--card);border:1px solid var(--border);
- border-radius:18px;padding:17px;cursor:pointer;
+.secondary{
+ color:white;
+ background:#25344F;
+ padding:11px 15px;
+ border-radius:11px;
 }
-.quick span,.quick-icon{font-size:28px}
-.quick h3{margin:10px 0 5px}
-.quick p{font-size:12px;color:var(--muted)}
-.go-live-btn{
- position:fixed;right:18px;bottom:91px;z-index:8;
- background:linear-gradient(135deg,#FF348B,#E91E63);
- color:white;border:0;border-radius:40px;
- padding:14px 21px;font-size:16px;font-weight:900;
- box-shadow:0 5px 25px #F45C9C66;
+.cyan-btn{
+ background:linear-gradient(100deg,#007EAB,var(--cyan));
+ color:#00121B;
+ padding:11px 15px;
+ border-radius:11px;
+ font-weight:bold;
 }
-.party-grid{
- display:grid;grid-template-columns:1fr 1fr;gap:12px;
+.grid2{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:11px;
 }
-.party-card{
- background:linear-gradient(145deg,#202B4A,#24152F);
- border:1px solid #394363;border-radius:19px;
- padding:15px;min-height:175px;
- display:flex;flex-direction:column;
+.feature{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:15px;
+ padding:16px 10px;
+ text-align:center;
+}
+.feature b{display:block;margin-top:8px}
+.feature span{font-size:25px}
+.section-title{
+ display:flex;
  justify-content:space-between;
+ align-items:center;
+ margin:20px 0 12px;
 }
-.party-card .emoji{font-size:32px}
-.tag{
- display:inline-block;background:#26344B;
- padding:6px 10px;border-radius:20px;
- font-size:11px;margin-top:8px;
+.vip-sticker{
+ display:inline-flex;
+ align-items:center;
+ gap:5px;
+ padding:6px 12px;
+ border-radius:20px;
+ color:white;
+ font-size:11px;
+ font-weight:900;
+ letter-spacing:1px;
+ background:linear-gradient(120deg,#FF2780,#7B2CFF,#00D9FF);
+ border:1px solid #ffffff66;
+ box-shadow:0 0 12px #7b2cff77;
 }
-.user-list{display:flex;flex-direction:column;gap:11px}
-.user-row{
- display:flex;align-items:center;gap:12px;
- background:var(--card);border:1px solid var(--border);
- border-radius:16px;padding:13px;
-}
-.avatar-small{
- width:48px;height:48px;flex-shrink:0;
- border-radius:50%;
- background:linear-gradient(135deg,#00D9FF,#9875FF);
- display:grid;place-items:center;font-size:24px;
- overflow:hidden;
-}
-.avatar-small img{width:100%;height:100%;object-fit:cover}
-.user-info{flex:1;min-width:0}
-.user-info p{color:var(--muted);font-size:12px;margin-top:5px}
-.follow{
- background:#26344B;color:white;border:0;
- border-radius:20px;padding:9px 13px;
-}
-.search,.field{
- width:100%;padding:14px;
- background:#091426;border:1px solid #354765;
- border-radius:13px;color:white;margin:9px 0 14px;
- outline:none;
-}
-.field option{background:#091426}
-.empty{
- text-align:center;padding:25px;
- background:var(--card);border:1px dashed #394A65;
- border-radius:18px;color:var(--muted);
-}
-nav{
- position:fixed;bottom:0;left:0;width:100%;
- height:76px;background:#090E1B;
- border-top:1px solid var(--border);
- display:flex;justify-content:space-around;
- align-items:center;z-index:12;
-}
-nav button{
- background:none;border:0;color:#8592A9;
- display:flex;flex-direction:column;
- align-items:center;gap:5px;font-size:10px;
-}
-nav b{font-size:23px}
-nav button.active{color:var(--pink)}
-
-/* PREMIUM PROFILE */
-.profile-center{
- text-align:center;padding:28px 15px;
- background:linear-gradient(160deg,#182B48,#17152D);
- border:1px solid #354765;border-radius:22px;
- margin-top:18px;
+.profile-top{
+ text-align:center;
+ background:linear-gradient(145deg,#172D4B,#302052,#4D1C45);
+ padding:23px 15px;
+ border-radius:20px;
+ margin-bottom:15px;
 }
 .avatar{
- width:112px;height:112px;border-radius:50%;
- margin:0 auto 15px;
- background:linear-gradient(135deg,#00D9FF,#7952D9);
+ width:85px;height:85px;
+ border-radius:50%;
  border:3px solid var(--cyan);
- box-shadow:0 0 17px #00D9FF55;
- display:grid;place-items:center;
- font-size:43px;overflow:hidden;
+ background:#263650;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:38px;
+ margin:0 auto 10px;
+ overflow:hidden;
 }
 .avatar img{width:100%;height:100%;object-fit:cover}
-.name{font-size:24px;font-weight:900;letter-spacing:.4px}
-.vip-badge{
- display:inline-block;padding:6px 14px;margin:9px 0;
- background:linear-gradient(90deg,#7450CF,#B35AFF);
- border-radius:20px;font-size:11px;font-weight:bold;
+.stats{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:8px;
+ margin-top:18px;
 }
-.details{
- display:flex;justify-content:center;
- flex-wrap:wrap;gap:8px;margin:15px 0;
+.stats div{
+ background:#ffffff12;
+ border-radius:12px;
+ padding:10px 4px;
 }
-.detail{
- background:#202D47;border:1px solid #40516D;
- border-radius:20px;padding:8px 11px;font-size:12px;
+.stats b{display:block;font-size:17px}
+.stats small{color:#D0D5E4;font-size:11px}
+.row-between{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:10px;
 }
-.profile-stats,.stats{
- display:grid;grid-template-columns:repeat(3,1fr);
- background:#121F34;border:1px solid #263B57;
- border-radius:17px;padding:18px 5px;
- text-align:center;margin:15px 0;
+.menu-item{
+ padding:14px 4px;
+ border-bottom:1px solid var(--border);
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
 }
-.profile-stats strong,.stats strong{
- display:block;font-size:21px;color:var(--cyan)
-}
-.profile-stats small,.stats p{
- color:var(--muted);font-size:10px;margin-top:6px;
-}
-.profile-menu{
- display:flex;align-items:center;gap:13px;
- padding:16px;background:#121C30;
- border:1px solid #26344B;border-radius:15px;
- margin-bottom:10px;color:white;width:100%;
- text-align:left;
-}
-.profile-menu span:first-child{font-size:23px}
-.profile-menu b{flex:1;font-size:13px}
-.money-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-.money{
- padding:16px;border-radius:20px;
- background:#1B2435;border:1px solid #D99B30;
-}
-.money.money-card{background:#142A3B;border-color:var(--cyan)}
-.money h3{font-size:14px;margin-bottom:18px}
-.money strong{font-size:25px}
-.money button{
- width:100%;padding:11px;border:0;
- border-radius:20px;margin-top:15px;
- font-weight:bold;background:#FFB32D;
-}
-.money-card button{background:var(--cyan)}
-.row{
- width:100%;display:flex;align-items:center;gap:13px;
- text-align:left;color:white;background:var(--card);
+.menu-item:last-child{border:0}
+input,textarea{
+ width:100%;
+ background:#0B1528;
  border:1px solid var(--border);
- border-radius:17px;padding:15px;margin-bottom:10px;
+ color:white;
+ padding:12px;
+ border-radius:10px;
+ margin:7px 0 13px;
+ outline:none;
 }
-.row-icon{font-size:23px}
-.row-info{flex:1}
-.row-info p{font-size:12px;color:var(--muted);margin-top:5px}
-
-/* MODALS */
-.overlay{
- display:none;position:fixed;inset:0;
- background:#000C;z-index:30;
- align-items:center;justify-content:center;padding:15px;
-}
-.modal{
- width:100%;max-width:410px;max-height:88vh;
- overflow:auto;background:#142039;
- border:1px solid #354765;border-radius:23px;padding:21px;
-}
-.modal h2{margin-bottom:17px}
-.modal .btn{width:100%;margin-top:9px}
-.modal .secondary{margin-bottom:5px}
-.format{
- padding:17px;border-radius:18px;
- border:1px solid var(--border);
- background:#10192B;margin:12px 0;cursor:pointer;
-}
-.format.selected{background:#512044;border-color:var(--pink)}
-.format strong{font-size:18px}
-.format p{color:#B9C5D8;font-size:13px;margin-top:7px}
-.switch{accent-color:var(--pink);width:20px;height:20px}
-.chat{
- background:var(--card);border-radius:16px;
- padding:15px;margin-bottom:10px;
- display:flex;gap:12px;align-items:center;
-}
-.chat p{font-size:12px;color:var(--muted);margin-top:5px}
-.toast{
- display:none;position:fixed;bottom:90px;
- left:50%;transform:translateX(-50%);
- background:#263952;padding:13px 18px;
- border-radius:25px;z-index:50;font-size:13px;
- white-space:nowrap;
-}
+textarea{resize:vertical}
+label{font-size:13px;color:#B9C4D6}
 .seats{
- display:grid;grid-template-columns:repeat(4,1fr);
- gap:12px;margin:20px 0;
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:10px;
 }
 .seat{
- min-height:100px;background:#202B42;
- border:1px solid #40516D;border-radius:16px;
- display:flex;flex-direction:column;
- justify-content:center;align-items:center;
- gap:5px;font-size:11px;
+ min-height:95px;
+ background:#18243B;
+ border:1px solid #354764;
+ border-radius:14px;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ gap:6px;
+ color:white;
+ font-size:12px;
 }
-.seat.host{border-color:#D6B65E;background:#29243A}
-.seat-avatar{
- width:43px;height:43px;border-radius:50%;
- background:#34344A;display:grid;place-items:center;
- font-size:20px;
+.seat span{font-size:25px}
+.seat.taken{border-color:var(--purple);background:#292044}
+.seat.host{border-color:#F5C451;background:#342C24}
+.party-card{
+ background:linear-gradient(130deg,#192B49,#32214E);
+ border:1px solid var(--border);
+ border-radius:15px;
+ padding:15px;
+ margin-bottom:12px;
 }
-.seat small{color:#AAB6C9}
-.room-controls{
- display:grid;grid-template-columns:repeat(3,1fr);gap:9px;
+.bottom-nav{
+ position:fixed;
+ bottom:0;left:0;right:0;
+ display:grid;
+ grid-template-columns:repeat(5,1fr);
+ background:#0C1528;
+ border-top:1px solid var(--border);
+ padding:9px 3px max(9px,env(safe-area-inset-bottom));
+ z-index:20;
 }
-.room-controls button{
- background:#222F49;color:white;border:1px solid #40516D;
- border-radius:13px;padding:13px 5px;font-size:12px;
+.nav-btn{
+ background:none;
+ color:var(--muted);
+ font-size:10px;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ gap:5px;
 }
+.nav-btn span{font-size:21px}
+.nav-btn.active{color:var(--cyan)}
+.toast{
+ position:fixed;
+ bottom:90px;
+ left:50%;
+ transform:translateX(-50%);
+ background:#263750;
+ padding:12px 17px;
+ border-radius:12px;
+ display:none;
+ z-index:50;
+ font-size:13px;
+ white-space:nowrap;
+}
+.live-dot{color:#FF4D79;font-weight:bold}
 </style>
 </head>
 
@@ -287,245 +256,473 @@ nav button.active{color:var(--pink)}
 
 <header>
  <div class="logo">SANO LIVE</div>
- <button class="btn secondary" onclick="notify('No new notifications')">♧</button>
+ <div class="coin">🪙 <b id="coinCount">1000</b></div>
 </header>
 
 <!-- HOME -->
-<section id="home" class="page active">
+<main id="home" class="page active">
  <div class="hero">
-  <h1>Welcome to SANO LIVE ✨</h1>
-  <p>Connect Together • Enjoy Together</p>
+  <div class="vip-sticker">👑 SANO PREMIUM</div>
+  <h1>Welcome to SANO LIVE</h1>
+  <p>Connect • Chat • Party • Enjoy</p>
+  <button class="primary" onclick="showPage('party')">🎤 Create Party</button>
  </div>
- <h2 class="heading">Discover</h2>
- <div class="quick-grid">
-  <div class="quick" onclick="go('explore')"><span>🌍</span><h3>Explore</h3><p>Discover people</p></div>
-  <div class="quick" onclick="go('party')"><span>🎉</span><h3>Party</h3><p>Join party rooms</p></div>
-  <div class="quick" onclick="go('messages')"><span>💬</span><h3>Messages</h3><p>Your conversations</p></div>
-  <div class="quick" onclick="go('profile')"><span>👤</span><h3>Profile</h3><p>Your account</p></div>
+
+ <div class="section-title">
+  <h2>Discover</h2>
+  <span class="muted">Explore SANO</span>
  </div>
- <h2 class="heading">Popular Parties 🔥</h2>
- <div id="homeParties" class="party-grid"></div>
- <h2 class="heading">People to Discover</h2>
- <div class="user-list">
-  <div class="user-row"><div class="avatar-small">🎧</div><div class="user-info"><b>Music Lover</b><p>🇳🇵 Nepal · Online</p></div><button class="follow" onclick="follow(this)">Follow</button></div>
-  <div class="user-row"><div class="avatar-small">👑</div><div class="user-info"><b>Live Star</b><p>🇳🇵 Nepal · Online</p></div><button class="follow" onclick="follow(this)">Follow</button></div>
+
+ <div class="grid2">
+  <div class="feature" onclick="showPage('party')">
+   <span>🎤</span><b>Audio Party</b>
+   <small class="muted">Join a room</small>
+  </div>
+  <div class="feature" onclick="showPage('explore')">
+   <span>🌍</span><b>Explore</b>
+   <small class="muted">Discover users</small>
+  </div>
+  <div class="feature" onclick="showPage('wallet')">
+   <span>💰</span><b>My Wallet</b>
+   <small class="muted">Coins & Money</small>
+  </div>
+  <div class="feature" onclick="showPage('profile')">
+   <span>👤</span><b>My Profile</b>
+   <small class="muted">Personal account</small>
+  </div>
  </div>
-</section>
+
+ <div class="section-title">
+  <h2>Featured Party</h2>
+  <button class="secondary" onclick="showPage('party')">See All</button>
+ </div>
+
+ <div id="homeParties"></div>
+</main>
 
 <!-- EXPLORE -->
 <section id="explore" class="page">
- <h1>Explore 🌍</h1>
- <p class="muted">Discover the SANO LIVE community.</p>
- <input class="search" id="search" placeholder="🔍 Search people..." oninput="searchPeople()">
- <div id="people" class="user-list">
-  <div class="user-row"><div class="avatar-small">🎮</div><div class="user-info"><b>Gaming Star</b><p>🇳🇵 Nepal · Online</p></div><button class="follow" onclick="follow(this)">Follow</button></div>
-  <div class="user-row"><div class="avatar-small">🎵</div><div class="user-info"><b>Music World</b><p>🇳🇵 Nepal · Online</p></div><button class="follow" onclick="follow(this)">Follow</button></div>
-  <div class="user-row"><div class="avatar-small">🌟</div><div class="user-info"><b>Happy User</b><p>🇮🇳 India · Online</p></div><button class="follow" onclick="follow(this)">Follow</button></div>
- </div>
+ <h2>🌍 Explore</h2>
+ <input id="searchUser" placeholder="Search users..." oninput="searchUsers()">
+ <div id="userResults"></div>
 </section>
 
 <!-- PARTY -->
 <section id="party" class="page">
- <h1>Party Rooms 🎉</h1>
- <p class="muted">Create a room and enjoy with friends.</p>
- <button class="btn" style="width:100%;margin:18px 0" onclick="createParty()">＋ Create Party</button>
- <h2 class="heading">Active Parties</h2>
- <div id="partyList" class="party-grid"></div>
+ <div class="row-between">
+  <h2>🎤 Party Rooms</h2>
+  <span class="vip-sticker">VIP</span>
+ </div>
+
+ <div class="card">
+  <h3>Create Your Party</h3>
+  <input id="partyName" placeholder="Enter party name">
+  <div class="grid2">
+   <button class="secondary" onclick="createParty('Audio')">🎤 Audio Party</button>
+   <button class="secondary" onclick="createParty('Video')">📹 Video Party</button>
+  </div>
+  <p class="muted">Maximum 8 seats per party</p>
+ </div>
+
+ <h3>Available Parties</h3>
+ <div id="partyList"></div>
+</section>
+
+<!-- PARTY ROOM -->
+<section id="room" class="page">
+ <div class="row-between">
+  <h2>🎤 Party Room</h2>
+  <span class="live-dot">● LIVE DEMO</span>
+ </div>
+ <div class="hero">
+  <h2 id="roomTitle">My Party</h2>
+  <p id="roomType">Audio Party</p>
+  <span class="vip-sticker">👑 PREMIUM ROOM</span>
+ </div>
+
+ <div class="section-title">
+  <h3>Party Seats (8)</h3>
+  <span class="muted" id="seatCount">1/8</span>
+ </div>
+ <div class="seats" id="seatGrid"></div>
+
+ <div class="card" style="margin-top:15px">
+  <div class="grid2">
+   <button class="secondary" onclick="toast('Mic feature needs live audio service')">🎙️ Mic</button>
+   <button class="secondary" onclick="toast('Speaker demo setting')">🔊 Speaker</button>
+   <button class="secondary" onclick="toast('Gift feature demo')">🎁 Gift</button>
+   <button class="secondary" onclick="toast('Chat feature demo')">💬 Chat</button>
+  </div>
+ </div>
+ <button class="primary" style="width:100%" onclick="leaveRoom()">Leave Party</button>
 </section>
 
 <!-- MESSAGES -->
 <section id="messages" class="page">
- <h1>Messages 💬</h1>
- <p class="muted">Your recent conversations.</p>
- <div class="chat" style="margin-top:20px" onclick="openChat('SANO FRIEND')">
-  <div class="avatar-small">👤</div><div style="flex:1"><b>SANO FRIEND</b><p>Welcome to SANO LIVE!</p></div><span>›</span>
- </div>
- <div class="chat" onclick="openChat('LIVE FRIEND')">
-  <div class="avatar-small">🎧</div><div style="flex:1"><b>LIVE FRIEND</b><p>Hello 👋</p></div><span>›</span>
+ <h2>💬 Messages</h2>
+ <div class="card">
+  <div style="font-size:35px;text-align:center">📨</div>
+  <h3 style="text-align:center">Your Messages</h3>
+  <p class="muted" style="text-align:center">Your conversations will appear here.</p>
+  <p class="muted" style="text-align:center">Demo screen — online messaging needs a backend.</p>
  </div>
 </section>
 
 <!-- PROFILE -->
 <section id="profile" class="page">
- <div style="display:flex;justify-content:space-between;gap:10px">
-  <button class="btn secondary" onclick="renderProfile();notify('Profile refreshed')">↻ Refresh</button>
-  <button class="btn secondary" onclick="go('settings')">⚙ Settings</button>
- </div>
-
- <div class="profile-center">
-  <div class="avatar" id="avatar">👤</div>
-  <div class="name" id="name">SANO USER</div>
-  <div class="vip-badge">💎 VIP MEMBER</div>
-  <div class="details">
-   <span class="detail" id="gender">♂ Male</span>
-   <span class="detail" id="country">🇳🇵 Nepal</span>
-   <span class="detail">🆔 <b id="uid">1111</b></span>
+ <div class="profile-top">
+  <div class="avatar" id="profileAvatar">👤</div>
+  <h2 id="profileName">SANO USER</h2>
+  <div class="vip-sticker">👑 VIP MEMBER</div>
+  <p class="muted">ID: <span id="profileID">1111</span></p>
+  <div class="stats">
+   <div><b>0</b><small>Following</small></div>
+   <div><b>0</b><small>Followers</small></div>
+   <div><b>0</b><small>Friends</small></div>
   </div>
-  <p class="muted" id="bio">Hello guys!</p>
-  <button class="btn" style="margin-top:15px" onclick="editProfile()">✏ Edit Profile</button>
  </div>
 
- <div class="profile-stats">
-  <div><strong id="followingCount">0</strong><small>FOLLOWING</small></div>
-  <div><strong id="followerCount">0</strong><small>FOLLOWERS</small></div>
-  <div><strong id="friendCount">0</strong><small>FRIENDS</small></div>
+ <div class="card">
+  <div class="row-between">
+   <h3>💰 My Wallet</h3>
+   <button class="secondary" onclick="showPage('wallet')">Open</button>
+  </div>
+  <h2>🪙 <span id="profileCoins">1000</span> Coins</h2>
+  <p class="muted">Money: $0.00 (Demo)</p>
  </div>
 
- <div class="money-grid">
-  <div class="money"><h3>🪙 COINS</h3><strong id="coinBalance">0</strong><button onclick="wallet('Coins')">＋ Top Up</button></div>
-  <div class="money money-card"><h3>💵 MONEY</h3><strong id="moneyBalance">0</strong><button onclick="wallet('Money')">View ›</button></div>
+ <div class="card">
+  <h3>My Profile Menu</h3>
+  <div class="menu-item" onclick="showPage('edit')">✏️ Edit Profile <span>›</span></div>
+  <div class="menu-item" onclick="showPage('wallet')">💰 Wallet <span>›</span></div>
+  <div class="menu-item" onclick="toast('Your rewards will appear here')">🎁 Rewards <span>›</span></div>
+  <div class="menu-item" onclick="toast('VIP membership demo')">👑 VIP Membership <span>›</span></div>
+  <div class="menu-item" onclick="toast('Your badges will appear here')">🏅 My Badges <span>›</span></div>
+  <div class="menu-item" onclick="toast('Your gifts will appear here')">🎀 My Gifts <span>›</span></div>
+  <div class="menu-item" onclick="showPage('settings')">⚙️ Settings <span>›</span></div>
  </div>
+</section>
 
- <h2 class="heading">My Tools</h2>
- <div class="quick-grid">
-  <div class="quick" onclick="openTool('Rewards','🎁')">🎁<h3>Rewards</h3><p>Daily tasks</p></div>
-  <div class="quick" onclick="openTool('Ranks','🏆')">🏆<h3>Ranks</h3><p>Leaderboard</p></div>
-  <div class="quick" onclick="openTool('My Bag','🎒')">🎒<h3>My Bag</h3><p>Decorations</p></div>
-  <div class="quick" onclick="openTool('Invite','💝')">💝<h3>Invite</h3><p>Invite friends</p></div>
+<!-- EDIT PROFILE -->
+<section id="edit" class="page">
+ <h2>✏️ Edit Profile</h2>
+ <div class="card">
+  <div class="avatar" id="editAvatar">👤</div>
+  <label>Profile Photo</label>
+  <input type="file" id="photoInput" accept="image/*">
+  <label>Display Name</label>
+  <input id="editName" maxlength="25" placeholder="Your name">
+  <label>Bio</label>
+  <textarea id="editBio" maxlength="120" placeholder="Write something about you"></textarea>
+  <label>Country</label>
+  <input id="editCountry" placeholder="Nepal">
+  <label>Gender</label>
+  <input id="editGender" placeholder="Not specified">
+  <button class="primary" style="width:100%" onclick="saveProfile()">Save Profile</button>
  </div>
+</section>
 
- <h2 class="heading">VIP & My Account</h2>
- <button class="profile-menu" onclick="openTool('VIP Membership','💎')"><span>💎</span><b>VIP Membership</b><span>›</span></button>
- <button class="profile-menu" onclick="openTool('My Badges','👑')"><span>👑</span><b>My Badges</b><span>›</span></button>
- <button class="profile-menu" onclick="openTool('My Gifts','🎁')"><span>🎁</span><b>My Gifts</b><span>›</span></button>
- <button class="profile-menu" onclick="openTool('My Visitors','👀')"><span>👀</span><b>My Visitors</b><span>›</span></button>
- <button class="profile-menu" onclick="openTool('My Level','⭐')"><span>⭐</span><b>My Level</b><span>›</span></button>
-
- <h2 class="heading">More</h2>
- <button class="row" onclick="go('settings')">⚙️ <span class="row-info"><b>Settings</b><p>Account preferences</p></span>›</button>
- <button class="row" onclick="openTool('Help & Support','💬')">💬 <span class="row-info"><b>Help & Support</b><p>Get help</p></span>›</button>
- <button class="row" onclick="notify('You are using the local demo version')">🚪 <span class="row-info"><b>About SANO LIVE</b><p>Version 1.0.0</p></span>›</button>
+<!-- WALLET -->
+<section id="wallet" class="page">
+ <h2>💰 My Wallet</h2>
+ <div class="hero">
+  <p>Available Coins</p>
+  <h1>🪙 <span id="walletCoins">1000</span></h1>
+  <p>Demo wallet balance</p>
+ </div>
+ <div class="card">
+  <h3>Money Balance</h3>
+  <h2>$0.00</h2>
+  <p class="muted">This is a demonstration balance, not withdrawable money.</p>
+ </div>
+ <div class="card">
+  <h3>Coin Exchange</h3>
+  <p class="muted">Real coin purchases and exchanges are not enabled.</p>
+  <button class="secondary" style="width:100%" onclick="toast('Coin exchange is not connected yet')">Exchange Demo</button>
+ </div>
+ <div class="card">
+  <h3>Withdrawal</h3>
+  <p class="muted">Real withdrawals require a verified payment system and eligible account.</p>
+  <button class="secondary" style="width:100%" onclick="toast('Withdrawal is not available in this demo')">💵 Withdrawal</button>
+ </div>
 </section>
 
 <!-- SETTINGS -->
 <section id="settings" class="page">
- <button class="btn secondary" onclick="go('profile')">← Back</button>
- <h1 style="margin-top:20px">Settings ⚙️</h1>
- <div class="card" style="margin-top:20px">
-  <div style="padding:13px 0;border-bottom:1px solid #26344B"><b>Notifications</b><input type="checkbox" class="switch" checked style="float:right"></div>
-  <div style="padding:13px 0;border-bottom:1px solid #26344B"><b>Sound</b><input type="checkbox" class="switch" checked style="float:right"></div>
-  <div style="padding:13px 0"><b>Vibration</b><input type="checkbox" class="switch" style="float:right"></div>
- </div>
- <button class="row" onclick="editProfile()">👤 <span class="row-info"><b>Edit Profile</b><p>Update your information</p></span>›</button>
- <button class="row" onclick="openTool('Privacy','🔒')">🔒 <span class="row-info"><b>Privacy</b><p>Privacy settings</p></span>›</button>
- <div class="card"><b>SANO LIVE</b><p class="muted">Version 1.0.0</p></div>
-</section>
-
-<!-- GO LIVE -->
-<section id="golive" class="page">
- <button class="btn secondary" onclick="go('home')">← Back</button>
- <div style="margin-top:20px;padding:25px 18px;border-radius:23px;background:linear-gradient(135deg,#392044,#182D50)">
-  <p style="color:#FF70AA;font-weight:bold">● CREATE YOUR LIVE</p>
-  <h1 style="margin-top:15px">Start Your Moment ✨</h1>
-  <p class="muted">Bring friends together and enjoy your time.</p>
- </div>
- <h2 class="heading">Select Live Format</h2>
- <div class="format selected" id="audioFormat" onclick="selectFormat('Audio')"><strong>🎙️ Audio Party</strong><p>Voice room · Maximum 8 people</p></div>
- <div class="format" id="videoFormat" onclick="selectFormat('Video')"><strong>📹 Video Live</strong><p>Face-to-face video stream</p></div>
- <h2 class="heading">Room Information</h2>
+ <h2>⚙️ Settings</h2>
  <div class="card">
-  <label>Room Title</label>
-  <input class="field" id="liveTitle" maxlength="35" placeholder="Enter your room title">
-  <label>Choose Room Privacy</label>
-  <select class="field" id="privacy"><option value="Public">Public Room</option><option value="Private">Private Room</option></select>
-  <label>Party Seats</label>
-  <select class="field" id="liveSeats"><option value="8">8 People Maximum</option></select>
-  <p class="muted">Your room supports up to 8 people including the host.</p>
+  <div class="menu-item" onclick="toast('Account settings')">👤 Account Settings <span>›</span></div>
+  <div class="menu-item" onclick="toast('Privacy settings')">🔒 Privacy <span>›</span></div>
+  <div class="menu-item" onclick="toast('Notification settings')">🔔 Notifications <span>›</span></div>
+  <div class="menu-item" onclick="toast('Help and support')">❓ Help & Support <span>›</span></div>
+  <div class="menu-item" onclick="toast('SANO LIVE Version 1.0')">ℹ️ About SANO LIVE <span>›</span></div>
  </div>
- <div class="card"><label style="display:flex;align-items:center;gap:10px"><input type="checkbox" id="terms" checked>I agree to the Terms & Conditions</label></div>
- <button class="btn" style="width:100%;padding:17px;font-size:17px;border-radius:35px" onclick="startLive()">📡 Go Live Now →</button>
+ <button class="secondary" style="width:100%" onclick="showPage('home')">Back to Home</button>
 </section>
 
-<!-- MODAL -->
-<div class="overlay" id="overlay" onclick="outsideClose(event)">
- <div class="modal" id="modal"></div>
-</div>
-
-<button class="go-live-btn" id="goLiveButton" onclick="go('golive')">📹 Go Live</button>
-
-<nav>
- <button id="nav-home" class="active" onclick="go('home')"><b>⌂</b>HOME</button>
- <button id="nav-explore" onclick="go('explore')"><b>◎</b>EXPLORE</button>
- <button id="nav-party" onclick="go('party')"><b>✧</b>PARTY</button>
- <button id="nav-messages" onclick="go('messages')"><b>☏</b>MESSAGES</button>
- <button id="nav-profile" onclick="go('profile')"><b>♟</b>PROFILE</button>
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+ <button class="nav-btn active" data-page="home" onclick="showPage('home')"><span>🏠</span>Home</button>
+ <button class="nav-btn" data-page="explore" onclick="showPage('explore')"><span>🌍</span>Explore</button>
+ <button class="nav-btn" data-page="party" onclick="showPage('party')"><span>🎤</span>Party</button>
+ <button class="nav-btn" data-page="messages" onclick="showPage('messages')"><span>💬</span>Messages</button>
+ <button class="nav-btn" data-page="profile" onclick="showPage('profile')"><span>👤</span>Profile</button>
 </nav>
 
-<div class="toast" id="toast"></div>
+<div id="toast" class="toast"></div>
 
 <script>
-const $=id=>document.getElementById(id);
+const $ = id => document.getElementById(id);
 
-let user={
- name:"SANO USER",bio:"Hello guys!",country:"Nepal",
- gender:"Male",avatar:"👤",photo:"",id:"1111",
- coins:0,money:0,following:0,followers:0,friends:0
+let profile = JSON.parse(localStorage.getItem("sanoProfile") || "null") || {
+ name:"SANO USER",
+ bio:"Hello guys!",
+ country:"Nepal",
+ gender:"Not specified",
+ photo:"",
+ id:"1111"
 };
-let parties=[];
-let liveFormat="Audio";
-let currentParty=null;
 
-function load(){
- try{
-  user={...user,...JSON.parse(localStorage.getItem("sano_profile")||"{}")};
-  parties=JSON.parse(localStorage.getItem("sano_parties")||"[]");
- }catch(e){}
- renderProfile();
- renderParties();
+let coins = Number(localStorage.getItem("sanoCoins") || 1000);
+let parties = JSON.parse(localStorage.getItem("sanoParties") || "[]");
+let currentParty = null;
+
+function saveData(){
+ localStorage.setItem("sanoProfile",JSON.stringify(profile));
+ localStorage.setItem("sanoCoins",coins);
+ localStorage.setItem("sanoParties",JSON.stringify(parties));
 }
-function save(){
- try{localStorage.setItem("sano_profile",JSON.stringify(user))}
- catch(e){notify("Storage full. Try a smaller photo.")}
-}
-function saveParties(){
- try{localStorage.setItem("sano_parties",JSON.stringify(parties))}
- catch(e){notify("Unable to save party")}
-}
-function go(id){
- document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
- $(id).classList.add("active");
- document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
- if($("nav-"+id))$("nav-"+id).classList.add("active");
- $("goLiveButton").style.display=id==="home"?"block":"none";
- window.scrollTo(0,0);
-}
-function notify(msg){
- $("toast").textContent=msg;
- $("toast").style.display="block";
+
+function toast(message){
+ const el=$("toast");
+ el.textContent=message;
+ el.style.display="block";
  clearTimeout(window.toastTimer);
- window.toastTimer=setTimeout(()=>$("toast").style.display="none",2300);
+ window.toastTimer=setTimeout(()=>el.style.display="none",2300);
 }
-function showModal(html){
- $("modal").innerHTML=html;
- $("overlay").style.display="flex";
-}
-function closeModal(){$("overlay").style.display="none"}
-function outsideClose(e){if(e.target.id==="overlay")closeModal()}
-function escapeHTML(s){
- return String(s).replace(/[&<>"']/g,c=>({
- "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
- }[c]));
+
+function showPage(page){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ $(page).classList.add("active");
+ document.querySelectorAll(".nav-btn").forEach(b=>{
+  b.classList.toggle("active",b.dataset.page===page);
+ });
+ if(page==="party") renderParties();
+ if(page==="home") renderHome();
+ if(page==="explore") renderUsers();
+ if(page==="profile") renderProfile();
+ window.scrollTo(0,0);
 }
 
 function renderProfile(){
- $("name").textContent=user.name;
- $("bio").textContent=user.bio;
- $("country").textContent="🌍 "+user.country;
- $("gender").textContent=user.gender;
- $("uid").textContent=user.id;
- $("avatar").innerHTML=user.photo?
-  '<img src="'+user.photo+'" alt="Profile photo">':user.avatar;
- $("coinBalance").textContent=Number(user.coins)||0;
- $("moneyBalance").textContent=Number(user.money)||0;
- $("followingCount").textContent=user.following||0;
- $("followerCount").textContent=user.followers||0;
- $("friendCount").textContent=user.friends||0;
+ $("profileName").textContent=profile.name;
+ $("profileID").textContent=profile.id;
+ $("profileCoins").textContent=coins;
+ $("walletCoins").textContent=coins;
+ $("coinCount").textContent=coins;
+ $("profileAvatar").innerHTML=profile.photo
+  ? `<img src="${profile.photo}" alt="Profile">` : "👤";
+ $("editAvatar").innerHTML=profile.photo
+  ? `<img src="${profile.photo}" alt="Profile">` : "👤";
+ $("editName").value=profile.name;
+ $("editBio").value=profile.bio;
+ $("editCountry").value=profile.country;
+ $("editGender").value=profile.gender;
 }
 
-function editProfile(){
- showModal(`
- <h2>✏️ Edit Profile</h2>
- <label>Username</label>
- <input class="field" id="editName" maxlength="25" value="${escapeHTML(user.name)}">
- <label>Bio</label>
- <textarea class="field" id="editBio" maxlength="120">${escapeHTM
+$("photoInput").addEventListener("change",function(){
+ const file=this.files[0];
+ if(!file)return;
+ if(file.size>1500000){
+  toast("Choose a photo smaller than 1.5 MB");
+  this.value="";
+  return;
+ }
+ const reader=new FileReader();
+ reader.onload=()=>{
+  profile.photo=reader.result;
+  renderProfile();
+  toast("Photo selected. Save your profile.");
+ };
+ reader.readAsDataURL(file);
+});
+
+function saveProfile(){
+ profile.name=$("editName").value.trim() || "SANO USER";
+ profile.bio=$("editBio").value.trim();
+ profile.country=$("editCountry").value.trim();
+ profile.gender=$("editGender").value.trim();
+ saveData();
+ renderProfile();
+ toast("Profile saved successfully!");
+ showPage("profile");
+}
+
+function createParty(type){
+ const title=$("partyName").value.trim() || profile.name+"'s Party";
+ const party={
+  id:Date.now(),
+  title,
+  type,
+  host:profile.name,
+  members:[{name:profile.name,host:true}],
+  seats:8
+ };
+ parties.unshift(party);
+ saveData();
+ $("partyName").value="";
+ openParty(party.id);
+}
+
+function renderParties(){
+ $("partyList").innerHTML="";
+ if(!parties.length){
+  $("partyList").innerHTML='<div class="card muted">No parties yet. Create your first party!</div>';
+  return;
+ }
+ parties.forEach(p=>{
+  const el=document.createElement("div");
+  el.className="party-card";
+  const title=document.createElement("h3");
+  title.textContent=p.title;
+  const info=document.createElement("p");
+  info.className="muted";
+  info.textContent="🎤 "+p.type+" • Host: "+p.host+" • "+p.members.length+"/8";
+  const btn=document.createElement("button");
+  btn.className="primary";
+  btn.textContent="Join Party";
+  btn.onclick=()=>openParty(p.id);
+  el.append(title,info,btn);
+  $("partyList").appendChild(el);
+ });
+}
+
+function renderHome(){
+ $("homeParties").innerHTML="";
+ if(!parties.length){
+  $("homeParties").innerHTML='<div class="card muted">No featured parties yet.</div>';
+  return;
+ }
+ parties.slice(0,2).forEach(p=>{
+  const el=document.createElement("div");
+  el.className="party-card";
+  const title=document.createElement("h3");
+  title.textContent=p.title;
+  const info=document.createElement("p");
+  info.className="muted";
+  info.textContent=p.type+" • "+p.members.length+"/8 members";
+  const btn=document.createElement("button");
+  btn.className="secondary";
+  btn.textContent="Open Party";
+  btn.onclick=()=>openParty(p.id);
+  el.append(title,info,btn);
+  $("homeParties").appendChild(el);
+ });
+}
+
+function openParty(id){
+ currentParty=parties.find(p=>p.id===id);
+ if(!currentParty)return;
+ if(!currentParty.members.some(m=>m.name===profile.name)){
+  if(currentParty.members.length>=8){
+   toast("Party is full!");
+   return;
+  }
+  currentParty.members.push({name:profile.name,host:false});
+  saveData();
+ }
+ $("roomTitle").textContent=currentParty.title;
+ $("roomType").textContent=currentParty.type+" Party";
+ renderSeats();
+ showPage("room");
+}
+
+function renderSeats(){
+ const grid=$("seatGrid");
+ grid.innerHTML="";
+ for(let i=0;i<8;i++){
+  const member=currentParty.members[i];
+  const seat=document.createElement("button");
+  seat.className="seat";
+  if(member){
+   seat.classList.add(member.host?"host":"taken");
+   const icon=document.createElement("span");
+   icon.textContent=member.host?"👑":"🎧";
+   const name=document.createElement("b");
+   name.textContent=member.name;
+   seat.append(icon,name);
+  }else{
+   const icon=document.createElement("span");
+   icon.textContent="＋";
+   const label=document.createElement("b");
+   label.textContent="Seat "+(i+1);
+   seat.append(icon,label);
+   seat.onclick=()=>{
+    if(currentParty.members.length>=8){
+     toast("Party is full!");
+     return;
+    }
+    currentParty.members.push({name:profile.name,host:false});
+    saveData();
+    renderSeats();
+   };
+  }
+  grid.appendChild(seat);
+ }
+ $("seatCount").textContent=currentParty.members.length+"/8";
+}
+
+function leaveRoom(){
+ if(currentParty){
+  currentParty.members=currentParty.members.filter(m=>m.name!==profile.name);
+  saveData();
+ }
+ currentParty=null;
+ renderParties();
+ showPage("party");
+}
+
+const demoUsers=[
+ {name:"SANO FRIEND",badge:"VIP"},
+ {name:"NEPAL USER",badge:"MEMBER"},
+ {name:"LIVE STAR",badge:"VIP"}
+];
+
+function renderUsers(){
+ $("userResults").innerHTML="";
+ demoUsers.forEach(u=>{
+  const el=document.createElement("div");
+  el.className="card row-between";
+  const info=document.createElement("div");
+  const name=document.createElement("b");
+  name.textContent="👤 "+u.name;
+  const badge=document.createElement("p");
+  badge.innerHTML='<span class="vip-sticker">👑 '+u.badge+'</span>';
+  info.append(name,badge);
+  const btn=document.createElement("button");
+  btn.className="secondary";
+  btn.textContent="View";
+  btn.onclick=()=>toast("Demo profile: "+u.name);
+  el.append(info,btn);
+  $("userResults").append(el);
+ });
+}
+
+function searchUsers(){
+ const q=$("searchUser").value.toLowerCase();
+ $("userResults").innerHTML="";
+ demoUsers.filter(u=>u.name.toLowerCase().includes(q)).forEach(u=>{
+  const el=document.createElement("div");
+  el.className="card";
+  el.textContent="👤 "+u.name+"  •  "+u.badge;
+  $("userResults").append(el);
+ });
+}
+
+renderProfile();
+renderHome();
+renderParties();
+renderUsers();
+</script>
+</body>
+</html>
