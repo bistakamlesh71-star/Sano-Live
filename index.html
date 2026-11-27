@@ -367,86 +367,97 @@ label{font-size:13px;color:#B9C4D6}
   <p class="muted" style="text-align:center">Demo screen — online messaging needs a backend.</p>
  </div>
 </section>
+ </style>
 
-<!-- PROFILE -->
-<section id="profile" class="page">
- <div class="profile-top">
-  <div class="avatar" id="profileAvatar">👤</div>
-  <h2 id="profileName">SANO USER</h2>
-  <div class="vip-sticker">👑 VIP MEMBER</div>
-  <p class="muted">ID: <span id="profileID">1111</span></p>
-  <div class="stats">
-   <div><b>0</b><small>Following</small></div>
-   <div><b>0</b><small>Followers</small></div>
-   <div><b>0</b><small>Friends</small></div>
+<div class="profile-page">
+
+ <div class="profile-card">
+
+  <div class="profile-avatar">
+   <img id="sanoProfilePhoto"
+   src="https://placehold.co/200x200/18233b/ffffff?text=USER">
+  </div>
+
+  <div class="profile-name" id="sanoProfileName">SANO USER</div>
+
+  <div class="profile-id">
+   ID: <span id="sanoProfileID">1111</span>
+   <button class="profile-copy"
+   onclick="navigator.clipboard.writeText(document.getElementById('sanoProfileID').innerText).then(()=>alert('ID Copied!'))">
+   Copy ID
+   </button>
+  </div>
+
+  <div class="profile-badges">
+   <span class="p-vip">👑 VIP</span>
+   <span class="p-svip">💜 SVIP</span>
+   <span class="p-admin">⚡ SUPER ADMIN</span>
+  </div>
+
+  <div class="profile-bio">Hello guys! Welcome to my profile 💜</div>
+
+  <div class="profile-stats">
+   <div class="profile-stat"><strong>120</strong><small>Following</small></div>
+   <div class="profile-stat"><strong>5.2K</strong><small>Followers</small></div>
+   <div class="profile-stat"><strong>350</strong><small>Friends</small></div>
+  </div>
+
+  <button class="profile-edit-btn"
+  onclick="alert('Edit Profile Coming Soon')">
+  ✏️ Edit Profile
+  </button>
+ </div>
+
+ <div class="profile-box">
+  <div class="profile-heading">⭐ Level & Experience</div>
+  <div style="display:flex;justify-content:space-between;font-size:13px">
+   <b>Level 25</b><span>6800 / 10000 XP</span>
+  </div>
+  <div class="profile-progress"><div></div></div>
+ </div>
+
+ <div class="profile-box">
+  <div class="profile-heading">💰 My Wallet</div>
+  <div class="profile-wallet">
+   <div class="profile-wallet-item">
+    <small>🪙 Coins</small><strong>125,000</strong>
+   </div>
+   <div class="profile-wallet-item money">
+    <small>💵 Money</small><strong>$7.14</strong>
+   </div>
   </div>
  </div>
 
- <div class="card">
-  <div class="row-between">
-   <h3>💰 My Wallet</h3>
-   <button class="secondary" onclick="showPage('wallet')">Open</button>
+ <div class="profile-box">
+  <div class="profile-heading">🎁 Gifts & Badges</div>
+  <div class="profile-gifts">
+   <div class="profile-gift">🌹<small>Rose</small></div>
+   <div class="profile-gift">👑<small>Crown</small></div>
+   <div class="profile-gift">💎<small>Diamond</small></div>
+   <div class="profile-gift">🚀<small>Rocket</small></div>
   </div>
-  <h2>🪙 <span id="profileCoins">1000</span> Coins</h2>
-  <p class="muted">Money: $0.00 (Demo)</p>
  </div>
 
- <div class="card">
-  <h3>My Profile Menu</h3>
-  <div class="menu-item" onclick="showPage('edit')">✏️ Edit Profile <span>›</span></div>
-  <div class="menu-item" onclick="showPage('wallet')">💰 Wallet <span>›</span></div>
-  <div class="menu-item" onclick="toast('Your rewards will appear here')">🎁 Rewards <span>›</span></div>
-  <div class="menu-item" onclick="toast('VIP membership demo')">👑 VIP Membership <span>›</span></div>
-  <div class="menu-item" onclick="toast('Your badges will appear here')">🏅 My Badges <span>›</span></div>
-  <div class="menu-item" onclick="toast('Your gifts will appear here')">🎀 My Gifts <span>›</span></div>
-  <div class="menu-item" onclick="showPage('settings')">⚙️ Settings <span>›</span></div>
+ <div class="profile-box">
+  <div class="profile-heading">🖼️ Profile Frames</div>
+  <div class="profile-frames">
+   <div class="profile-frame"></div>
+   <div class="profile-frame"></div>
+   <div class="profile-frame"></div>
+  </div>
  </div>
-</section>
 
-<!-- EDIT PROFILE -->
-<section id="edit" class="page">
- <h2>✏️ Edit Profile</h2>
- <div class="card">
-  <div class="avatar" id="editAvatar">👤</div>
-  <label>Profile Photo</label>
-  <input type="file" id="photoInput" accept="image/*">
-  <label>Display Name</label>
-  <input id="editName" maxlength="25" placeholder="Your name">
-  <label>Bio</label>
-  <textarea id="editBio" maxlength="120" placeholder="Write something about you"></textarea>
-  <label>Country</label>
-  <input id="editCountry" placeholder="Nepal">
-  <label>Gender</label>
-  <input id="editGender" placeholder="Not specified">
-  <button class="primary" style="width:100%" onclick="saveProfile()">Save Profile</button>
+ <div class="profile-box">
+  <div class="profile-heading">⚙️ Settings & Privacy</div>
+  <div class="profile-menu"><span>👤 Edit Profile</span><span>›</span></div>
+  <div class="profile-menu"><span>🔒 Privacy</span><span>›</span></div>
+  <div class="profile-menu"><span>⚙️ Account Settings</span><span>›</span></div>
+  <div class="profile-menu"><span>🌐 Language</span><span>›</span></div>
+  <div class="profile-menu"><span>🎧 Help & Support</span><span>›</span></div>
  </div>
-</section>
 
-<!-- WALLET -->
-<section id="wallet" class="page">
- <h2>💰 My Wallet</h2>
- <div class="hero">
-  <p>Available Coins</p>
-  <h1>🪙 <span id="walletCoins">1000</span></h1>
-  <p>Demo wallet balance</p>
- </div>
- <div class="card">
-  <h3>Money Balance</h3>
-  <h2>$0.00</h2>
-  <p class="muted">This is a demonstration balance, not withdrawable money.</p>
- </div>
- <div class="card">
-  <h3>Coin Exchange</h3>
-  <p class="muted">Real coin purchases and exchanges are not enabled.</p>
-  <button class="secondary" style="width:100%" onclick="toast('Coin exchange is not connected yet')">Exchange Demo</button>
- </div>
- <div class="card">
-  <h3>Withdrawal</h3>
-  <p class="muted">Real withdrawals require a verified payment system and eligible account.</p>
-  <button class="secondary" style="width:100%" onclick="toast('Withdrawal is not available in this demo')">💵 Withdrawal</button>
- </div>
-</section>
-
+</div>
+ 
 <!-- SETTINGS -->
 <section id="settings" class="page">
  <h2>⚙️ Settings</h2>
@@ -838,97 +849,6 @@ renderUsers();
  color:white;border:0;border-radius:10px;
  padding:10px 17px;font-weight:bold;margin-top:13px;
 }
-</style>
-
-<div class="profile-page">
-
- <div class="profile-card">
-
-  <div class="profile-avatar">
-   <img id="sanoProfilePhoto"
-   src="https://placehold.co/200x200/18233b/ffffff?text=USER">
-  </div>
-
-  <div class="profile-name" id="sanoProfileName">SANO USER</div>
-
-  <div class="profile-id">
-   ID: <span id="sanoProfileID">1111</span>
-   <button class="profile-copy"
-   onclick="navigator.clipboard.writeText(document.getElementById('sanoProfileID').innerText).then(()=>alert('ID Copied!'))">
-   Copy ID
-   </button>
-  </div>
-
-  <div class="profile-badges">
-   <span class="p-vip">👑 VIP</span>
-   <span class="p-svip">💜 SVIP</span>
-   <span class="p-admin">⚡ SUPER ADMIN</span>
-  </div>
-
-  <div class="profile-bio">Hello guys! Welcome to my profile 💜</div>
-
-  <div class="profile-stats">
-   <div class="profile-stat"><strong>120</strong><small>Following</small></div>
-   <div class="profile-stat"><strong>5.2K</strong><small>Followers</small></div>
-   <div class="profile-stat"><strong>350</strong><small>Friends</small></div>
-  </div>
-
-  <button class="profile-edit-btn"
-  onclick="alert('Edit Profile Coming Soon')">
-  ✏️ Edit Profile
-  </button>
- </div>
-
- <div class="profile-box">
-  <div class="profile-heading">⭐ Level & Experience</div>
-  <div style="display:flex;justify-content:space-between;font-size:13px">
-   <b>Level 25</b><span>6800 / 10000 XP</span>
-  </div>
-  <div class="profile-progress"><div></div></div>
- </div>
-
- <div class="profile-box">
-  <div class="profile-heading">💰 My Wallet</div>
-  <div class="profile-wallet">
-   <div class="profile-wallet-item">
-    <small>🪙 Coins</small><strong>125,000</strong>
-   </div>
-   <div class="profile-wallet-item money">
-    <small>💵 Money</small><strong>$7.14</strong>
-   </div>
-  </div>
- </div>
-
- <div class="profile-box">
-  <div class="profile-heading">🎁 Gifts & Badges</div>
-  <div class="profile-gifts">
-   <div class="profile-gift">🌹<small>Rose</small></div>
-   <div class="profile-gift">👑<small>Crown</small></div>
-   <div class="profile-gift">💎<small>Diamond</small></div>
-   <div class="profile-gift">🚀<small>Rocket</small></div>
-  </div>
- </div>
-
- <div class="profile-box">
-  <div class="profile-heading">🖼️ Profile Frames</div>
-  <div class="profile-frames">
-   <div class="profile-frame"></div>
-   <div class="profile-frame"></div>
-   <div class="profile-frame"></div>
-  </div>
- </div>
-
- <div class="profile-box">
-  <div class="profile-heading">⚙️ Settings & Privacy</div>
-  <div class="profile-menu"><span>👤 Edit Profile</span><span>›</span></div>
-  <div class="profile-menu"><span>🔒 Privacy</span><span>›</span></div>
-  <div class="profile-menu"><span>⚙️ Account Settings</span><span>›</span></div>
-  <div class="profile-menu"><span>🌐 Language</span><span>›</span></div>
-  <div class="profile-menu"><span>🎧 Help & Support</span><span>›</span></div>
- </div>
-
-</div>
- 
 </script>
 </body>
 </html>
