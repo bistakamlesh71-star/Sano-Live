@@ -78,6 +78,186 @@ button{cursor:pointer}
 .settings-version{font-size:14px;color:#888}
 .settings-row:active{background:#f5f5f5}
 
+/* ACCOUNT SECURITY */
+.security-page{
+ display:none;
+ position:fixed;
+ inset:0;
+ z-index:25;
+ background:#F5F7FB;
+ color:#172033;
+ overflow-y:auto;
+}
+.security-page.active{display:block}
+
+.security-header{
+ height:65px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ background:white;
+ border-bottom:1px solid #E9EDF3;
+ position:sticky;
+ top:0;
+ font-size:19px;
+ font-weight:bold;
+}
+
+.security-back{
+ position:absolute;
+ left:17px;
+ background:#F0F4FA;
+ border:0;
+ border-radius:10px;
+ width:38px;
+ height:38px;
+ font-size:27px;
+ color:#263750;
+}
+
+.security-content{
+ max-width:500px;
+ margin:auto;
+ padding:20px;
+}
+
+.security-intro{margin:8px 0 22px}
+.security-intro h2{font-size:25px;margin-bottom:8px}
+.security-intro p{font-size:13px;color:#8490A2;line-height:1.5}
+
+.security-group{
+ background:white;
+ border-radius:17px;
+ overflow:hidden;
+ margin-bottom:16px;
+ box-shadow:0 3px 14px #17203308;
+}
+
+.security-row{
+ display:flex;
+ align-items:center;
+ gap:13px;
+ padding:17px 14px;
+ min-height:76px;
+ border-bottom:1px solid #EFF1F5;
+ cursor:pointer;
+}
+
+.security-row:last-child{border-bottom:0}
+
+.security-icon{
+ width:43px;
+ height:43px;
+ border-radius:13px;
+ background:#EAF3FF;
+ display:grid;
+ place-items:center;
+ font-size:21px;
+ flex-shrink:0;
+}
+
+.security-info{flex:1}
+.security-info h3{font-size:14px;margin-bottom:5px}
+.security-info p{font-size:11px;color:#8994A5;line-height:1.4}
+.security-arrow{font-size:23px;color:#A0AABB}
+
+.security-tag{
+ font-size:10px;
+ color:#16834D;
+ background:#E7F8EF;
+ padding:6px 8px;
+ border-radius:20px;
+}
+
+.security-switch{
+ width:43px;
+ height:24px;
+ border:0;
+ border-radius:20px;
+ background:#CBD3DF;
+ position:relative;
+ flex-shrink:0;
+}
+
+.security-switch:after{
+ content:"";
+ position:absolute;
+ width:18px;
+ height:18px;
+ top:3px;
+ left:3px;
+ background:white;
+ border-radius:50%;
+ transition:.2s;
+}
+
+.security-switch.active{background:#287CE0}
+.security-switch.active:after{left:22px}
+
+.security-delete .security-icon{
+ background:#FFECEC;
+ color:#D94A4A;
+}
+
+.security-delete h3{color:#D94A4A}
+
+/* SECURITY MODAL */
+.security-modal{
+ display:none;
+ position:fixed;
+ inset:0;
+ z-index:50;
+ background:#0009;
+ align-items:center;
+ justify-content:center;
+ padding:18px;
+}
+
+.security-modal.show{display:flex}
+
+.security-modal-box{
+ background:#FFFFFF;
+ color:#172033;
+ width:100%;
+ max-width:380px;
+ border-radius:20px;
+ padding:22px;
+}
+
+.security-modal-box h2{font-size:20px;margin-bottom:9px}
+.security-modal-box p{font-size:13px;color:#8490A2;line-height:1.5;margin-bottom:17px}
+
+.security-modal-box input{
+ width:100%;
+ padding:13px;
+ margin-bottom:12px;
+ border:1px solid #DFE5ED;
+ border-radius:10px;
+ outline:none;
+ color:#172033;
+ background:white;
+}
+
+.security-primary{
+ width:100%;
+ padding:13px;
+ background:#287CE0;
+ color:white;
+ border:0;
+ border-radius:10px;
+ font-weight:bold;
+}
+
+.security-cancel{
+ width:100%;
+ padding:12px;
+ background:#EEF2F7;
+ color:#46536A;
+ border:0;
+ border-radius:10px;
+ margin-top:9px;
+}
+
 /* MODALS */
 .modal{display:none;position:fixed;inset:0;z-index:30;background:#000C;align-items:center;justify-content:center;padding:18px}
 .modal-box{background:#142239;border:1px solid #354966;border-radius:20px;padding:22px;width:100%;max-width:380px}
@@ -250,7 +430,7 @@ button{cursor:pointer}
 
   <div class="settings-group">
 
-   <div class="settings-row" onclick="settingDetail('Account Security')">
+   <div class="settings-row" onclick="openSecurity()">
     <span>Account Security</span><span class="settings-arrow">›</span>
    </div>
 
@@ -293,6 +473,106 @@ button{cursor:pointer}
  </div>
 </div>
 
+<!-- ACCOUNT SECURITY PAGE -->
+<div class="security-page" id="securityPage">
+
+ <div class="security-header">
+  <button class="security-back" onclick="closeSecurity()">‹</button>
+  Account Security
+ </div>
+
+ <div class="security-content">
+
+  <div class="security-intro">
+   <h2>Security Center 🛡️</h2>
+   <p>Manage your account security and protect your SANO LIVE account.</p>
+  </div>
+
+  <div class="security-group">
+
+   <div class="security-row" onclick="securityAction('email')">
+    <div class="security-icon">✉️</div>
+    <div class="security-info">
+     <h3>Email Address</h3>
+     <p>Connect and verify your email address</p>
+    </div>
+    <span class="security-tag">Recommended</span>
+   </div>
+
+   <div class="security-row" onclick="securityAction('phone')">
+    <div class="security-icon">📱</div>
+    <div class="security-info">
+     <h3>Phone Number</h3>
+     <p>Connect your phone and verify OTP</p>
+    </div>
+    <span class="security-arrow">›</span>
+   </div>
+
+   <div class="security-row" onclick="securityAction('password')">
+    <div class="security-icon">🔒</div>
+    <div class="security-info">
+     <h3>Change Password</h3>
+     <p>Update your account password</p>
+    </div>
+    <span class="security-arrow">›</span>
+   </div>
+
+  </div>
+
+  <div class="security-group">
+
+   <div class="security-row" onclick="securityAction('2fa')">
+    <div class="security-icon">🛡️</div>
+    <div class="security-info">
+     <h3>Two-Step Verification</h3>
+     <p>Extra protection during login</p>
+    </div>
+    <span class="security-arrow">›</span>
+   </div>
+
+   <div class="security-row" onclick="securityAction('devices')">
+    <div class="security-icon">💻</div>
+    <div class="security-info">
+     <h3>Login Devices</h3>
+     <p>Review your signed-in devices</p>
+    </div>
+    <span class="security-arrow">›</span>
+   </div>
+
+  </div>
+
+  <div class="security-group">
+   <div class="security-row security-delete"
+   onclick="securityAction('delete')">
+    <div class="security-icon">🗑️</div>
+    <div class="security-info">
+     <h3>Delete Account</h3>
+     <p>Request permanent account deletion</p>
+    </div>
+    <span class="security-arrow">›</span>
+   </div>
+  </div>
+
+  <p style="text-align:center;color:#98A2B1;font-size:12px;padding:15px">
+   🛡️ Your security matters to SANO LIVE
+  </p>
+
+ </div>
+</div>
+
+<!-- SECURITY POPUP -->
+<div class="security-modal" id="securityModal">
+ <div class="security-modal-box">
+  <h2 id="securityModalTitle">Security</h2>
+  <p id="securityModalDesc"></p>
+  <div id="securityModalFields"></div>
+  <button class="security-primary" id="securitySubmit"
+  onclick="submitSecurity()">Continue</button>
+  <button class="security-cancel"
+  onclick="closeSecurityModal()">Cancel</button>
+ </div>
+</div>
+
 <!-- EDIT MODAL -->
 <div class="modal" id="editModal">
  <div class="modal-box">
@@ -324,6 +604,7 @@ function showPage(page){
  document.getElementById(page+'Page').classList.add('active');
 
  document.getElementById('settingsPage').classList.remove('active');
+ document.getElementById('securityPage').classList.remove('active');
 
  document.querySelectorAll('.nav-item').forEach(btn=>{
   btn.classList.toggle('active',btn.dataset.page===page);
@@ -337,120 +618,4 @@ function showPage(page){
 let profile=JSON.parse(localStorage.getItem('sano_profile')) || {
  name:'SANO USER',
  id:'1111',
- bio:'Hello guys! Welcome to my profile.',
- coins:0,
- money:0,
- commission:0
-};
-
-function renderProfile(){
- document.getElementById('profileName').textContent=profile.name;
- document.getElementById('profileID').textContent=profile.id;
- document.getElementById('profileBio').textContent=profile.bio;
- document.getElementById('coinBalance').textContent=Number(profile.coins).toLocaleString();
- document.getElementById('moneyBalance').textContent='$'+Number(profile.money).toFixed(2);
- document.getElementById('commissionBalance').textContent='$'+Number(profile.commission||0).toFixed(2);
-}
-
-function saveData(){
- localStorage.setItem('sano_profile',JSON.stringify(profile));
-}
-
-// EDIT PROFILE
-function openEdit(){
- document.getElementById('editName').value=profile.name;
- document.getElementById('editBio').value=profile.bio;
- document.getElementById('editModal').style.display='flex';
-}
-
-function closeEdit(){
- document.getElementById('editModal').style.display='none';
-}
-
-function saveProfile(){
- let name=document.getElementById('editName').value.trim();
- let bio=document.getElementById('editBio').value.trim();
-
- if(!name){alert('Please enter your name');return;}
-
- profile.name=name;
- profile.bio=bio;
- saveData();
- renderProfile();
- closeEdit();
- alert('Profile Updated!');
-}
-
-// PHOTO UPLOAD
-function uploadPhoto(event){
- let file=event.target.files[0];
- if(!file)return;
-
- if(!file.type.startsWith('image/')){
-  alert('Select an image');return;
- }
-
- if(file.size>2*1024*1024){
-  alert('Image must be under 2MB');return;
- }
-
- let reader=new FileReader();
- reader.onload=function(e){
-  document.getElementById('profilePhoto').src=e.target.result;
-  localStorage.setItem('sano_profile_photo',e.target.result);
- };
- reader.readAsDataURL(file);
-}
-
-let savedPhoto=localStorage.getItem('sano_profile_photo');
-if(savedPhoto)document.getElementById('profilePhoto').src=savedPhoto;
-
-// SETTINGS
-function openSettings(){
- document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
- document.getElementById('settingsPage').classList.add('active');
- document.getElementById('goLive').style.display='none';
- document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
- window.scrollTo(0,0);
-}
-
-function closeSettings(){
- document.getElementById('settingsPage').classList.remove('active');
- showPage('profile');
-}
-
-function settingDetail(name){
- alert(name+' section coming soon!');
-}
-
-function clearCache(){
- if(confirm('Clear temporary app cache?')){
-  sessionStorage.clear();
-  alert('Temporary cache cleared.');
- }
-}
-
-function checkUpdates(){
- alert('SANO LIVE Version 1.0.0\\nYou are using this demo version.');
-}
-
-function settingsLogout(){
- if(confirm('Are you sure you want to log out?')){
-  alert('Connect Supabase Authentication for real logout.');
- }
-}
-
-function coming(name){
- alert(name+' feature coming soon!');
-}
-
-function logout(){
- alert('Connect Supabase Authentication for real logout.');
-}
-
-// START
-renderProfile();
-
-</script>
-</body>
-</html>
+ bio:'Hello guys! Welcome to my p
