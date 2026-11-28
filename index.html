@@ -64,7 +64,7 @@ button{cursor:pointer}
 .menu-icon{font-size:19px}
 .arrow{color:#8295B0;font-size:20px}
 
-/* SETTINGS SCREEN */
+/* SETTINGS */
 .settings-page{display:none;position:fixed;inset:0;z-index:20;background:#F5F5F5;color:#333;overflow-y:auto}
 .settings-page.active{display:block}
 .settings-header{height:65px;display:flex;align-items:center;justify-content:center;position:relative;background:white;border-bottom:1px solid #eee;font-size:21px}
@@ -77,6 +77,126 @@ button{cursor:pointer}
 .settings-arrow{font-size:26px;color:#777}
 .settings-version{font-size:14px;color:#888}
 .settings-row:active{background:#f5f5f5}
+
+/* ACCOUNT SECURITY PAGE */
+.security-page{
+ display:none;position:fixed;inset:0;z-index:25;
+ background:#F5F7FB;color:#172033;overflow-y:auto;
+}
+.security-page.active{display:block}
+.security-header{
+ height:65px;background:white;border-bottom:1px solid #EAECEF;
+ display:flex;align-items:center;justify-content:center;
+ position:sticky;top:0;z-index:3;font-size:19px;font-weight:bold;
+}
+.security-back{
+ position:absolute;left:17px;border:0;background:#EFF5FF;
+ color:#2878E8;width:39px;height:39px;border-radius:12px;font-size:25px;
+}
+.security-content{max-width:500px;margin:auto;padding:20px 17px 40px}
+.security-subtitle{font-size:13px;color:#8993A3;margin-bottom:19px;line-height:1.6}
+.security-banner{
+ background:linear-gradient(120deg,#EAF3FF,#F2F5FF);
+ border:1px solid #DDEAFF;border-radius:17px;padding:17px;
+ display:flex;align-items:center;gap:13px;margin-bottom:21px;
+}
+.security-banner-icon{
+ width:47px;height:47px;background:white;border-radius:14px;
+ display:grid;place-items:center;font-size:24px;
+}
+.security-banner b{font-size:14px}
+.security-banner p{font-size:12px;color:#71819A;margin-top:5px;line-height:1.5}
+.security-group{
+ background:white;border:1px solid #EDF0F5;
+ border-radius:17px;padding:0 15px;
+ box-shadow:0 3px 14px #15294D06;
+}
+.security-item{
+ min-height:77px;display:flex;align-items:center;gap:12px;
+ border-bottom:1px solid #F0F2F6;cursor:pointer;
+}
+.security-item:last-child{border-bottom:0}
+.security-icon{
+ width:43px;height:43px;flex-shrink:0;border-radius:13px;
+ background:#EAF3FF;display:grid;place-items:center;font-size:20px;
+}
+.security-info{flex:1;min-width:0}
+.security-info b{font-size:14px}
+.security-info p{font-size:11px;color:#8993A3;margin-top:5px}
+.security-arrow{font-size:23px;color:#A0A9B8}
+.recommend{
+ background:#EAF3FF;color:#2878E8;font-size:9px;
+ padding:6px 7px;border-radius:7px;font-weight:bold;
+}
+.security-danger .security-icon{background:#FFF0F0}
+.security-danger .security-info b{color:#DF4545}
+.security-note{
+ margin-top:17px;font-size:11px;line-height:1.7;color:#8A94A4;
+ padding:0 5px;
+}
+
+/* SECURITY DETAIL PAGES */
+.security-detail{display:none}
+.security-detail.active{display:block}
+.detail-card{
+ background:white;border:1px solid #EDF0F5;
+ border-radius:17px;padding:19px;margin-bottom:15px;
+}
+.detail-title{font-size:16px;font-weight:bold;margin-bottom:8px}
+.detail-description{font-size:12px;line-height:1.6;color:#8993A3;margin-bottom:18px}
+.security-label{display:block;font-size:12px;font-weight:bold;margin:13px 0 7px;color:#344054}
+.security-input{
+ width:100%;padding:14px;border:1px solid #DFE5ED;
+ border-radius:11px;background:#FAFBFD;color:#172033;
+ font-size:14px;outline:none;
+}
+.security-input:focus{border-color:#2878E8;background:white}
+.security-primary{
+ width:100%;padding:14px;border:0;border-radius:11px;
+ background:#2878E8;color:white;font-size:14px;font-weight:bold;
+ margin-top:15px;
+}
+.security-secondary{
+ width:100%;padding:13px;border:1px solid #DCE4EF;
+ border-radius:11px;background:white;color:#344054;
+ font-size:13px;font-weight:bold;margin-top:10px;
+}
+.security-tip{
+ background:#EFF6FF;color:#47658E;padding:13px;
+ border-radius:11px;font-size:11px;line-height:1.6;margin-top:14px;
+}
+.security-switch{
+ width:48px;height:27px;border-radius:20px;
+ background:#D8DEE8;border:0;position:relative;flex-shrink:0;
+}
+.security-switch:after{
+ content:"";width:21px;height:21px;position:absolute;
+ left:3px;top:3px;background:white;border-radius:50%;
+ transition:.2s;
+}
+.security-switch.on{background:#2878E8}
+.security-switch.on:after{left:24px}
+.device-card{
+ background:white;border:1px solid #EDF0F5;border-radius:14px;
+ padding:15px;display:flex;align-items:center;gap:13px;margin-bottom:11px;
+}
+.device-icon{
+ width:43px;height:43px;border-radius:12px;
+ background:#EAF3FF;display:grid;place-items:center;font-size:21px;
+}
+.device-info{flex:1}
+.device-info b{font-size:13px}
+.device-info p{font-size:11px;color:#8993A3;margin-top:5px}
+.current-label{font-size:10px;color:#16834A;background:#E9F8EF;padding:6px;border-radius:7px}
+.delete-warning{
+ background:#FFF2F2;border:1px solid #FFE1E1;
+ border-radius:13px;padding:15px;color:#B93E3E;
+ font-size:12px;line-height:1.7;margin-bottom:16px;
+}
+.delete-btn{
+ width:100%;padding:14px;border:0;border-radius:11px;
+ background:#DF4545;color:white;font-weight:bold;margin-top:15px;
+}
 
 /* MODALS */
 .modal{display:none;position:fixed;inset:0;z-index:30;background:#000C;align-items:center;justify-content:center;padding:18px}
@@ -94,7 +214,10 @@ button{cursor:pointer}
 .nav-item{background:none;border:0;color:#8290A7;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:10px}
 .nav-item span{font-size:20px}
 .nav-item.active{color:#00D9FF}
-@media(min-width:501px){body{background:#050913}.app{border-left:1px solid #202D43;border-right:1px solid #202D43}}
+@media(min-width:501px){
+ body{background:#050913}
+ .app{border-left:1px solid #202D43;border-right:1px solid #202D43}
+}
 </style>
 </head>
 
@@ -109,18 +232,15 @@ button{cursor:pointer}
 
 <!-- HOME -->
 <div class="page active" id="homePage">
- <div class="search">
-  🔍
+ <div class="search">🔍
   <input placeholder="Search users, live rooms...">
  </div>
-
  <div class="hero">
   <div class="hero-tag">✨ WELCOME TO SANO LIVE</div>
   <h1>Your World.<br>Your Live.</h1>
   <p>Connect with friends and enjoy beautiful live moments.</p>
   <button class="explore-btn" onclick="showPage('explore')">Explore Live →</button>
  </div>
-
  <section class="section">
   <div class="section-head"><h2>🔴 Live Now</h2></div>
   <div class="empty">
@@ -156,7 +276,6 @@ button{cursor:pointer}
 
 <!-- PROFILE -->
 <div class="page" id="profilePage">
-
  <div class="profile-card">
   <div class="photo-box">
    <img id="profilePhoto" class="profile-photo"
@@ -164,13 +283,11 @@ button{cursor:pointer}
    <button class="upload-btn" onclick="document.getElementById('photoInput').click()">+</button>
    <input type="file" id="photoInput" accept="image/*" hidden onchange="uploadPhoto(event)">
   </div>
-
   <div class="profile-name" id="profileName">SANO USER</div>
   <div class="profile-id">ID: <span id="profileID">1111</span></div>
   <div class="country">🇳🇵 Nepal</div>
   <div class="bio" id="profileBio">Hello guys! Welcome to my profile.</div>
   <button class="edit-btn" onclick="openEdit()">✏️ Edit Profile</button>
-
   <div class="stats">
    <div><strong>0</strong><span>Followers</span></div>
    <div><strong>0</strong><span>Following</span></div>
@@ -194,7 +311,6 @@ button{cursor:pointer}
     <button onclick="coming('Withdrawal')">Withdraw</button>
    </div>
   </div>
-
   <div class="commission-card">
    <h3>💰 My Commission</h3>
    <strong id="commissionBalance">$0.00</strong>
@@ -207,65 +323,49 @@ button{cursor:pointer}
  <div class="section">
   <div class="section-title">More</div>
   <div class="menu">
-
    <div class="menu-item" onclick="coming('My Gifts')">
     <div class="menu-left"><span class="menu-icon">🎁</span>My Gifts</div><span class="arrow">›</span>
    </div>
-
    <div class="menu-item" onclick="coming('VIP Center')">
     <div class="menu-left"><span class="menu-icon">👑</span>VIP Center</div><span class="arrow">›</span>
    </div>
-
    <div class="menu-item" onclick="coming('My Friends')">
     <div class="menu-left"><span class="menu-icon">👥</span>My Friends</div><span class="arrow">›</span>
    </div>
-
    <div class="menu-item" onclick="openSettings()">
     <div class="menu-left"><span class="menu-icon">⚙️</span>Settings</div><span class="arrow">›</span>
    </div>
-
    <div class="menu-item" onclick="coming('Help & Support')">
     <div class="menu-left"><span class="menu-icon">💬</span>Help & Support</div><span class="arrow">›</span>
    </div>
-
    <div class="menu-item" onclick="logout()">
     <div class="menu-left"><span class="menu-icon">🚪</span>Logout</div><span class="arrow">›</span>
    </div>
-
   </div>
  </div>
 </div>
-
 </div>
 
-<!-- SETTINGS FULL SCREEN -->
+<!-- SETTINGS PAGE -->
 <div class="settings-page" id="settingsPage">
-
  <div class="settings-header">
   <button class="settings-back" onclick="closeSettings()">‹</button>
   Settings
  </div>
-
  <div class="settings-content">
-
   <div class="settings-group">
-
-   <div class="settings-row" onclick="settingDetail('Account Security')">
+   <div class="settings-row" onclick="openSecurity()">
     <span>Account Security</span><span class="settings-arrow">›</span>
    </div>
-
    <div class="settings-row" onclick="settingDetail('Blacklist')">
     <span>Blacklist</span><span class="settings-arrow">›</span>
    </div>
-
    <div class="settings-row" onclick="settingDetail('User Agreement')">
     <span>User Agreement</span><span class="settings-arrow">›</span>
    </div>
-
    <div class="settings-row" onclick="settingDetail('Privacy Statement')">
     <span>Privacy Statement</span><span class="settings-arrow">›</span>
    </div>
-
    <div class="settings-row" onclick="clearCache()">
     <span>Clear Cache</span>
     <span class="settings-right">
@@ -273,7 +373,6 @@ button{cursor:pointer}
      <span class="settings-arrow">›</span>
     </span>
    </div>
-
    <div class="settings-row" onclick="checkUpdates()">
     <span>Updates</span>
     <span class="settings-right">
@@ -281,176 +380,110 @@ button{cursor:pointer}
      <span class="settings-arrow">›</span>
     </span>
    </div>
-
   </div>
-
   <div class="settings-group">
    <div class="settings-row" onclick="settingsLogout()">
     <span>Log Out</span><span class="settings-arrow">›</span>
    </div>
   </div>
-
  </div>
 </div>
 
-<!-- EDIT MODAL -->
-<div class="modal" id="editModal">
- <div class="modal-box">
-  <h2>Edit Profile</h2>
-  <input id="editName" placeholder="Your Name">
-  <textarea id="editBio" rows="3" placeholder="Your Bio"></textarea>
-  <div class="actions">
-   <button class="cancel" onclick="closeEdit()">Cancel</button>
-   <button class="save" onclick="saveProfile()">Save</button>
+<!-- ACCOUNT SECURITY MAIN PAGE -->
+<div class="security-page" id="securityPage">
+ <div class="security-header">
+  <button class="security-back" onclick="closeSecurity()">‹</button>
+  Account Security
+ </div>
+
+ <div class="security-content">
+
+  <div id="securityMain" class="security-detail active">
+   <p class="security-subtitle">
+    Manage your account security and login protection.
+   </p>
+
+   <div class="security-banner">
+    <div class="security-banner-icon">🛡️</div>
+    <div>
+     <b>Account Protection</b>
+     <p>Keep your SANO LIVE account safe and secure.</p>
+    </div>
+   </div>
+
+   <div class="security-group">
+
+    <div class="security-item" onclick="securityOpen('securityEmail')">
+     <div class="security-icon">✉️</div>
+     <div class="security-info">
+      <b>Email Address</b>
+      <p id="emailStatus">Add and verify your email</p>
+     </div>
+     <span class="recommend">Recommended</span>
+     <span class="security-arrow">›</span>
+    </div>
+
+    <div class="security-item" onclick="securityOpen('securityPhone')">
+     <div class="security-icon">📱</div>
+     <div class="security-info">
+      <b>Phone Number</b>
+      <p id="phoneStatus">Add your mobile number</p>
+     </div>
+     <span class="security-arrow">›</span>
+    </div>
+
+    <div class="security-item" onclick="securityOpen('securityPassword')">
+     <div class="security-icon">🔒</div>
+     <div class="security-info">
+      <b>Change Password</b>
+      <p>Update your account password</p>
+     </div>
+     <span class="security-arrow">›</span>
+    </div>
+
+    <div class="security-item" onclick="securityOpen('securityTwoStep')">
+     <div class="security-icon">🛡️</div>
+     <div class="security-info">
+      <b>Two-Step Verification</b>
+      <p id="twoStepStatus">Extra login protection</p>
+     </div>
+     <span class="security-arrow">›</span>
+    </div>
+
+    <div class="security-item" onclick="securityOpen('securityDevices')">
+     <div class="security-icon">💻</div>
+     <div class="security-info">
+      <b>Login Devices</b>
+      <p>View your logged-in devices</p>
+     </div>
+     <span class="security-arrow">›</span>
+    </div>
+
+    <div class="security-item security-danger" onclick="securityOpen('securityDelete')">
+     <div class="security-icon">🗑️</div>
+     <div class="security-info">
+      <b>Delete Account</b>
+      <p>Request permanent account deletion</p>
+     </div>
+     <span class="security-arrow">›</span>
+    </div>
+
+   </div>
+
+   <p class="security-note">
+    🔐 Your security matters. Never share your password or verification codes with anyone.
+   </p>
   </div>
- </div>
-</div>
 
-<button class="go-live" id="goLive" onclick="alert('Go Live Coming Soon')">＋</button>
-
-<nav class="bottom-nav">
- <button class="nav-item active" data-page="home" onclick="showPage('home')"><span>⌂</span>Home</button>
- <button class="nav-item" data-page="explore" onclick="showPage('explore')"><span>🔎</span>Explore</button>
- <button class="nav-item" data-page="party" onclick="showPage('party')"><span>🎙️</span>Party</button>
- <button class="nav-item" data-page="messages" onclick="showPage('messages')"><span>💬</span>Messages</button>
- <button class="nav-item" data-page="profile" onclick="showPage('profile')"><span>👤</span>Profile</button>
-</nav>
-
-<script>
-
-// NAVIGATION
-function showPage(page){
- document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
- document.getElementById(page+'Page').classList.add('active');
-
- document.getElementById('settingsPage').classList.remove('active');
-
- document.querySelectorAll('.nav-item').forEach(btn=>{
-  btn.classList.toggle('active',btn.dataset.page===page);
- });
-
- document.getElementById('goLive').style.display=page==='home'?'block':'none';
- window.scrollTo(0,0);
-}
-
-// PROFILE DATA
-let profile=JSON.parse(localStorage.getItem('sano_profile')) || {
- name:'SANO USER',
- id:'1111',
- bio:'Hello guys! Welcome to my profile.',
- coins:0,
- money:0,
- commission:0
-};
-
-function renderProfile(){
- document.getElementById('profileName').textContent=profile.name;
- document.getElementById('profileID').textContent=profile.id;
- document.getElementById('profileBio').textContent=profile.bio;
- document.getElementById('coinBalance').textContent=Number(profile.coins).toLocaleString();
- document.getElementById('moneyBalance').textContent='$'+Number(profile.money).toFixed(2);
- document.getElementById('commissionBalance').textContent='$'+Number(profile.commission||0).toFixed(2);
-}
-
-function saveData(){
- localStorage.setItem('sano_profile',JSON.stringify(profile));
-}
-
-// EDIT PROFILE
-function openEdit(){
- document.getElementById('editName').value=profile.name;
- document.getElementById('editBio').value=profile.bio;
- document.getElementById('editModal').style.display='flex';
-}
-
-function closeEdit(){
- document.getElementById('editModal').style.display='none';
-}
-
-function saveProfile(){
- let name=document.getElementById('editName').value.trim();
- let bio=document.getElementById('editBio').value.trim();
-
- if(!name){alert('Please enter your name');return;}
-
- profile.name=name;
- profile.bio=bio;
- saveData();
- renderProfile();
- closeEdit();
- alert('Profile Updated!');
-}
-
-// PHOTO UPLOAD
-function uploadPhoto(event){
- let file=event.target.files[0];
- if(!file)return;
-
- if(!file.type.startsWith('image/')){
-  alert('Select an image');return;
- }
-
- if(file.size>2*1024*1024){
-  alert('Image must be under 2MB');return;
- }
-
- let reader=new FileReader();
- reader.onload=function(e){
-  document.getElementById('profilePhoto').src=e.target.result;
-  localStorage.setItem('sano_profile_photo',e.target.result);
- };
- reader.readAsDataURL(file);
-}
-
-let savedPhoto=localStorage.getItem('sano_profile_photo');
-if(savedPhoto)document.getElementById('profilePhoto').src=savedPhoto;
-
-// SETTINGS
-function openSettings(){
- document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
- document.getElementById('settingsPage').classList.add('active');
- document.getElementById('goLive').style.display='none';
- document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
- window.scrollTo(0,0);
-}
-
-function closeSettings(){
- document.getElementById('settingsPage').classList.remove('active');
- showPage('profile');
-}
-
-function settingDetail(name){
- alert(name+' section coming soon!');
-}
-
-function clearCache(){
- if(confirm('Clear temporary app cache?')){
-  sessionStorage.clear();
-  alert('Temporary cache cleared.');
- }
-}
-
-function checkUpdates(){
- alert('SANO LIVE Version 1.0.0\\nYou are using this demo version.');
-}
-
-function settingsLogout(){
- if(confirm('Are you sure you want to log out?')){
-  alert('Connect Supabase Authentication for real logout.');
- }
-}
-
-function coming(name){
- alert(name+' feature coming soon!');
-}
-
-function logout(){
- alert('Connect Supabase Authentication for real logout.');
-}
-
-// START
-renderProfile();
-
-</script>
-</body>
-</html>
+  <!-- EMAIL -->
+  <div id="securityEmail" class="security-detail">
+   <div class="detail-card">
+    <div class="detail-title">✉️ Email Address</div>
+    <p class="detail-description">
+     Connect your email address to help protect and recover your SANO LIVE account.
+    </p>
+    <label class="security-label">Email Address</label>
+    <input class="security-input" id="emailInput" type="email" placeholder="Enter your email address">
+    <button class="security-primary" onclick="sendEmailVerification()">Send Verification</button>
+    <div class="security-tip">
+     Email verificati
