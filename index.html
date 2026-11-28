@@ -1,621 +1,495 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080D1D">
-<title>SANO LIVE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#FFFFFF">
+<title>SANO LIVE - Account Security</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#080D1D;color:white;font-family:Arial,sans-serif}
-button{cursor:pointer}
-.app{max-width:500px;min-height:100vh;margin:auto;padding:18px 16px 110px}
-.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:23px}
-.logo{font-size:26px;font-weight:900;letter-spacing:1px;background:linear-gradient(90deg,#00D9FF,#9875FF,#FF2780);-webkit-background-clip:text;color:transparent}
-.icon-btn{background:#121C30;border:1px solid #26344B;color:white;padding:12px;border-radius:12px;font-size:18px}
-.page{display:none}
-.page.active{display:block}
-
-/* HOME */
-.search{display:flex;gap:10px;align-items:center;background:#121C30;border:1px solid #26344B;border-radius:14px;padding:14px;margin-bottom:22px}
-.search input{background:none;border:none;outline:none;color:white;width:100%;font-size:14px}
-.search input::placeholder{color:#8190A8}
-.hero{padding:28px 20px;border-radius:22px;border:1px solid #3A3B64;background:radial-gradient(circle at 90% 10%,#53358A 0%,transparent 40%),linear-gradient(135deg,#182440,#15172F,#102D40);margin-bottom:27px}
-.hero-tag{color:#00D9FF;font-size:11px;font-weight:bold;letter-spacing:2px;margin-bottom:15px}
-.hero h1{font-size:30px;line-height:1.3;margin-bottom:10px}
-.hero p{color:#AAB8CC;font-size:13px;line-height:1.6;margin-bottom:19px}
-.explore-btn{background:linear-gradient(90deg,#9875FF,#00D9FF);color:white;border:0;padding:12px 20px;border-radius:11px;font-weight:bold}
-.section{margin-bottom:25px}
-.section-head{margin-bottom:14px}
-.section-head h2{font-size:19px}
-.empty{min-height:150px;border:1px solid #26344B;border-radius:17px;background:linear-gradient(145deg,#121C30,#10182A);display:flex;justify-content:center;align-items:center;flex-direction:column;gap:10px;color:#8493AB;font-size:13px}
-.empty-icon{font-size:30px}
-
-/* PROFILE */
-.profile-card{text-align:center;padding:24px 15px;background:#101B2E;border:1px solid #263750;border-radius:20px;margin-bottom:24px}
-.photo-box{position:relative;width:100px;height:100px;margin:auto}
-.profile-photo{width:100px;height:100px;border-radius:50%;border:2px solid #00D9FF;object-fit:cover;background:#263750}
-.upload-btn{position:absolute;bottom:0;right:0;width:31px;height:31px;border-radius:50%;border:2px solid #101B2E;background:#00D9FF;color:#080D1D;font-size:20px}
-.profile-name{font-size:22px;font-weight:bold;margin-top:15px}
-.profile-id{color:#00D9FF;font-size:13px;margin-top:8px}
-.country{color:#93A1B7;font-size:13px;margin-top:7px}
-.bio{font-size:14px;color:#B9C5D7;margin:15px 0}
-.edit-btn{background:#1D3450;color:white;border:1px solid #34516E;padding:11px 28px;border-radius:10px;font-weight:bold}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:25px}
-.stats strong{display:block;font-size:19px}
-.stats span{font-size:12px;color:#93A1B7}
-.section-title{font-size:18px;font-weight:bold;margin-bottom:14px}
-.wallet{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.wallet-card{background:#121F33;border:1px solid #263750;border-radius:16px;padding:17px 13px}
-.wallet-icon{font-size:24px}
-.wallet-card h3{font-size:20px;margin-top:12px}
-.wallet-card p{color:#93A1B7;font-size:12px;margin-top:5px}
-.wallet-card button{width:100%;margin-top:13px;padding:10px;border:0;border-radius:9px;background:#1D3450;color:white}
-.commission-card{background:linear-gradient(135deg,#182D42,#18203B);border:1px solid #31506B;border-radius:16px;padding:18px;margin-top:12px}
-.commission-card h3{font-size:15px}
-.commission-card strong{display:block;font-size:24px;margin-top:12px;color:#00D9FF}
-.commission-card p{font-size:12px;color:#93A1B7;margin-top:6px}
-.menu{background:#111E31;border:1px solid #263750;border-radius:16px;overflow:hidden}
-.menu-item{display:flex;align-items:center;justify-content:space-between;padding:17px 15px;border-bottom:1px solid #263750;font-size:14px;cursor:pointer}
-.menu-item:last-child{border-bottom:0}
-.menu-left{display:flex;align-items:center;gap:13px}
-.menu-icon{font-size:19px}
-.arrow{color:#8295B0;font-size:20px}
-
-/* SETTINGS SCREEN */
-.settings-page{display:none;position:fixed;inset:0;z-index:20;background:#F5F5F5;color:#333;overflow-y:auto}
-.settings-page.active{display:block}
-.settings-header{height:65px;display:flex;align-items:center;justify-content:center;position:relative;background:white;border-bottom:1px solid #eee;font-size:21px}
-.settings-back{position:absolute;left:17px;border:0;background:none;font-size:30px;color:#333}
-.settings-content{padding:14px 20px}
-.settings-group{background:white;border-radius:17px;overflow:hidden;margin-bottom:15px}
-.settings-row{min-height:83px;padding:15px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f5f5f5;font-size:16px;cursor:pointer}
-.settings-row:last-child{border-bottom:none}
-.settings-right{display:flex;align-items:center;gap:12px;color:#888}
-.settings-arrow{font-size:26px;color:#777}
-.settings-version{font-size:14px;color:#888}
-.settings-row:active{background:#f5f5f5}
-
-/* ACCOUNT SECURITY */
-.security-page{
- display:none;
- position:fixed;
- inset:0;
- z-index:25;
- background:#F5F7FB;
- color:#172033;
- overflow-y:auto;
-}
-.security-page.active{display:block}
-
-.security-header{
- height:65px;
- display:flex;
- align-items:center;
- justify-content:center;
- background:white;
- border-bottom:1px solid #E9EDF3;
- position:sticky;
- top:0;
- font-size:19px;
- font-weight:bold;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
 }
 
-.security-back{
- position:absolute;
- left:17px;
- background:#F0F4FA;
- border:0;
- border-radius:10px;
- width:38px;
- height:38px;
- font-size:27px;
- color:#263750;
+body{
+  background:#F5F7FB;
+  color:#172033;
+  padding-bottom:30px;
 }
 
-.security-content{
- max-width:500px;
- margin:auto;
- padding:20px;
+header{
+  background:white;
+  padding:20px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  border-bottom:1px solid #E9EDF3;
+  position:sticky;
+  top:0;
+  z-index:5;
 }
 
-.security-intro{margin:8px 0 22px}
-.security-intro h2{font-size:25px;margin-bottom:8px}
-.security-intro p{font-size:13px;color:#8490A2;line-height:1.5}
-
-.security-group{
- background:white;
- border-radius:17px;
- overflow:hidden;
- margin-bottom:16px;
- box-shadow:0 3px 14px #17203308;
+.back{
+  border:none;
+  background:#F0F5FC;
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  font-size:22px;
+  cursor:pointer;
 }
 
-.security-row{
- display:flex;
- align-items:center;
- gap:13px;
- padding:17px 14px;
- min-height:76px;
- border-bottom:1px solid #EFF1F5;
- cursor:pointer;
+header h2{
+  font-size:19px;
 }
 
-.security-row:last-child{border-bottom:0}
-
-.security-icon{
- width:43px;
- height:43px;
- border-radius:13px;
- background:#EAF3FF;
- display:grid;
- place-items:center;
- font-size:21px;
- flex-shrink:0;
+.container{
+  padding:20px;
+  max-width:550px;
+  margin:auto;
 }
 
-.security-info{flex:1}
-.security-info h3{font-size:14px;margin-bottom:5px}
-.security-info p{font-size:11px;color:#8994A5;line-height:1.4}
-.security-arrow{font-size:23px;color:#A0AABB}
-
-.security-tag{
- font-size:10px;
- color:#16834D;
- background:#E7F8EF;
- padding:6px 8px;
- border-radius:20px;
+.intro{
+  margin:12px 0 22px;
 }
 
-.security-switch{
- width:43px;
- height:24px;
- border:0;
- border-radius:20px;
- background:#CBD3DF;
- position:relative;
- flex-shrink:0;
+.intro h1{
+  font-size:25px;
+  margin-bottom:8px;
 }
 
-.security-switch:after{
- content:"";
- position:absolute;
- width:18px;
- height:18px;
- top:3px;
- left:3px;
- background:white;
- border-radius:50%;
- transition:.2s;
+.intro p{
+  font-size:13px;
+  color:#778397;
+  line-height:1.6;
 }
 
-.security-switch.active{background:#287CE0}
-.security-switch.active:after{left:22px}
-
-.security-delete .security-icon{
- background:#FFECEC;
- color:#D94A4A;
+.card{
+  background:white;
+  border-radius:18px;
+  padding:17px;
+  margin-bottom:14px;
+  box-shadow:0 3px 15px rgba(20,40,70,.04);
 }
 
-.security-delete h3{color:#D94A4A}
-
-/* SECURITY MODAL */
-.security-modal{
- display:none;
- position:fixed;
- inset:0;
- z-index:50;
- background:#0009;
- align-items:center;
- justify-content:center;
- padding:18px;
+.item{
+  display:flex;
+  align-items:center;
+  gap:13px;
 }
 
-.security-modal.show{display:flex}
-
-.security-modal-box{
- background:#FFFFFF;
- color:#172033;
- width:100%;
- max-width:380px;
- border-radius:20px;
- padding:22px;
+.icon{
+  width:45px;
+  height:45px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:#EAF3FF;
+  color:#287CE0;
+  font-size:21px;
+  flex-shrink:0;
 }
 
-.security-modal-box h2{font-size:20px;margin-bottom:9px}
-.security-modal-box p{font-size:13px;color:#8490A2;line-height:1.5;margin-bottom:17px}
-
-.security-modal-box input{
- width:100%;
- padding:13px;
- margin-bottom:12px;
- border:1px solid #DFE5ED;
- border-radius:10px;
- outline:none;
- color:#172033;
- background:white;
+.details{
+  flex:1;
+  min-width:0;
 }
 
-.security-primary{
- width:100%;
- padding:13px;
- background:#287CE0;
- color:white;
- border:0;
- border-radius:10px;
- font-weight:bold;
+.details h3{
+  font-size:15px;
+  margin-bottom:5px;
 }
 
-.security-cancel{
- width:100%;
- padding:12px;
- background:#EEF2F7;
- color:#46536A;
- border:0;
- border-radius:10px;
- margin-top:9px;
+.details p{
+  color:#8791A1;
+  font-size:12px;
+  line-height:1.4;
 }
 
-/* MODALS */
-.modal{display:none;position:fixed;inset:0;z-index:30;background:#000C;align-items:center;justify-content:center;padding:18px}
-.modal-box{background:#142239;border:1px solid #354966;border-radius:20px;padding:22px;width:100%;max-width:380px}
-.modal-box h2{margin-bottom:20px}
-.modal-box input,.modal-box textarea{width:100%;padding:13px;margin-bottom:13px;border-radius:10px;border:1px solid #354966;background:#080D1D;color:white;outline:none}
-.actions{display:flex;gap:10px}
-.actions button{flex:1;padding:12px;border:0;border-radius:9px;font-weight:bold}
-.save{background:#00D9FF;color:#080D1D}
-.cancel{background:#30425D;color:white}
+.arrow{
+  color:#A0AABB;
+  font-size:22px;
+}
 
-/* BOTTOM NAV */
-.go-live{position:fixed;bottom:83px;right:20px;width:58px;height:58px;border-radius:19px;background:linear-gradient(135deg,#FF2780,#9875FF);color:white;font-size:27px;box-shadow:0 0 25px #9875FF55;border:0;z-index:5}
-.bottom-nav{position:fixed;bottom:0;left:0;width:100%;background:#0D1526;border-top:1px solid #26344B;display:flex;justify-content:space-around;padding:12px 3px 19px;z-index:10}
-.nav-item{background:none;border:0;color:#8290A7;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:10px}
-.nav-item span{font-size:20px}
-.nav-item.active{color:#00D9FF}
-@media(min-width:501px){body{background:#050913}.app{border-left:1px solid #202D43;border-right:1px solid #202D43}}
+.tag{
+  font-size:10px;
+  color:#16834D;
+  background:#E6F8EF;
+  padding:6px 9px;
+  border-radius:20px;
+  white-space:nowrap;
+}
+
+.section-title{
+  font-size:13px;
+  color:#8994A5;
+  margin:25px 3px 12px;
+  font-weight:bold;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+button{
+  cursor:pointer;
+}
+
+.switch{
+  width:43px;
+  height:24px;
+  background:#CCD4DF;
+  border-radius:30px;
+  position:relative;
+  border:none;
+}
+
+.switch:after{
+  content:"";
+  position:absolute;
+  width:18px;
+  height:18px;
+  background:white;
+  border-radius:50%;
+  top:3px;
+  left:3px;
+  transition:.2s;
+}
+
+.switch.active{
+  background:#287CE0;
+}
+
+.switch.active:after{
+  left:22px;
+}
+
+.delete{
+  background:#FFF4F4;
+}
+
+.delete .icon{
+  background:#FFE6E6;
+  color:#E34F4F;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(10,20,40,.45);
+  z-index:20;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:100%;
+  max-width:400px;
+  background:white;
+  border-radius:20px;
+  padding:22px;
+}
+
+.modal-box h2{
+  font-size:19px;
+  margin-bottom:8px;
+}
+
+.modal-box p{
+  font-size:13px;
+  color:#7D899A;
+  margin-bottom:18px;
+  line-height:1.5;
+}
+
+.modal-box input{
+  width:100%;
+  padding:14px;
+  border:1px solid #DFE5ED;
+  border-radius:11px;
+  margin-bottom:12px;
+  outline:none;
+  font-size:14px;
+}
+
+.modal-box input:focus{
+  border-color:#287CE0;
+}
+
+.primary{
+  background:#287CE0;
+  color:white;
+  border:none;
+  padding:13px;
+  width:100%;
+  border-radius:11px;
+  font-size:14px;
+  font-weight:bold;
+}
+
+.cancel{
+  background:#F0F3F7;
+  color:#46536A;
+  border:none;
+  padding:13px;
+  width:100%;
+  border-radius:11px;
+  margin-top:9px;
+}
+
+.security-note{
+  text-align:center;
+  font-size:12px;
+  color:#98A2B1;
+  padding:18px;
+}
 </style>
 </head>
 
 <body>
 
-<div class="app">
-
-<header class="header">
- <div class="logo">SANO LIVE</div>
- <button class="icon-btn" onclick="alert('Notifications coming soon')">🔔</button>
+<header>
+  <button class="back" onclick="history.back()">‹</button>
+  <h2>Account Security</h2>
 </header>
 
-<!-- HOME -->
-<div class="page active" id="homePage">
- <div class="search">
-  🔍
-  <input placeholder="Search users, live rooms...">
- </div>
+<div class="container">
 
- <div class="hero">
-  <div class="hero-tag">✨ WELCOME TO SANO LIVE</div>
-  <h1>Your World.<br>Your Live.</h1>
-  <p>Connect with friends and enjoy beautiful live moments.</p>
-  <button class="explore-btn" onclick="showPage('explore')">Explore Live →</button>
- </div>
-
- <section class="section">
-  <div class="section-head"><h2>🔴 Live Now</h2></div>
-  <div class="empty">
-   <div class="empty-icon">📡</div>
-   No Live Streams Yet
-  </div>
- </section>
-</div>
-
-<!-- EXPLORE -->
-<div class="page" id="explorePage">
- <section class="section">
-  <div class="section-head"><h2>Explore</h2></div>
-  <div class="empty"><div class="empty-icon">🔍</div>Discover New Friends</div>
- </section>
-</div>
-
-<!-- PARTY -->
-<div class="page" id="partyPage">
- <section class="section">
-  <div class="section-head"><h2>🎙️ Party</h2></div>
-  <div class="empty"><div class="empty-icon">🎧</div>No Party Rooms Yet</div>
- </section>
-</div>
-
-<!-- MESSAGES -->
-<div class="page" id="messagesPage">
- <section class="section">
-  <div class="section-head"><h2>Messages</h2></div>
-  <div class="empty"><div class="empty-icon">💬</div>No Messages Yet</div>
- </section>
-</div>
-
-<!-- PROFILE -->
-<div class="page" id="profilePage">
-
- <div class="profile-card">
-  <div class="photo-box">
-   <img id="profilePhoto" class="profile-photo"
-   src="https://placehold.co/200x200/17243A/FFFFFF?text=USER">
-   <button class="upload-btn" onclick="document.getElementById('photoInput').click()">+</button>
-   <input type="file" id="photoInput" accept="image/*" hidden onchange="uploadPhoto(event)">
+  <div class="intro">
+    <h1>Security Center 🛡️</h1>
+    <p>Manage your account security and protect your SANO LIVE account.</p>
   </div>
 
-  <div class="profile-name" id="profileName">SANO USER</div>
-  <div class="profile-id">ID: <span id="profileID">1111</span></div>
-  <div class="country">🇳🇵 Nepal</div>
-  <div class="bio" id="profileBio">Hello guys! Welcome to my profile.</div>
-  <button class="edit-btn" onclick="openEdit()">✏️ Edit Profile</button>
+  <div class="section-title">Account Protection</div>
 
-  <div class="stats">
-   <div><strong>0</strong><span>Followers</span></div>
-   <div><strong>0</strong><span>Following</span></div>
-   <div><strong>0</strong><span>Likes</span></div>
-  </div>
- </div>
-
- <div class="section">
-  <div class="section-title">My Wallet</div>
-  <div class="wallet">
-   <div class="wallet-card">
-    <div class="wallet-icon">🪙</div>
-    <h3 id="coinBalance">0</h3>
-    <p>Coins</p>
-    <button onclick="coming('Coin Recharge')">+ Recharge</button>
-   </div>
-   <div class="wallet-card">
-    <div class="wallet-icon">💵</div>
-    <h3 id="moneyBalance">$0.00</h3>
-    <p>Money</p>
-    <button onclick="coming('Withdrawal')">Withdraw</button>
-   </div>
-  </div>
-
-  <div class="commission-card">
-   <h3>💰 My Commission</h3>
-   <strong id="commissionBalance">$0.00</strong>
-   <p>Your commission balance</p>
-   <button style="margin-top:13px;padding:9px 15px;border:0;border-radius:9px;background:#263B58;color:white"
-   onclick="coming('Commission History')">View Commission History</button>
-  </div>
- </div>
-
- <div class="section">
-  <div class="section-title">More</div>
-  <div class="menu">
-
-   <div class="menu-item" onclick="coming('My Gifts')">
-    <div class="menu-left"><span class="menu-icon">🎁</span>My Gifts</div><span class="arrow">›</span>
-   </div>
-
-   <div class="menu-item" onclick="coming('VIP Center')">
-    <div class="menu-left"><span class="menu-icon">👑</span>VIP Center</div><span class="arrow">›</span>
-   </div>
-
-   <div class="menu-item" onclick="coming('My Friends')">
-    <div class="menu-left"><span class="menu-icon">👥</span>My Friends</div><span class="arrow">›</span>
-   </div>
-
-   <div class="menu-item" onclick="openSettings()">
-    <div class="menu-left"><span class="menu-icon">⚙️</span>Settings</div><span class="arrow">›</span>
-   </div>
-
-   <div class="menu-item" onclick="coming('Help & Support')">
-    <div class="menu-left"><span class="menu-icon">💬</span>Help & Support</div><span class="arrow">›</span>
-   </div>
-
-   <div class="menu-item" onclick="logout()">
-    <div class="menu-left"><span class="menu-icon">🚪</span>Logout</div><span class="arrow">›</span>
-   </div>
-
-  </div>
- </div>
-</div>
-
-</div>
-
-<!-- SETTINGS FULL SCREEN -->
-<div class="settings-page" id="settingsPage">
-
- <div class="settings-header">
-  <button class="settings-back" onclick="closeSettings()">‹</button>
-  Settings
- </div>
-
- <div class="settings-content">
-
-  <div class="settings-group">
-
-   <div class="settings-row" onclick="openSecurity()">
-    <span>Account Security</span><span class="settings-arrow">›</span>
-   </div>
-
-   <div class="settings-row" onclick="settingDetail('Blacklist')">
-    <span>Blacklist</span><span class="settings-arrow">›</span>
-   </div>
-
-   <div class="settings-row" onclick="settingDetail('User Agreement')">
-    <span>User Agreement</span><span class="settings-arrow">›</span>
-   </div>
-
-   <div class="settings-row" onclick="settingDetail('Privacy Statement')">
-    <span>Privacy Statement</span><span class="settings-arrow">›</span>
-   </div>
-
-   <div class="settings-row" onclick="clearCache()">
-    <span>Clear Cache</span>
-    <span class="settings-right">
-     <span id="cacheSize">0 MB</span>
-     <span class="settings-arrow">›</span>
-    </span>
-   </div>
-
-   <div class="settings-row" onclick="checkUpdates()">
-    <span>Updates</span>
-    <span class="settings-right">
-     <span class="settings-version">1.0.0</span>
-     <span class="settings-arrow">›</span>
-    </span>
-   </div>
-
-  </div>
-
-  <div class="settings-group">
-   <div class="settings-row" onclick="settingsLogout()">
-    <span>Log Out</span><span class="settings-arrow">›</span>
-   </div>
-  </div>
-
- </div>
-</div>
-
-<!-- ACCOUNT SECURITY PAGE -->
-<div class="security-page" id="securityPage">
-
- <div class="security-header">
-  <button class="security-back" onclick="closeSecurity()">‹</button>
-  Account Security
- </div>
-
- <div class="security-content">
-
-  <div class="security-intro">
-   <h2>Security Center 🛡️</h2>
-   <p>Manage your account security and protect your SANO LIVE account.</p>
-  </div>
-
-  <div class="security-group">
-
-   <div class="security-row" onclick="securityAction('email')">
-    <div class="security-icon">✉️</div>
-    <div class="security-info">
-     <h3>Email Address</h3>
-     <p>Connect and verify your email address</p>
+  <div class="card">
+    <div class="item">
+      <div class="icon">✉</div>
+      <div class="details">
+        <h3>Email Address</h3>
+        <p id="emailStatus">Connect and verify your email address</p>
+      </div>
+      <span class="tag">Recommended</span>
     </div>
-    <span class="security-tag">Recommended</span>
-   </div>
-
-   <div class="security-row" onclick="securityAction('phone')">
-    <div class="security-icon">📱</div>
-    <div class="security-info">
-     <h3>Phone Number</h3>
-     <p>Connect your phone and verify OTP</p>
-    </div>
-    <span class="security-arrow">›</span>
-   </div>
-
-   <div class="security-row" onclick="securityAction('password')">
-    <div class="security-icon">🔒</div>
-    <div class="security-info">
-     <h3>Change Password</h3>
-     <p>Update your account password</p>
-    </div>
-    <span class="security-arrow">›</span>
-   </div>
-
+    <button class="primary" style="margin-top:15px"
+      onclick="openModal('email')">Add / Verify Email</button>
   </div>
 
-  <div class="security-group">
-
-   <div class="security-row" onclick="securityAction('2fa')">
-    <div class="security-icon">🛡️</div>
-    <div class="security-info">
-     <h3>Two-Step Verification</h3>
-     <p>Extra protection during login</p>
+  <div class="card" onclick="openModal('phone')">
+    <div class="item">
+      <div class="icon">☎</div>
+      <div class="details">
+        <h3>Phone Number</h3>
+        <p id="phoneStatus">Connect your mobile number</p>
+      </div>
+      <span class="arrow">›</span>
     </div>
-    <span class="security-arrow">›</span>
-   </div>
-
-   <div class="security-row" onclick="securityAction('devices')">
-    <div class="security-icon">💻</div>
-    <div class="security-info">
-     <h3>Login Devices</h3>
-     <p>Review your signed-in devices</p>
-    </div>
-    <span class="security-arrow">›</span>
-   </div>
-
   </div>
 
-  <div class="security-group">
-   <div class="security-row security-delete"
-   onclick="securityAction('delete')">
-    <div class="security-icon">🗑️</div>
-    <div class="security-info">
-     <h3>Delete Account</h3>
-     <p>Request permanent account deletion</p>
+  <div class="card" onclick="openModal('password')">
+    <div class="item">
+      <div class="icon">🔒</div>
+      <div class="details">
+        <h3>Change Password</h3>
+        <p>Update your account password</p>
+      </div>
+      <span class="arrow">›</span>
     </div>
-    <span class="security-arrow">›</span>
-   </div>
   </div>
 
-  <p style="text-align:center;color:#98A2B1;font-size:12px;padding:15px">
-   🛡️ Your security matters to SANO LIVE
-  </p>
+  <div class="section-title">Advanced Security</div>
 
- </div>
+  <div class="card">
+    <div class="item">
+      <div class="icon">🛡️</div>
+      <div class="details">
+        <h3>Two-Step Verification</h3>
+        <p>Extra security when signing in</p>
+      </div>
+      <button class="switch" id="twoFA"
+        onclick="toggle2FA()"></button>
+    </div>
+  </div>
+
+  <div class="card" onclick="openModal('devices')">
+    <div class="item">
+      <div class="icon">📱</div>
+      <div class="details">
+        <h3>Login Devices</h3>
+        <p>Review your signed-in devices</p>
+      </div>
+      <span class="arrow">›</span>
+    </div>
+  </div>
+
+  <div class="section-title">Account Management</div>
+
+  <div class="card delete" onclick="openModal('delete')">
+    <div class="item">
+      <div class="icon">🗑️</div>
+      <div class="details">
+        <h3 style="color:#D94A4A">Delete Account</h3>
+        <p>Request permanent account deletion</p>
+      </div>
+      <span class="arrow">›</span>
+    </div>
+  </div>
+
+  <div class="security-note">
+    🛡️ Your security matters to SANO LIVE.
+  </div>
+
 </div>
 
-<!-- SECURITY POPUP -->
-<div class="security-modal" id="securityModal">
- <div class="security-modal-box">
-  <h2 id="securityModalTitle">Security</h2>
-  <p id="securityModalDesc"></p>
-  <div id="securityModalFields"></div>
-  <button class="security-primary" id="securitySubmit"
-  onclick="submitSecurity()">Continue</button>
-  <button class="security-cancel"
-  onclick="closeSecurityModal()">Cancel</button>
- </div>
-</div>
-
-<!-- EDIT MODAL -->
-<div class="modal" id="editModal">
- <div class="modal-box">
-  <h2>Edit Profile</h2>
-  <input id="editName" placeholder="Your Name">
-  <textarea id="editBio" rows="3" placeholder="Your Bio"></textarea>
-  <div class="actions">
-   <button class="cancel" onclick="closeEdit()">Cancel</button>
-   <button class="save" onclick="saveProfile()">Save</button>
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <h2 id="modalTitle">Security</h2>
+    <p id="modalDesc"></p>
+    <div id="modalFields"></div>
+    <button class="primary" id="modalAction"
+      onclick="submitAction()">Continue</button>
+    <button class="cancel" onclick="closeModal()">Cancel</button>
   </div>
- </div>
 </div>
-
-<button class="go-live" id="goLive" onclick="alert('Go Live Coming Soon')">＋</button>
-
-<nav class="bottom-nav">
- <button class="nav-item active" data-page="home" onclick="showPage('home')"><span>⌂</span>Home</button>
- <button class="nav-item" data-page="explore" onclick="showPage('explore')"><span>🔎</span>Explore</button>
- <button class="nav-item" data-page="party" onclick="showPage('party')"><span>🎙️</span>Party</button>
- <button class="nav-item" data-page="messages" onclick="showPage('messages')"><span>💬</span>Messages</button>
- <button class="nav-item" data-page="profile" onclick="showPage('profile')"><span>👤</span>Profile</button>
-</nav>
 
 <script>
+let currentAction = "";
 
-// NAVIGATION
-function showPage(page){
- document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
- document.getElementById(page+'Page').classList.add('active');
+function openModal(type){
+  currentAction = type;
 
- document.getElementById('settingsPage').classList.remove('active');
- document.getElementById('securityPage').classList.remove('active');
+  const title = document.getElementById("modalTitle");
+  const desc = document.getElementById("modalDesc");
+  const fields = document.getElementById("modalFields");
+  const action = document.getElementById("modalAction");
 
- document.querySelectorAll('.nav-item').forEach(btn=>{
-  btn.classList.toggle('active',btn.dataset.page===page);
- });
+  fields.innerHTML = "";
+  action.style.display = "block";
 
- document.getElementById('goLive').style.display=page==='home'?'block':'none';
- window.scrollTo(0,0);
+  const configs = {
+    email:{
+      title:"Email Address",
+      desc:"Enter your email address to connect it to your account.",
+      fields:[
+        ["email","Enter your email address","email"]
+      ],
+      button:"Send Verification"
+    },
+    phone:{
+      title:"Phone Number",
+      desc:"Enter your mobile number. OTP verification requires authentication setup.",
+      fields:[
+        ["tel","+977 98XXXXXXXX","tel"]
+      ],
+      button:"Continue"
+    },
+    password:{
+      title:"Change Password",
+      desc:"Enter your current and new password.",
+      fields:[
+        ["password","Current password","password"],
+        ["password","New password","password"],
+        ["password","Confirm new password","password"]
+      ],
+      button:"Update Password"
+    },
+    devices:{
+      title:"Login Devices",
+      desc:"Your actual login sessions will appear here after device-session management is connected to Supabase.",
+      fields:[],
+      button:"Close"
+    },
+    delete:{
+      title:"Delete Account",
+      desc:"Account deletion is permanent. Please contact support or submit a verified deletion request.",
+      fields:[
+        ["text","Type DELETE to confirm","text"]
+      ],
+      button:"Submit Request"
+    }
+  };
+
+  const c = configs[type];
+
+  title.textContent = c.title;
+  desc.textContent = c.desc;
+  action.textContent = c.button;
+
+  c.fields.forEach(f=>{
+    const input = document.createElement("input");
+    input.type = f[0];
+    input.placeholder = f[1];
+    input.autocomplete = "off";
+    fields.appendChild(input);
+  });
+
+  if(type === "devices"){
+    action.style.display = "none";
+  }
+
+  document.getElementById("modal").classList.add("show");
 }
 
-// PROFILE DATA
-let profile=JSON.parse(localStorage.getItem('sano_profile')) || {
- name:'SANO USER',
- id:'1111',
- bio:'Hello guys! Welcome to my p
+function closeModal(){
+  document.getElementById("modal").classList.remove("show");
+}
+
+function submitAction(){
+  const inputs = [...document.querySelectorAll("#modalFields input")];
+  const values = inputs.map(i=>i.value.trim());
+
+  if(currentAction === "email"){
+    if(!values[0] || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values[0])){
+      alert("Please enter a valid email address.");
+      return;
+    }
+    alert("Demo only: Connect Supabase Auth to send a real verification email.");
+  }
+
+  if(currentAction === "phone"){
+    alert("Demo only: Connect Supabase Phone OTP authentication.");
+  }
+
+  if(currentAction === "password"){
+    if(values.some(v=>!v)){
+      alert("Please fill all fields.");
+      return;
+    }
+    if(values[1].length < 8){
+      alert("New password must be at least 8 characters.");
+      return;
+    }
+    if(values[1] !== values[2]){
+      alert("New passwords do not match.");
+      return;
+    }
+    alert("Demo only: Password changes require Supabase Authentication.");
+  }
+
+  if(currentAction === "delete"){
+    if(values[0] !== "DELETE"){
+      alert("Please type DELETE to confirm.");
+      return;
+    }
+    alert("Demo only: Deletion request requires a secure backend.");
+  }
+
+  closeModal();
+}
+
+function toggle2FA(){
+  const btn = document.getElementById("twoFA");
+  btn.classList.toggle("active");
+  alert("Demo switch only. Real Two-Step Verification requires backend authentication.");
+}
+</script>
+
+</body>
+</html>
